@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AppId</key>
+	<string>479516143</string>
+	<key>ContactMail</key>
+	<string>contact@appsfoundation.com</string>
+	<key>MailSubject</key>
+	<string>Hello</string>
+	<key>RateAppDelayInMinutes</key>
+	<integer>1</integer>
+	<key>FlurrySessionID</key>
+	<string>AAAAAAAAAAAAAAAAAAAA</string>
+</dict>
+</plist>

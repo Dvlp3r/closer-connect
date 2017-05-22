@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="M4Y-Lb-cyx">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <scenes>
+        <!--Today View Controller-->
+        <scene sceneID="cwh-vc-ff4">
+            <objects>
+                <viewController id="M4Y-Lb-cyx" customClass="TodayViewController" customModule="MeetleWidget" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ft6-oW-KC0"/>
+                        <viewControllerLayoutGuide type="bottom" id="FKl-LY-JtV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" preservesSuperviewLayoutMargins="YES" id="S3S-Oj-5AN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NXh-1v-K4w">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="so5-Ew-gwn">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ULp-gt-XyM">
+                                        <rect key="frame" x="83" y="239" width="154" height="73"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HrZ-Wz-ceE">
+                                                <rect key="frame" x="0.0" y="0.0" width="73" height="73"/>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="HrZ-Wz-ceE" secondAttribute="height" multiplier="1:1" id="DBW-vj-Gy2"/>
+                                                </constraints>
+                                                <state key="normal" image="like_button.png">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted" image="like_button_clicked.png"/>
+                                                <connections>
+                                                    <action selector="likeButtonPressed:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="SMz-4V-rEd"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gqz-NX-Q9K">
+                                                <rect key="frame" x="81" y="0.0" width="73" height="73"/>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="gqz-NX-Q9K" secondAttribute="height" multiplier="1:1" id="Dtb-4M-TdH"/>
+                                                </constraints>
+                                                <state key="normal" image="next_button.png">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted" image="next_button_clicked.png"/>
+                                                <connections>
+                                                    <action selector="nextButtonPressed:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="Vpx-Tn-s8V"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <animations/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="HrZ-Wz-ceE" firstAttribute="leading" secondItem="ULp-gt-XyM" secondAttribute="leading" id="Ii5-lh-KgJ"/>
+                                            <constraint firstAttribute="bottom" secondItem="HrZ-Wz-ceE" secondAttribute="bottom" id="fdT-Yn-bsJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="gqz-NX-Q9K" secondAttribute="trailing" id="kls-fm-jRT"/>
+                                            <constraint firstItem="gqz-NX-Q9K" firstAttribute="leading" secondItem="HrZ-Wz-ceE" secondAttribute="trailing" constant="8" id="lOI-KK-egE"/>
+                                            <constraint firstAttribute="bottom" secondItem="gqz-NX-Q9K" secondAttribute="bottom" id="nsl-Zm-1ba"/>
+                                            <constraint firstItem="gqz-NX-Q9K" firstAttribute="top" secondItem="ULp-gt-XyM" secondAttribute="top" id="pfL-yd-sx6"/>
+                                            <constraint firstItem="HrZ-Wz-ceE" firstAttribute="top" secondItem="ULp-gt-XyM" secondAttribute="top" id="wO7-Ls-JSV"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="so5-Ew-gwn" secondAttribute="trailing" id="2Qw-sT-SBk"/>
+                                    <constraint firstItem="so5-Ew-gwn" firstAttribute="leading" secondItem="NXh-1v-K4w" secondAttribute="leading" id="BpH-kS-2tJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="ULp-gt-XyM" secondAttribute="bottom" constant="8" id="GLO-vW-1y4"/>
+                                    <constraint firstItem="ULp-gt-XyM" firstAttribute="centerX" secondItem="NXh-1v-K4w" secondAttribute="centerX" id="LRy-38-gXx"/>
+                                    <constraint firstItem="so5-Ew-gwn" firstAttribute="top" secondItem="NXh-1v-K4w" secondAttribute="top" id="MZc-OI-qvm"/>
+                                    <constraint firstAttribute="bottom" secondItem="so5-Ew-gwn" secondAttribute="bottom" id="SAE-Yi-sUg"/>
+                                    <constraint firstAttribute="width" secondItem="NXh-1v-K4w" secondAttribute="height" multiplier="1:1" priority="999" id="kiP-hC-1fW"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NXh-1v-K4w" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" id="N0U-oK-5uO"/>
+                            <constraint firstItem="NXh-1v-K4w" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" id="XZ0-gE-sJ5"/>
+                            <constraint firstAttribute="trailing" secondItem="NXh-1v-K4w" secondAttribute="trailing" id="hMJ-OR-bdi"/>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="NXh-1v-K4w" secondAttribute="bottom" id="pKj-wl-TGi"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="320"/>
+                    <connections>
+                        <outlet property="imageView" destination="so5-Ew-gwn" id="Mfv-UG-pdH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="410" y="393"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="like_button.png" width="73" height="73"/>
+        <image name="like_button_clicked.png" width="73" height="73"/>
+        <image name="next_button.png" width="73" height="73"/>
+        <image name="next_button_clicked.png" width="73" height="73"/>
+    </resources>
+</document>

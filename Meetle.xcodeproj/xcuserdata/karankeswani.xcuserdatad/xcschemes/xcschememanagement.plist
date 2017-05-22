@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Meetle.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>MeetleWatchKitApp.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>MeetleWidget.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>B0D2EBFF1B7227D7007DC099</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BB9AF7DB1BD8165400871DAD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E035F2E61BDE5DFC00BE16A0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E0F75FE71BB15F41003958EE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
