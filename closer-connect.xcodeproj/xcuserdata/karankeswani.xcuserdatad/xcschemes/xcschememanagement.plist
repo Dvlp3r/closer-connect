@@ -4,17 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Meetle.xcscheme</key>
+		<key>closer-connect.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>MeetleWatchKitApp.xcscheme</key>
+		<key>closer-connectWatchKitApp.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
-		<key>MeetleWidget.xcscheme</key>
+		<key>closer-connectWidget.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
