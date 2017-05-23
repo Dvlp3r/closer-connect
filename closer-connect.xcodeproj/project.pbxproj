@@ -2367,7 +2367,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/MeetleWatchApp/MeetleWatchKitExtension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.AppsFoundation.Meetle.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.AppsFoundation.closer-connect.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -2386,7 +2386,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/MeetleWatchApp/MeetleWatchKitExtension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.AppsFoundation.Meetle.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.AppsFoundation.closer-connect.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -2405,7 +2405,7 @@
 				DEVELOPMENT_TEAM = F2A662GW7A;
 				IBSC_MODULE = Meetle_WatchKit_1_Extension;
 				INFOPLIST_FILE = "$(SRCROOT)/MeetleWatchApp/MeetleWatchKitApp/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.AppsFoundation.Meetle.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.AppsFoundation.closer-connect.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -2423,7 +2423,7 @@
 				DEVELOPMENT_TEAM = F2A662GW7A;
 				IBSC_MODULE = Meetle_WatchKit_1_Extension;
 				INFOPLIST_FILE = "$(SRCROOT)/MeetleWatchApp/MeetleWatchKitApp/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.AppsFoundation.Meetle.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.AppsFoundation.closer-connect.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -2475,7 +2475,7 @@
 				INFOPLIST_FILE = MeetleWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.AppsFoundation.Meetle.MeetleWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.AppsFoundation.closer-connect.MeetleWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -2492,7 +2492,7 @@
 				INFOPLIST_FILE = MeetleWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.AppsFoundation.Meetle.MeetleWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.AppsFoundation.closer-connect.MeetleWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
