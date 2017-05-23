@@ -28,7 +28,7 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>WKCompanionAppBundleIdentifier</key>
-	<string>com.AppsFoundation.closer-connect</string>
+	<string>com.closerconnect.closerconnect</string>
 	<key>WKWatchKitApp</key>
 	<true/>
 </dict>
