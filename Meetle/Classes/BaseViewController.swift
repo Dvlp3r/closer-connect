@@ -40,7 +40,7 @@ class BaseViewController: UIViewController {
     // MARK - Public Methods
 	
     func initMessageIcon() {
-        let navigationImage = UIImage(named: "message")!.withRenderingMode(.alwaysOriginal)
+        let navigationImage = UIImage(named: "MessageWithDot")!.withRenderingMode(.alwaysOriginal)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: navigationImage, style: UIBarButtonItemStyle.plain, target: self, action: #selector(BaseViewController.messageIconClicked(_:)))
     }
     

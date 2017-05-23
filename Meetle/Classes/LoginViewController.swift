@@ -29,8 +29,8 @@ class LoginViewController: UIViewController {
 	//MARK: - Private methods
 	
     func configureSpaces() {
-        spaceViewConstraint!.constant = (UIScreen.main.bounds.size.height - LoginContentWidth) / 2;
-        view.updateConstraints()
+        //spaceViewConstraint!.constant = (UIScreen.main.bounds.size.height - LoginContentWidth) / 2;
+        //view.updateConstraints()
     }
     
 	func hideKeyboard(_ recognizer: UITapGestureRecognizer) {
