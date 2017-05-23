@@ -214,8 +214,8 @@
 		B0D2EDD91B72C030007DC099 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D2EDD81B72C030007DC099 /* LoginViewController.swift */; };
 		B0D2EDDB1B7380C7007DC099 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D2EDDA1B7380C7007DC099 /* MenuViewController.swift */; };
 		B0D2EDDD1B7389A8007DC099 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D2EDDC1B7389A8007DC099 /* HomeViewController.swift */; };
-		BB0576031BFA784500EE2C06 /* MeetleWatchKitExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BB9AF7D31BD8165400871DAD /* MeetleWatchKitExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		BB0576061BFA784500EE2C06 /* MeetleWatchKitApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = BB9AF7DC1BD8165400871DAD /* MeetleWatchKitApp.app */; };
+		BB0576031BFA784500EE2C06 /* closer-connectWatchKitExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BB9AF7D31BD8165400871DAD /* closer-connectWatchKitExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BB0576061BFA784500EE2C06 /* closer-connectWatchKitApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = BB9AF7DC1BD8165400871DAD /* closer-connectWatchKitApp.app */; };
 		BB1B55661BD8DC0A00A14C29 /* jessy.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D2EC4C1B722B1B007DC099 /* jessy.png */; };
 		BB1B55671BD8DC0A00A14C29 /* jessy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D2EC4D1B722B1B007DC099 /* jessy@2x.png */; };
 		BB1B55681BD8DC0A00A14C29 /* jessy@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D2EC4E1B722B1B007DC099 /* jessy@3x.png */; };
@@ -528,7 +528,7 @@
 		E0F75FEA1BB15F41003958EE /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0F75FE91BB15F41003958EE /* NotificationCenter.framework */; };
 		E0F75FED1BB15F41003958EE /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F75FEC1BB15F41003958EE /* TodayViewController.swift */; };
 		E0F75FF01BB15F41003958EE /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0F75FEE1BB15F41003958EE /* MainInterface.storyboard */; };
-		E0F75FF41BB15F41003958EE /* MeetleWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E0F75FE81BB15F41003958EE /* MeetleWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E0F75FF41BB15F41003958EE /* closer-connectWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E0F75FE81BB15F41003958EE /* closer-connectWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E0F760141BB1626B003958EE /* jessy.png in Resources */ = {isa = PBXBuildFile; fileRef = E0F75FFF1BB1626B003958EE /* jessy.png */; };
 		E0F760151BB1626B003958EE /* jessy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E0F760001BB1626B003958EE /* jessy@2x.png */; };
 		E0F760161BB1626B003958EE /* jessy@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E0F760011BB1626B003958EE /* jessy@3x.png */; };
@@ -591,7 +591,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				BB0576031BFA784500EE2C06 /* MeetleWatchKitExtension.appex in Embed App Extensions */,
+				BB0576031BFA784500EE2C06 /* closer-connectWatchKitExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -602,7 +602,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				BB0576061BFA784500EE2C06 /* MeetleWatchKitApp.app in Embed Watch Content */,
+				BB0576061BFA784500EE2C06 /* closer-connectWatchKitApp.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -613,7 +613,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				E0F75FF41BB15F41003958EE /* MeetleWidget.appex in Embed App Extensions */,
+				E0F75FF41BB15F41003958EE /* closer-connectWidget.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -633,7 +633,7 @@
 		B0701D991B73F70D00CACAE5 /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppiraterDelegate.h; sourceTree = "<group>"; };
 		B0701D9C1B73F71400CACAE5 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		B0701D9D1B73F71400CACAE5 /* libFlurry_5.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_5.4.0.a; sourceTree = "<group>"; };
-		B0A204AD1B7E044A007D5428 /* Meetle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meetle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0A204AD1B7E044A007D5428 /* closer-connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "closer-connect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0D2EC041B7227D7007DC099 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0D2EC051B7227D7007DC099 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0D2EC0A1B7227D7007DC099 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -838,8 +838,8 @@
 		B0D2EDD81B72C030007DC099 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B0D2EDDA1B7380C7007DC099 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		B0D2EDDC1B7389A8007DC099 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		BB9AF7D31BD8165400871DAD /* MeetleWatchKitExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MeetleWatchKitExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		BB9AF7DC1BD8165400871DAD /* MeetleWatchKitApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetleWatchKitApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB9AF7D31BD8165400871DAD /* closer-connectWatchKitExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "closer-connectWatchKitExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB9AF7DC1BD8165400871DAD /* closer-connectWatchKitApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "closer-connectWatchKitApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB9AF7F21BD8169C00871DAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB9AF7F41BD8169C00871DAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		BB9AF7F51BD8169C00871DAD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -849,12 +849,12 @@
 		D94BE5F21BBA79CD008A1293 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 		D94BE5F41BBA7A41008A1293 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdColony.framework; sourceTree = "<group>"; };
 		D9B15E371BBA8BFA0081FEC6 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
-		E035F2E71BDE5DFC00BE16A0 /* MeetleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeetleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E035F2E71BDE5DFC00BE16A0 /* closer-connectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "closer-connectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E035F2E91BDE5DFC00BE16A0 /* MeetleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetleUITests.swift; sourceTree = "<group>"; };
 		E035F2EB1BDE5DFC00BE16A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0924BE21B99FA1E0063A07B /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		E0ED0AF71B99F7570051F65C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		E0F75FE81BB15F41003958EE /* MeetleWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MeetleWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0F75FE81BB15F41003958EE /* closer-connectWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "closer-connectWidget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F75FE91BB15F41003958EE /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		E0F75FEC1BB15F41003958EE /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		E0F75FEF1BB15F41003958EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -975,9 +975,9 @@
 				E0F75FEB1BB15F41003958EE /* MeetleWidget */,
 				B0D2EC021B7227D7007DC099 /* Meetle */,
 				E0F75FFB1BB15FEC003958EE /* Products */,
-				BB9AF7D31BD8165400871DAD /* MeetleWatchKitExtension.appex */,
-				BB9AF7DC1BD8165400871DAD /* MeetleWatchKitApp.app */,
-				E035F2E71BDE5DFC00BE16A0 /* MeetleUITests.xctest */,
+				BB9AF7D31BD8165400871DAD /* closer-connectWatchKitExtension.appex */,
+				BB9AF7DC1BD8165400871DAD /* closer-connectWatchKitApp.app */,
+				E035F2E71BDE5DFC00BE16A0 /* closer-connectUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1357,8 +1357,8 @@
 		E0F75FFB1BB15FEC003958EE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E0F75FE81BB15F41003958EE /* MeetleWidget.appex */,
-				B0A204AD1B7E044A007D5428 /* Meetle.app */,
+				E0F75FE81BB15F41003958EE /* closer-connectWidget.appex */,
+				B0A204AD1B7E044A007D5428 /* closer-connect.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1402,9 +1402,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B0D2EBFF1B7227D7007DC099 /* Meetle */ = {
+		B0D2EBFF1B7227D7007DC099 /* closer-connect */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B0D2EC1F1B7227D7007DC099 /* Build configuration list for PBXNativeTarget "Meetle" */;
+			buildConfigurationList = B0D2EC1F1B7227D7007DC099 /* Build configuration list for PBXNativeTarget "closer-connect" */;
 			buildPhases = (
 				B0D2EBFC1B7227D7007DC099 /* Sources */,
 				B0D2EBFD1B7227D7007DC099 /* Frameworks */,
@@ -1418,14 +1418,14 @@
 				E0F75FF31BB15F41003958EE /* PBXTargetDependency */,
 				BB0576051BFA784500EE2C06 /* PBXTargetDependency */,
 			);
-			name = Meetle;
+			name = "closer-connect";
 			productName = Meetle;
-			productReference = B0A204AD1B7E044A007D5428 /* Meetle.app */;
+			productReference = B0A204AD1B7E044A007D5428 /* closer-connect.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BB9AF7D21BD8165400871DAD /* MeetleWatchKitExtension */ = {
+		BB9AF7D21BD8165400871DAD /* closer-connectWatchKitExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BB9AF7EF1BD8165400871DAD /* Build configuration list for PBXNativeTarget "MeetleWatchKitExtension" */;
+			buildConfigurationList = BB9AF7EF1BD8165400871DAD /* Build configuration list for PBXNativeTarget "closer-connectWatchKitExtension" */;
 			buildPhases = (
 				BB9AF7CF1BD8165400871DAD /* Sources */,
 				BB9AF7D01BD8165400871DAD /* Frameworks */,
@@ -1435,14 +1435,14 @@
 			);
 			dependencies = (
 			);
-			name = MeetleWatchKitExtension;
+			name = "closer-connectWatchKitExtension";
 			productName = "Meetle WatchKit 1 Extension";
-			productReference = BB9AF7D31BD8165400871DAD /* MeetleWatchKitExtension.appex */;
+			productReference = BB9AF7D31BD8165400871DAD /* closer-connectWatchKitExtension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
-		BB9AF7DB1BD8165400871DAD /* MeetleWatchKitApp */ = {
+		BB9AF7DB1BD8165400871DAD /* closer-connectWatchKitApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BB9AF7EE1BD8165400871DAD /* Build configuration list for PBXNativeTarget "MeetleWatchKitApp" */;
+			buildConfigurationList = BB9AF7EE1BD8165400871DAD /* Build configuration list for PBXNativeTarget "closer-connectWatchKitApp" */;
 			buildPhases = (
 				BB9AF7DA1BD8165400871DAD /* Resources */,
 				BB0576071BFA784500EE2C06 /* Embed App Extensions */,
@@ -1452,14 +1452,14 @@
 			dependencies = (
 				BB0576021BFA784500EE2C06 /* PBXTargetDependency */,
 			);
-			name = MeetleWatchKitApp;
+			name = "closer-connectWatchKitApp";
 			productName = "Meetle WatchKit 1 App";
-			productReference = BB9AF7DC1BD8165400871DAD /* MeetleWatchKitApp.app */;
+			productReference = BB9AF7DC1BD8165400871DAD /* closer-connectWatchKitApp.app */;
 			productType = "com.apple.product-type.application.watchapp2";
 		};
-		E035F2E61BDE5DFC00BE16A0 /* MeetleUITests */ = {
+		E035F2E61BDE5DFC00BE16A0 /* closer-connectUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E035F2F01BDE5DFC00BE16A0 /* Build configuration list for PBXNativeTarget "MeetleUITests" */;
+			buildConfigurationList = E035F2F01BDE5DFC00BE16A0 /* Build configuration list for PBXNativeTarget "closer-connectUITests" */;
 			buildPhases = (
 				E035F2E31BDE5DFC00BE16A0 /* Sources */,
 				E035F2E41BDE5DFC00BE16A0 /* Frameworks */,
@@ -1470,14 +1470,14 @@
 			dependencies = (
 				E035F2ED1BDE5DFC00BE16A0 /* PBXTargetDependency */,
 			);
-			name = MeetleUITests;
+			name = "closer-connectUITests";
 			productName = MeetleUITests;
-			productReference = E035F2E71BDE5DFC00BE16A0 /* MeetleUITests.xctest */;
+			productReference = E035F2E71BDE5DFC00BE16A0 /* closer-connectUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		E0F75FE71BB15F41003958EE /* MeetleWidget */ = {
+		E0F75FE71BB15F41003958EE /* closer-connectWidget */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E0F75FF71BB15F42003958EE /* Build configuration list for PBXNativeTarget "MeetleWidget" */;
+			buildConfigurationList = E0F75FF71BB15F42003958EE /* Build configuration list for PBXNativeTarget "closer-connectWidget" */;
 			buildPhases = (
 				E0F75FE41BB15F41003958EE /* Sources */,
 				E0F75FE51BB15F41003958EE /* Frameworks */,
@@ -1487,9 +1487,9 @@
 			);
 			dependencies = (
 			);
-			name = MeetleWidget;
+			name = "closer-connectWidget";
 			productName = MeetleWidget;
-			productReference = E0F75FE81BB15F41003958EE /* MeetleWidget.appex */;
+			productReference = E0F75FE81BB15F41003958EE /* closer-connectWidget.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -1536,7 +1536,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B0D2EBFB1B7227D7007DC099 /* Build configuration list for PBXProject "Meetle" */;
+			buildConfigurationList = B0D2EBFB1B7227D7007DC099 /* Build configuration list for PBXProject "closer-connect" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1549,11 +1549,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B0D2EBFF1B7227D7007DC099 /* Meetle */,
-				E0F75FE71BB15F41003958EE /* MeetleWidget */,
-				BB9AF7D21BD8165400871DAD /* MeetleWatchKitExtension */,
-				BB9AF7DB1BD8165400871DAD /* MeetleWatchKitApp */,
-				E035F2E61BDE5DFC00BE16A0 /* MeetleUITests */,
+				B0D2EBFF1B7227D7007DC099 /* closer-connect */,
+				E0F75FE71BB15F41003958EE /* closer-connectWidget */,
+				BB9AF7D21BD8165400871DAD /* closer-connectWatchKitExtension */,
+				BB9AF7DB1BD8165400871DAD /* closer-connectWatchKitApp */,
+				E035F2E61BDE5DFC00BE16A0 /* closer-connectUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -2150,22 +2150,22 @@
 /* Begin PBXTargetDependency section */
 		BB0576021BFA784500EE2C06 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BB9AF7D21BD8165400871DAD /* MeetleWatchKitExtension */;
+			target = BB9AF7D21BD8165400871DAD /* closer-connectWatchKitExtension */;
 			targetProxy = BB0576011BFA784500EE2C06 /* PBXContainerItemProxy */;
 		};
 		BB0576051BFA784500EE2C06 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BB9AF7DB1BD8165400871DAD /* MeetleWatchKitApp */;
+			target = BB9AF7DB1BD8165400871DAD /* closer-connectWatchKitApp */;
 			targetProxy = BB0576041BFA784500EE2C06 /* PBXContainerItemProxy */;
 		};
 		E035F2ED1BDE5DFC00BE16A0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B0D2EBFF1B7227D7007DC099 /* Meetle */;
+			target = B0D2EBFF1B7227D7007DC099 /* closer-connect */;
 			targetProxy = E035F2EC1BDE5DFC00BE16A0 /* PBXContainerItemProxy */;
 		};
 		E0F75FF31BB15F41003958EE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E0F75FE71BB15F41003958EE /* MeetleWidget */;
+			target = E0F75FE71BB15F41003958EE /* closer-connectWidget */;
 			targetProxy = E0F75FF21BB15F41003958EE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -2502,7 +2502,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B0D2EBFB1B7227D7007DC099 /* Build configuration list for PBXProject "Meetle" */ = {
+		B0D2EBFB1B7227D7007DC099 /* Build configuration list for PBXProject "closer-connect" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B0D2EC1D1B7227D7007DC099 /* Debug */,
@@ -2511,7 +2511,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B0D2EC1F1B7227D7007DC099 /* Build configuration list for PBXNativeTarget "Meetle" */ = {
+		B0D2EC1F1B7227D7007DC099 /* Build configuration list for PBXNativeTarget "closer-connect" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B0D2EC201B7227D7007DC099 /* Debug */,
@@ -2520,7 +2520,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BB9AF7EE1BD8165400871DAD /* Build configuration list for PBXNativeTarget "MeetleWatchKitApp" */ = {
+		BB9AF7EE1BD8165400871DAD /* Build configuration list for PBXNativeTarget "closer-connectWatchKitApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BB9AF7EC1BD8165400871DAD /* Debug */,
@@ -2529,7 +2529,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BB9AF7EF1BD8165400871DAD /* Build configuration list for PBXNativeTarget "MeetleWatchKitExtension" */ = {
+		BB9AF7EF1BD8165400871DAD /* Build configuration list for PBXNativeTarget "closer-connectWatchKitExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BB9AF7EA1BD8165400871DAD /* Debug */,
@@ -2538,7 +2538,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E035F2F01BDE5DFC00BE16A0 /* Build configuration list for PBXNativeTarget "MeetleUITests" */ = {
+		E035F2F01BDE5DFC00BE16A0 /* Build configuration list for PBXNativeTarget "closer-connectUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E035F2EE1BDE5DFC00BE16A0 /* Debug */,
@@ -2547,7 +2547,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E0F75FF71BB15F42003958EE /* Build configuration list for PBXNativeTarget "MeetleWidget" */ = {
+		E0F75FF71BB15F42003958EE /* Build configuration list for PBXNativeTarget "closer-connectWidget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E0F75FF51BB15F42003958EE /* Debug */,

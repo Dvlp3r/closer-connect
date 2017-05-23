@@ -6,10 +6,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
     </dependencies>
     <scenes>
-        <!--Meetle-->
+        <!--closer-connect-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller identifier="InterfaceController" title="Meetle" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="MeetleWatchKitExtension">
+                <controller identifier="InterfaceController" title="closer-connect" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="MeetleWatchKitExtension">
                     <items>
                         <group width="1" height="1" alignment="left" radius="9" id="McR-yT-f4b">
                             <items>

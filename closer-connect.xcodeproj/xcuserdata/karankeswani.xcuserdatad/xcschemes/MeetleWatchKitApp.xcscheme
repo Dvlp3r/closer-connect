@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BB9AF7DB1BD8165400871DAD"
-               BuildableName = "MeetleWatchKitApp.app"
-               BlueprintName = "MeetleWatchKitApp"
-               ReferencedContainer = "container:Meetle.xcodeproj">
+               BuildableName = "closer-connectWatchKitApp.app"
+               BlueprintName = "closer-connectWatchKitApp"
+               ReferencedContainer = "container:closer-connect.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B0D2EBFF1B7227D7007DC099"
-               BuildableName = "Meetle.app"
-               BlueprintName = "Meetle"
-               ReferencedContainer = "container:Meetle.xcodeproj">
+               BuildableName = "closer-connect.app"
+               BlueprintName = "closer-connect"
+               ReferencedContainer = "container:closer-connect.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BB9AF7DB1BD8165400871DAD"
-            BuildableName = "MeetleWatchKitApp.app"
-            BlueprintName = "MeetleWatchKitApp"
-            ReferencedContainer = "container:Meetle.xcodeproj">
+            BuildableName = "closer-connectWatchKitApp.app"
+            BlueprintName = "closer-connectWatchKitApp"
+            ReferencedContainer = "container:closer-connect.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -72,18 +72,18 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BB9AF7DB1BD8165400871DAD"
-            BuildableName = "MeetleWatchKitApp.app"
-            BlueprintName = "MeetleWatchKitApp"
-            ReferencedContainer = "container:Meetle.xcodeproj">
+            BuildableName = "closer-connectWatchKitApp.app"
+            BlueprintName = "closer-connectWatchKitApp"
+            ReferencedContainer = "container:closer-connect.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BB9AF7DB1BD8165400871DAD"
-            BuildableName = "MeetleWatchKitApp.app"
-            BlueprintName = "MeetleWatchKitApp"
-            ReferencedContainer = "container:Meetle.xcodeproj">
+            BuildableName = "closer-connectWatchKitApp.app"
+            BlueprintName = "closer-connectWatchKitApp"
+            ReferencedContainer = "container:closer-connect.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -102,18 +102,18 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BB9AF7DB1BD8165400871DAD"
-            BuildableName = "MeetleWatchKitApp.app"
-            BlueprintName = "MeetleWatchKitApp"
-            ReferencedContainer = "container:Meetle.xcodeproj">
+            BuildableName = "closer-connectWatchKitApp.app"
+            BlueprintName = "closer-connectWatchKitApp"
+            ReferencedContainer = "container:closer-connect.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BB9AF7DB1BD8165400871DAD"
-            BuildableName = "MeetleWatchKitApp.app"
-            BlueprintName = "MeetleWatchKitApp"
-            ReferencedContainer = "container:Meetle.xcodeproj">
+            BuildableName = "closer-connectWatchKitApp.app"
+            BlueprintName = "closer-connectWatchKitApp"
+            ReferencedContainer = "container:closer-connect.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
