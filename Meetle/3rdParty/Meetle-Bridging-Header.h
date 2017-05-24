@@ -6,6 +6,6 @@
 #import "MSViewControllerSlidingPanel.h"
 #import "RangeSlider.h"
 #import "Appirater.h"
-#import "Flurry.h"
-#import <RevMobAds/RevMobAds.h>
-#import <AdColony/AdColony.h>
+//#import "Flurry.h"
+//#import <RevMobAds/RevMobAds.h>
+//#import <AdColony/AdColony.h>

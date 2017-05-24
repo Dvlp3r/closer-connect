@@ -18,13 +18,13 @@ enum RateApp: Int {
 
 @UIApplicationMain
 
-class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstitialDelegate, AdColonyDelegate, RevMobAdsDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 	
-	var interstitial: GADInterstitial?
-	var request: GADRequest?
-	var revMobFullscreen: RevMobFullscreen?
+	//var interstitial: GADInterstitial?
+	//var request: GADRequest?
+	//var revMobFullscreen: RevMobFullscreen?
 	
 	var homeController: UIViewController?
 	var chatController: UIViewController?
@@ -154,44 +154,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstitialDelegate, 
 	}
 	
 	//MARK: - AdMob
-	func showInterstitialAd() {
-		request = GADRequest()
-		request!.testDevices = [kGADSimulatorID]
-		interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/1033173712")
-		interstitial!.delegate = self
-		interstitial!.load(request)
-	}
-	
-	func interstitialDidReceiveAd(_ ad: GADInterstitial) {
-		ad.present(fromRootViewController: window?.rootViewController)
-	}
-	
-	func interstitial(_ ad: GADInterstitial!, didFailToReceiveAdWithError error: GADRequestError!) {
-		print("error: appdelegate #79", terminator: "")
-	}
+//	func showInterstitialAd() {
+//		request = GADRequest()
+//		request!.testDevices = [kGADSimulatorID]
+//		interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/1033173712")
+//		interstitial!.delegate = self
+//		interstitial!.load(request)
+//	}
+//	
+//	func interstitialDidReceiveAd(_ ad: GADInterstitial) {
+//		ad.present(fromRootViewController: window?.rootViewController)
+//	}
+//	
+//	func interstitial(_ ad: GADInterstitial!, didFailToReceiveAdWithError error: GADRequestError!) {
+//		print("error: appdelegate #79", terminator: "")
+//	}
 	
 	//MARK: - AdColony
 	//You can view full tutorial here
 	//https://github.com/AdColony/AdColony-iOS-SDK/wiki
 	
-	func configureAdColony() {
-        AdColony.configure(withAppID: "appdd3425524d234ba4bd", zoneIDs: ["vz7166df2af5ed437088"], delegate: nil, logging: true)
-	}
+//	func configureAdColony() {
+//        AdColony.configure(withAppID: "appdd3425524d234ba4bd", zoneIDs: ["vz7166df2af5ed437088"], delegate: nil, logging: true)
+//	}
     
 	
 	//MARK: - RevMob
 	//You can view full tutorial here
 	//http://sdk.revmobmobileadnetwork.com/ios.html
 	
-	func showRevMob() {
-		RevMobAds.startSession(withAppID: "52eb8752a026a90b34000d7f", withSuccessHandler: { () -> Void in
-				self.revMobFullscreen = RevMobAds.session().fullscreen()
-				self.revMobFullscreen!.delegate = self
-				self.revMobFullscreen!.showAd()
-			}, andFailHandler: { error in
-				print("failHandler", terminator: "")
-		})
-	}
+//	func showRevMob() {
+//		RevMobAds.startSession(withAppID: "52eb8752a026a90b34000d7f", withSuccessHandler: { () -> Void in
+//				self.revMobFullscreen = RevMobAds.session().fullscreen()
+//				self.revMobFullscreen!.delegate = self
+//				self.revMobFullscreen!.showAd()
+//			}, andFailHandler: { error in
+//				print("failHandler", terminator: "")
+//		})
+//	}
 	
 }
 
