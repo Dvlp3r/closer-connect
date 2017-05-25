@@ -26,7 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	//var request: GADRequest?
 	//var revMobFullscreen: RevMobFullscreen?
 	
-	var homeController: UIViewController?
+	var myResumeController: UIViewController?
+    var homeController: UIViewController?
 	var chatController: UIViewController?
 	var locationController: UIViewController?
 	var settingsController: UIViewController?
@@ -65,8 +66,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 		let navigationController = window!.rootViewController as! MSSlidingPanelController
 	
-		if homeController == nil {
-			homeController = navigationController.centerViewController
+		if myResumeController == nil {
+			myResumeController = navigationController.centerViewController
 		}
 		
 		let mystoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -77,7 +78,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				homeController = mystoryboard.instantiateViewController(withIdentifier: notification.object as! String)
 			}
 			controller = homeController!
-		} else if (notification.object! as AnyObject).isEqual(to: "chatController") {
+		}
+        else if (notification.object! as AnyObject).isEqual(to: "myResumeController") {
+            if myResumeController == nil {
+                myResumeController = mystoryboard.instantiateViewController(withIdentifier: notification.object as! String)
+            }
+            controller = myResumeController!
+        }
+        else if (notification.object! as AnyObject).isEqual(to: "chatController") {
 			if chatController == nil {
 				chatController = mystoryboard.instantiateViewController(withIdentifier: notification.object as! String)
 			}

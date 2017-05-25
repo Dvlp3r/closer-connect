@@ -9,11 +9,11 @@
 import UIKit
 
 enum MenuItem: Int {
-	case home = 0
+	case resume = 0
 	case chat
+    case home
 	case location
 	case settings
-	case invite
 	case count
 }
 
@@ -52,25 +52,25 @@ extension MenuViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier) as! MenuTableViewCell
         
         switch indexPath.row {
-        case MenuItem.home.rawValue:
-            cell.menuItemIcon!.image = UIImage(named: "menu_home")
-            cell.menuItemLabel!.text = "Home"
+        case MenuItem.resume.rawValue:
+            cell.menuItemIcon!.image = UIImage(named: "MenuResume")
+            cell.menuItemLabel!.text = "my resume"
             break
         case MenuItem.chat.rawValue:
-            cell.menuItemIcon!.image = UIImage(named: "menu_chat")
-            cell.menuItemLabel!.text = "My Chat"
+            cell.menuItemIcon!.image = UIImage(named: "MenuMessage")
+            cell.menuItemLabel!.text = "message"
+            break
+        case MenuItem.home.rawValue:
+            cell.menuItemIcon!.image = UIImage(named: "MenuPipeline")
+            cell.menuItemLabel!.text = "pipeline"
             break
         case MenuItem.location.rawValue:
-            cell.menuItemIcon!.image = UIImage(named: "menu_location")
-            cell.menuItemLabel!.text = "Location"
+            cell.menuItemIcon!.image = UIImage(named: "MenuEvent")
+            cell.menuItemLabel!.text = "events"
             break
         case MenuItem.settings.rawValue:
-            cell.menuItemIcon!.image = UIImage(named: "menu_settings")
-            cell.menuItemLabel!.text = "Settings"
-            break
-        case MenuItem.invite.rawValue:
-            cell.menuItemIcon!.image = UIImage(named: "menu_invite")
-            cell.menuItemLabel!.text = "Invite a Friend"
+            cell.menuItemIcon!.image = UIImage(named: "MenuSettings")
+            cell.menuItemLabel!.text = "settings"
             break
         default:
             break
@@ -86,20 +86,20 @@ extension MenuViewController: UITableViewDelegate {
    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
-        case MenuItem.home.rawValue:
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "changeControllerNotification"), object: "homeController")
+        case MenuItem.resume.rawValue:
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "changeControllerNotification"), object: "myResumeController")
             break
         case MenuItem.chat.rawValue:
             NotificationCenter.default.post(name: Notification.Name(rawValue: "changeControllerNotification"), object: "chatController")
+            break
+        case MenuItem.home.rawValue:
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "changeControllerNotification"), object: "homeController")
             break
         case MenuItem.location.rawValue:
             NotificationCenter.default.post(name: Notification.Name(rawValue: "changeControllerNotification"), object: "locationController")
             break
         case MenuItem.settings.rawValue:
             NotificationCenter.default.post(name: Notification.Name(rawValue: "changeControllerNotification"), object: "settingsController")
-            break
-        case MenuItem.invite.rawValue:
-            inviteByMail()
             break
         default:
             break

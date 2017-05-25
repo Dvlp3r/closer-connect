@@ -19,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.1</string>
+	<string>1.4</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -28,7 +28,9 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>YES</string>
+	<string>We wish to capture images from camera</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We wish to pick photos library.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Daniel-Black.otf</string>

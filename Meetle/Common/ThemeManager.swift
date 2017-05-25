@@ -11,11 +11,11 @@ import UIKit
 class ThemeManager: NSObject {
 	
 	class func menuItemBackgroundColor() -> UIColor {
-		return UIColor(red: 36.0/255.0, green:60.0/255.0, blue:64.0/255.0, alpha:1.0)
+		return UIColor(red: 2.0/255.0, green:27.0/255.0, blue:49.0/255.0, alpha:1.0)
 	}
 	
 	class func selectedMenuItemBackgroundColor() -> UIColor {
-		return UIColor(red: 43.0/255.0, green:182.0/255.0, blue:123.0/255.0, alpha:1.0)
+		return UIColor(red: 0.0/255.0, green:105.0/255.0, blue:194.0/255.0, alpha:1.0)
 	}
 	
 	class func profileLikeBackgroundColor() -> UIColor {
