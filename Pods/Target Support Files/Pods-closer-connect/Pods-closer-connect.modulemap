@@ -1,0 +1,6 @@
+framework module Pods_closer_connect {
+  umbrella header "Pods-closer-connect-umbrella.h"
+
+  export *
+  module * { export * }
+}
