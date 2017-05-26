@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D0239AA1ED72E810052D587 /* GoogleService-Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 3D5809661ED7254500314BF3 /* GoogleService-Info.plist */; };
+		3D5809671ED7254500314BF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D5809661ED7254500314BF3 /* GoogleService-Info.plist */; };
+		3D5809691ED727A200314BF3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5809681ED727A200314BF3 /* SignUpViewController.swift */; };
 		3DAFF0C51ED69915008A70CF /* MyResumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAFF0C41ED69915008A70CF /* MyResumeViewController.swift */; };
+		6D80864E25FF9DA88456350B /* Pods_closer_connect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC108578DE87A638D3A29530 /* Pods_closer_connect.framework */; };
 		B0701D891B73ACDF00CACAE5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0701D881B73ACDF00CACAE5 /* ProfileViewController.swift */; };
 		B0701D8D1B73AD1E00CACAE5 /* RangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = B0701D8C1B73AD1E00CACAE5 /* RangeSlider.m */; };
 		B0701D8F1B73BA6300CACAE5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0701D8E1B73BA6300CACAE5 /* ChatViewController.swift */; };
@@ -200,7 +204,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10D24337514E7AF3C5593DE5 /* Pods-closer-connect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-closer-connect.release.xcconfig"; path = "Pods/Target Support Files/Pods-closer-connect/Pods-closer-connect.release.xcconfig"; sourceTree = "<group>"; };
+		3D5809661ED7254500314BF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3D5809681ED727A200314BF3 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		3DAFF0C41ED69915008A70CF /* MyResumeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyResumeViewController.swift; sourceTree = "<group>"; };
+		AC108578DE87A638D3A29530 /* Pods_closer_connect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_closer_connect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0701D881B73ACDF00CACAE5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B0701D8B1B73AD1E00CACAE5 /* RangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeSlider.h; sourceTree = "<group>"; };
 		B0701D8C1B73AD1E00CACAE5 /* RangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeSlider.m; sourceTree = "<group>"; };
@@ -428,6 +436,7 @@
 		E0F760121BB1626B003958EE /* Veronika@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Veronika@2x.png"; sourceTree = "<group>"; };
 		E0F760131BB1626B003958EE /* Veronika@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Veronika@3x.png"; sourceTree = "<group>"; };
 		E0F760291BB16282003958EE /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		F742801AF0ED1925327BE02C /* Pods-closer-connect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-closer-connect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-closer-connect/Pods-closer-connect.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -435,12 +444,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D80864E25FF9DA88456350B /* Pods_closer_connect.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6721F45BC5D36152AA1AA6D9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AC108578DE87A638D3A29530 /* Pods_closer_connect.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		81E9F5B84A782EA2F82889CD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F742801AF0ED1925327BE02C /* Pods-closer-connect.debug.xcconfig */,
+				10D24337514E7AF3C5593DE5 /* Pods-closer-connect.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		B0701D8A1B73AD1E00CACAE5 /* RangeSlider */ = {
 			isa = PBXGroup;
 			children = (
@@ -476,12 +503,15 @@
 				E0F75FEB1BB15F41003958EE /* MeetleWidget */,
 				B0D2EC021B7227D7007DC099 /* Meetle */,
 				E0F75FFB1BB15FEC003958EE /* Products */,
+				81E9F5B84A782EA2F82889CD /* Pods */,
+				6721F45BC5D36152AA1AA6D9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		B0D2EC021B7227D7007DC099 /* Meetle */ = {
 			isa = PBXGroup;
 			children = (
+				3D5809661ED7254500314BF3 /* GoogleService-Info.plist */,
 				B0D2EDCD1B72BF52007DC099 /* 3rdParty */,
 				B0D2EC391B722A84007DC099 /* Configuration */,
 				B0D2EC381B722A7A007DC099 /* Common */,
@@ -517,6 +547,7 @@
 				B0701D921B73EBE500CACAE5 /* LocationMatchViewController.swift */,
 				B0701D941B73F48F00CACAE5 /* SettingsViewController.swift */,
 				3DAFF0C41ED69915008A70CF /* MyResumeViewController.swift */,
+				3D5809681ED727A200314BF3 /* SignUpViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -834,9 +865,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B0D2EC1F1B7227D7007DC099 /* Build configuration list for PBXNativeTarget "closer-connect" */;
 			buildPhases = (
+				6199B2E8DCFDC8BDE18A9A2D /* [CP] Check Pods Manifest.lock */,
 				B0D2EBFC1B7227D7007DC099 /* Sources */,
 				B0D2EBFD1B7227D7007DC099 /* Frameworks */,
 				B0D2EBFE1B7227D7007DC099 /* Resources */,
+				E15FF3A3BB6A59B59315AA00 /* [CP] Embed Pods Frameworks */,
+				E6417212FE5564AA180E9517 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -934,6 +968,7 @@
 				B0D2ECD81B722B1B007DC099 /* camera@3x.png in Resources */,
 				B0D2ECE01B722B1B007DC099 /* info@3x.png in Resources */,
 				B0D2ED411B722B1B007DC099 /* no_one_around_invite.png in Resources */,
+				3D5809671ED7254500314BF3 /* GoogleService-Info.plist in Resources */,
 				B0D2ED891B722BB5007DC099 /* DejaVuSans.ttf in Resources */,
 				B0D2ED121B722B1B007DC099 /* menu_settings@2x.png in Resources */,
 				B0D2ECDF1B722B1B007DC099 /* info@2x.png in Resources */,
@@ -1065,11 +1100,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6199B2E8DCFDC8BDE18A9A2D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E15FF3A3BB6A59B59315AA00 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-closer-connect/Pods-closer-connect-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E6417212FE5564AA180E9517 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-closer-connect/Pods-closer-connect-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B0D2EBFC1B7227D7007DC099 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D0239AA1ED72E810052D587 /* GoogleService-Info.plist in Sources */,
 				B0D2ED951B724F44007DC099 /* ConfigurationManager.swift in Sources */,
 				E0ED0AF81B99F7570051F65C /* Constants.swift in Sources */,
 				B0D2EC061B7227D7007DC099 /* AppDelegate.swift in Sources */,
@@ -1088,6 +1172,7 @@
 				B0D2ED9D1B7257DF007DC099 /* OpponentMessageCell.swift in Sources */,
 				B0D2ED9F1B726DFC007DC099 /* BaseViewController.swift in Sources */,
 				B0D2EDDB1B7380C7007DC099 /* MenuViewController.swift in Sources */,
+				3D5809691ED727A200314BF3 /* SignUpViewController.swift in Sources */,
 				B0D2ED971B72536D007DC099 /* ThemeManager.swift in Sources */,
 				B0D2EDD61B72BFA4007DC099 /* MSViewControllerSlidingPanel.m in Sources */,
 				B0D2EDD41B72BFA4007DC099 /* EmptySegue.m in Sources */,
@@ -1209,6 +1294,7 @@
 		};
 		B0D2EC201B7227D7007DC099 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F742801AF0ED1925327BE02C /* Pods-closer-connect.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1233,6 +1319,7 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-fobjc-arc",
+					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.closerconnect.closerconnect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1245,6 +1332,7 @@
 		};
 		B0D2EC211B7227D7007DC099 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 10D24337514E7AF3C5593DE5 /* Pods-closer-connect.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1269,6 +1357,7 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-fobjc-arc",
+					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.closerconnect.closerconnect;
 				PRODUCT_NAME = "$(TARGET_NAME)";

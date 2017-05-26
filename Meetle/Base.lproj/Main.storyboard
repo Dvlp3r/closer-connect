@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8ta-yV-x0G">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sQ7-nj-oRW">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -65,7 +65,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Nyp-Iy-yvn">
-                                <rect key="frame" x="0.0" y="199" width="320" height="309"/>
+                                <rect key="frame" x="0.0" y="193" width="320" height="309"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="250" constant="309" id="9zj-v5-jjn"/>
@@ -87,7 +87,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iPZ-im-9IK">
-                                                    <rect key="frame" x="52" y="26" width="130" height="23"/>
+                                                    <rect key="frame" x="52" y="26" width="130" height="26"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="130" id="lgf-Oh-BgL"/>
                                                     </constraints>
@@ -116,7 +116,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Veronika Scott" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTQ-0w-k31">
-                                <rect key="frame" x="56" y="142" width="141" height="27"/>
+                                <rect key="frame" x="56" y="142" width="117" height="21"/>
                                 <fontDescription key="fontDescription" name="Daniel" family="Daniel" pointSize="18"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -161,7 +161,7 @@
         <scene sceneID="7rT-ry-afk">
             <objects>
                 <navigationController storyboardIdentifier="homeController" id="15k-SL-5jA" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="d4Z-pM-iDP">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="d4Z-pM-iDP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -415,10 +415,10 @@
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ffc-u4-Qhv">
-                                                    <rect key="frame" x="257" y="4" width="49" height="36"/>
+                                                    <rect key="frame" x="257.5" y="4" width="48.5" height="36"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="6c6-kL-2xt">
-                                                            <rect key="frame" x="8" y="12" width="33" height="12"/>
+                                                            <rect key="frame" x="8" y="12" width="32.5" height="12"/>
                                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" name="DejaVuSans" family="DejaVu Sans" pointSize="12"/>
                                                             <nil key="highlightedColor"/>
@@ -463,10 +463,10 @@
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U2E-YO-4Pd">
-                                                    <rect key="frame" x="14" y="4" width="49" height="36"/>
+                                                    <rect key="frame" x="14" y="4" width="48.5" height="36"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="bLP-9R-JnI">
-                                                            <rect key="frame" x="8" y="12" width="33" height="12"/>
+                                                            <rect key="frame" x="8" y="12" width="32.5" height="12"/>
                                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" name="DejaVuSans" family="DejaVu Sans" pointSize="12"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -675,7 +675,7 @@
                                         <color key="tintColor" red="0.0" green="0.41176470590000003" blue="0.76078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </segmentedControl>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I am:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Per-3c-Foe">
-                                        <rect key="frame" x="144" y="22" width="32" height="21"/>
+                                        <rect key="frame" x="144.5" y="22.5" width="31.5" height="20.5"/>
                                         <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -694,7 +694,7 @@
                                 <rect key="frame" x="0.0" y="101" width="320" height="100.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Me:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Of-WQ-Sgn">
-                                        <rect key="frame" x="124" y="21" width="72" height="21"/>
+                                        <rect key="frame" x="124.5" y="21.5" width="71.5" height="20.5"/>
                                         <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -722,7 +722,7 @@
                                 <rect key="frame" x="0.0" y="203.5" width="320" height="101"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Limit Search To:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8G-VX-cO7">
-                                        <rect key="frame" x="103" y="8" width="114" height="21"/>
+                                        <rect key="frame" x="103.5" y="8.5" width="113.5" height="20.5"/>
                                         <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -738,7 +738,7 @@
                                         </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 miles" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihx-83-tNj">
-                                        <rect key="frame" x="127" y="36.5" width="67" height="21"/>
+                                        <rect key="frame" x="127.5" y="37" width="66.5" height="20.5"/>
                                         <fontDescription key="fontDescription" name="Eurofurencelight" family="eurofurence light" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -760,13 +760,13 @@
                                 <rect key="frame" x="0.0" y="302.5" width="320" height="100.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Ages:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHg-ap-MMb">
-                                        <rect key="frame" x="117" y="8" width="85" height="21"/>
+                                        <rect key="frame" x="117.5" y="8" width="84.5" height="20.5"/>
                                         <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18 - 60" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i9f-gg-Rfg">
-                                        <rect key="frame" x="135" y="34.5" width="50" height="21"/>
+                                        <rect key="frame" x="135.5" y="35" width="50" height="20.5"/>
                                         <fontDescription key="fontDescription" name="Eurofurencelight" family="eurofurence light" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -799,7 +799,7 @@
                                 <rect key="frame" x="0.0" y="403" width="320" height="101"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Distance:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UEL-PR-pdm">
-                                        <rect key="frame" x="104" y="22" width="111" height="21"/>
+                                        <rect key="frame" x="104.5" y="22.5" width="110.5" height="20.5"/>
                                         <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1052,6 +1052,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="signUpPressed:" destination="8ta-yV-x0G" eventType="touchUpInside" id="jFi-B5-BKc"/>
+                                                    <segue destination="S8M-rX-UxW" kind="push" id="Sj6-Yl-3b1"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1142,10 +1143,12 @@
                             <constraint firstItem="JjP-gH-g7h" firstAttribute="top" secondItem="PxQ-50-Z42" secondAttribute="top" id="qYO-Dk-dX7"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="R5T-ui-inK"/>
                     <connections>
                         <outlet property="emailTextField" destination="hcf-sU-0Io" id="Gce-gj-9gj"/>
                         <outlet property="passwordTextField" destination="oVJ-Ia-D0X" id="Y03-Fy-q1V"/>
                         <outlet property="scrollView" destination="JjP-gH-g7h" id="twd-Ho-zeS"/>
+                        <segue destination="S8M-rX-UxW" kind="push" id="hC7-o8-6gb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8MR-aF-pvt" sceneMemberID="firstResponder"/>
@@ -1165,28 +1168,28 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfD-Bk-Bfn">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="315"/>
                                 <connections>
                                     <outlet property="delegate" destination="jGR-xM-qv4" id="MQ1-Dz-SUS"/>
                                 </connections>
                             </scrollView>
                             <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nF6-Sr-sVx">
-                                <rect key="frame" x="0.0" y="220" width="320" height="100"/>
+                                <rect key="frame" x="0.0" y="220" width="320" height="95"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jessy Venzel, 22" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9Z-3f-AnI">
-                                        <rect key="frame" x="54" y="20" width="213" height="33"/>
+                                        <rect key="frame" x="72" y="20" width="177.5" height="28"/>
                                         <fontDescription key="fontDescription" name="DanielBold" family="Daniel" pointSize="24"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New York, NY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Kx-fY-TWJ">
-                                        <rect key="frame" x="123" y="59" width="93" height="21"/>
+                                        <rect key="frame" x="114.5" y="54" width="111.5" height="21"/>
                                         <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="18"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_location.png" translatesAutoresizingMaskIntoConstraints="NO" id="DoN-8t-3mX">
-                                        <rect key="frame" x="105" y="61" width="10" height="17"/>
+                                        <rect key="frame" x="96.5" y="56" width="10" height="17"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0078431372549019607" green="0.10588235294117647" blue="0.19215686274509802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1202,7 +1205,7 @@
                                 </constraints>
                             </view>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" translatesAutoresizingMaskIntoConstraints="NO" id="4Hq-1Q-ekr">
-                                <rect key="frame" x="109" y="329" width="103" height="10"/>
+                                <rect key="frame" x="109" y="324" width="103" height="10"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="iIf-yR-ugt"/>
                                 </constraints>
@@ -1210,7 +1213,7 @@
                                 <color key="currentPageIndicatorTintColor" red="0.71372549019999998" green="0.20000000000000001" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </pageControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hY-Jq-ody">
-                                <rect key="frame" x="0.0" y="347" width="320" height="157"/>
+                                <rect key="frame" x="0.0" y="342" width="320" height="162"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_about.png" translatesAutoresizingMaskIntoConstraints="NO" id="07b-0P-iSl">
                                         <rect key="frame" x="152" y="8" width="17" height="17"/>
@@ -1220,13 +1223,13 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ABOUT:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsS-6P-ZeY">
-                                        <rect key="frame" x="137" y="29" width="46" height="17"/>
+                                        <rect key="frame" x="132" y="29" width="57" height="19"/>
                                         <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="16"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I'm 22 years old student with a passion for photography and travel - honestly I can't imagine my life without it!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="303" translatesAutoresizingMaskIntoConstraints="NO" id="TJC-hs-uiL">
-                                        <rect key="frame" x="16" y="46" width="288" height="27"/>
+                                        <rect key="frame" x="16" y="48" width="288" height="45.5"/>
                                         <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="13"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1292,28 +1295,28 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbA-7u-FrB">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="319.5"/>
                                 <connections>
                                     <outlet property="delegate" destination="8sq-nP-6KK" id="SLw-a2-E75"/>
                                 </connections>
                             </scrollView>
                             <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sQb-U0-Isd">
-                                <rect key="frame" x="0.0" y="220" width="320" height="100"/>
+                                <rect key="frame" x="0.0" y="220" width="320" height="99.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jessy Venzel, 22" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cL9-LE-JHj">
-                                        <rect key="frame" x="53" y="20" width="213" height="33"/>
+                                        <rect key="frame" x="53.5" y="20" width="212.5" height="32.5"/>
                                         <fontDescription key="fontDescription" name="DanielBold" family="Daniel" pointSize="24"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New York, NY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPb-hS-FzH">
-                                        <rect key="frame" x="122" y="59" width="93" height="21"/>
+                                        <rect key="frame" x="122.5" y="58.5" width="93" height="21"/>
                                         <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="18"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_location.png" translatesAutoresizingMaskIntoConstraints="NO" id="oUV-Wo-lqU">
-                                        <rect key="frame" x="104" y="61" width="10" height="17"/>
+                                        <rect key="frame" x="104.5" y="60.5" width="10" height="17"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0078431372550000003" green="0.1058823529" blue="0.19215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1329,7 +1332,7 @@
                                 </constraints>
                             </view>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" translatesAutoresizingMaskIntoConstraints="NO" id="DK2-Uf-A8k">
-                                <rect key="frame" x="109" y="329" width="103" height="10"/>
+                                <rect key="frame" x="109" y="328.5" width="103" height="10"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="8Ke-EZ-WXB"/>
                                 </constraints>
@@ -1337,7 +1340,7 @@
                                 <color key="currentPageIndicatorTintColor" red="0.71372549019999998" green="0.20000000000000001" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </pageControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exB-hy-x58">
-                                <rect key="frame" x="0.0" y="347" width="320" height="157"/>
+                                <rect key="frame" x="0.0" y="346.5" width="320" height="157.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_about.png" translatesAutoresizingMaskIntoConstraints="NO" id="oqJ-n4-QWA">
                                         <rect key="frame" x="152" y="8" width="17" height="17"/>
@@ -1347,13 +1350,13 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ABOUT:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Chk-Rh-XvK">
-                                        <rect key="frame" x="137" y="29" width="46" height="17"/>
+                                        <rect key="frame" x="137.5" y="29" width="45.5" height="16.5"/>
                                         <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="16"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I'm 22 years old student with a passion for photography and travel - honestly I can't imagine my life without it!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="303" translatesAutoresizingMaskIntoConstraints="NO" id="mmc-9N-wfO">
-                                        <rect key="frame" x="16" y="46" width="288" height="27"/>
+                                        <rect key="frame" x="16" y="45.5" width="288" height="26.5"/>
                                         <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="13"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1412,7 +1415,7 @@
         <scene sceneID="kDR-KF-cK9">
             <objects>
                 <navigationController storyboardIdentifier="myResumeController" id="TRf-bU-Igg" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="ven-RW-LCO">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="ven-RW-LCO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1425,6 +1428,151 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v0k-PG-A1Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1374" y="326"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fuJ-UF-f1k">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="sQ7-nj-oRW" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="c5W-KV-UA9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.031372549020000001" green="0.22352941179999999" blue="0.3803921569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="8ta-yV-x0G" kind="relationship" relationship="rootViewController" id="qh6-cf-Ubh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pCh-Dj-zEV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-780" y="135"/>
+        </scene>
+        <!--Sign Up View Controller-->
+        <scene sceneID="OQt-I3-PHl">
+            <objects>
+                <viewController storyboardIdentifier="signupController" id="S8M-rX-UxW" customClass="SignUpViewController" customModule="closer_connect" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fcv-pB-9ae"/>
+                        <viewControllerLayoutGuide type="bottom" id="T6U-eb-LlI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hRc-Y0-ksb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IUn-SK-coS">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Enter Your E-mail" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RQM-Xq-acw">
+                                        <rect key="frame" x="67" y="192" width="185" height="40"/>
+                                        <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="He4-CH-UTc"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="S8M-rX-UxW" id="RJD-vk-7Ux"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Enter Your Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="95A-Lp-cpx">
+                                        <rect key="frame" x="67" y="237" width="185" height="40"/>
+                                        <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="dQc-Dt-gXe"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="S8M-rX-UxW" id="tI7-hB-6gK"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9no-v6-Mc3">
+                                        <rect key="frame" x="109" y="287" width="100" height="40"/>
+                                        <color key="backgroundColor" red="0.92549019610000005" green="0.0" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="NLN-kn-AQE"/>
+                                            <constraint firstAttribute="width" constant="100" id="Utg-Q2-Gy0"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="20"/>
+                                        <state key="normal" title="sign up">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="createAccountAction:" destination="S8M-rX-UxW" eventType="touchUpInside" id="5qw-nV-G9x"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e1J-Xw-mUF">
+                                        <rect key="frame" x="0.0" y="353" width="320" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1S-zC-RO5">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+                                                <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="14"/>
+                                                <state key="normal" title="already have an account?">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="backAction:" destination="S8M-rX-UxW" eventType="touchUpInside" id="nI4-fK-qxd"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="Q1S-zC-RO5" secondAttribute="bottom" id="BhI-k8-Fq3"/>
+                                            <constraint firstItem="Q1S-zC-RO5" firstAttribute="top" secondItem="e1J-Xw-mUF" secondAttribute="top" id="EAW-k1-QdT"/>
+                                            <constraint firstAttribute="height" constant="30" id="Yrl-1u-9NK"/>
+                                            <constraint firstAttribute="trailing" secondItem="Q1S-zC-RO5" secondAttribute="trailing" id="y4w-83-nFk"/>
+                                            <constraint firstItem="Q1S-zC-RO5" firstAttribute="leading" secondItem="e1J-Xw-mUF" secondAttribute="leading" id="y7H-qC-ozg"/>
+                                        </constraints>
+                                    </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MainLogo" translatesAutoresizingMaskIntoConstraints="NO" id="u5w-QP-X9x">
+                                        <rect key="frame" x="0.0" y="90" width="320" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="hGg-eX-l19"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="u5w-QP-X9x" firstAttribute="leading" secondItem="e1J-Xw-mUF" secondAttribute="leading" id="2b2-8T-W2U"/>
+                                    <constraint firstItem="u5w-QP-X9x" firstAttribute="trailing" secondItem="e1J-Xw-mUF" secondAttribute="trailing" id="6hB-m5-f0U"/>
+                                    <constraint firstItem="RQM-Xq-acw" firstAttribute="top" secondItem="u5w-QP-X9x" secondAttribute="bottom" constant="22" id="BAF-1P-nUe"/>
+                                    <constraint firstItem="9no-v6-Mc3" firstAttribute="top" secondItem="95A-Lp-cpx" secondAttribute="bottom" constant="10" id="Bbq-B1-Ybk"/>
+                                    <constraint firstItem="u5w-QP-X9x" firstAttribute="centerX" secondItem="RQM-Xq-acw" secondAttribute="centerX" id="EPk-fG-kPb"/>
+                                    <constraint firstItem="RQM-Xq-acw" firstAttribute="leading" secondItem="95A-Lp-cpx" secondAttribute="leading" id="HMy-DL-4Jx"/>
+                                    <constraint firstItem="e1J-Xw-mUF" firstAttribute="top" secondItem="9no-v6-Mc3" secondAttribute="bottom" constant="26" id="VlL-u5-zlF"/>
+                                    <constraint firstAttribute="trailing" secondItem="u5w-QP-X9x" secondAttribute="trailing" id="WQP-zW-pJ1"/>
+                                    <constraint firstItem="RQM-Xq-acw" firstAttribute="trailing" secondItem="95A-Lp-cpx" secondAttribute="trailing" id="bwV-GF-JIA"/>
+                                    <constraint firstItem="u5w-QP-X9x" firstAttribute="top" secondItem="IUn-SK-coS" secondAttribute="top" constant="90" id="fDJ-rP-tDG"/>
+                                    <constraint firstItem="u5w-QP-X9x" firstAttribute="centerX" secondItem="IUn-SK-coS" secondAttribute="centerX" id="gmS-Dz-tR5"/>
+                                    <constraint firstItem="95A-Lp-cpx" firstAttribute="top" secondItem="RQM-Xq-acw" secondAttribute="bottom" constant="5" id="om9-L0-Ymr"/>
+                                    <constraint firstItem="u5w-QP-X9x" firstAttribute="leading" secondItem="IUn-SK-coS" secondAttribute="leading" id="pg5-4q-26u"/>
+                                    <constraint firstItem="95A-Lp-cpx" firstAttribute="centerX" secondItem="9no-v6-Mc3" secondAttribute="centerX" id="s2o-Oc-ujr"/>
+                                    <constraint firstItem="RQM-Xq-acw" firstAttribute="leading" secondItem="IUn-SK-coS" secondAttribute="leading" constant="67" id="uxT-YO-oJI"/>
+                                    <constraint firstAttribute="bottom" secondItem="e1J-Xw-mUF" secondAttribute="bottom" constant="185" id="vct-zP-M6p"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="IUn-SK-coS" firstAttribute="leading" secondItem="hRc-Y0-ksb" secondAttribute="leading" id="5lc-b8-H36"/>
+                            <constraint firstItem="IUn-SK-coS" firstAttribute="top" secondItem="hRc-Y0-ksb" secondAttribute="top" id="Hmv-Lg-NI4"/>
+                            <constraint firstAttribute="trailing" secondItem="IUn-SK-coS" secondAttribute="trailing" id="WtF-L4-1aD"/>
+                            <constraint firstItem="IUn-SK-coS" firstAttribute="bottom" secondItem="T6U-eb-LlI" secondAttribute="top" id="yHL-72-4Px"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="8Yj-U5-XFc"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="RQM-Xq-acw" id="ttj-13-Y5e"/>
+                        <outlet property="passwordTextField" destination="95A-Lp-cpx" id="cb6-C2-RoH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bdo-Aw-vUK" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="889" y="132"/>
         </scene>
     </scenes>
     <resources>
@@ -1453,4 +1601,7 @@
         <image name="profile_about.png" width="18" height="18"/>
         <image name="profile_location.png" width="10" height="17"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="hC7-o8-6gb"/>
+    </inferredMetricsTieBreakers>
 </document>

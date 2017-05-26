@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMobileAds
+import Firebase
 
 let rateDelay: NSInteger  = 60
 
@@ -38,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Remove comments to add Flurry Analytics more information here - www.flurry.com
 		//let flurrySessionID = ConfigurationManager.sharedManager.flurrySessionId
 		//Flurry.startSession(flurrySessionID)
-		
+		FirebaseApp.configure()
 		UIApplication.shared.statusBarStyle = .lightContent
 		UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName : UIFont(name: "Eurofurenceregular", size: 20.0)!, NSForegroundColorAttributeName : UIColor.white]
 
