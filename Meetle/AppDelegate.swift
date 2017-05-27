@@ -8,7 +8,12 @@
 
 import UIKit
 import GoogleMobileAds
+import FacebookLogin
+import FacebookCore
 import Firebase
+import Fabric
+import TwitterKit
+import NVActivityIndicatorView
 
 let rateDelay: NSInteger  = 60
 
@@ -19,7 +24,7 @@ enum RateApp: Int {
 
 @UIApplicationMain
 
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, NVActivityIndicatorViewable {
 
 	var window: UIWindow?
 	
@@ -33,9 +38,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var locationController: UIViewController?
 	var settingsController: UIViewController?
 	var inviteController: UIViewController?
+    var activityIndicatorView :NVActivityIndicatorView?
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		
+        activityIndicatorView = NVActivityIndicatorView(frame: (self.window?.bounds)!, type: .ballSpinFadeLoader, color: UIColor.white, padding: CGFloat(0))
+        
 		// Remove comments to add Flurry Analytics more information here - www.flurry.com
 		//let flurrySessionID = ConfigurationManager.sharedManager.flurrySessionId
 		//Flurry.startSession(flurrySessionID)
@@ -59,57 +67,90 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //RevMob:
         //showRevMob()
-		
+        Twitter.sharedInstance().start(withConsumerKey: "zEDwWj3RrugAu55MaJpCHZ7Kj", consumerSecret: "BM9k6jaSa2cFpLN2SlDqJfvh1ABQmnYPW5u0Vz0GjpogXfh6th")
+        
+        
 		return true
 	}
 	
 	func changedController(_ notification: Notification) {
 	
-		let navigationController = window!.rootViewController as! MSSlidingPanelController
-	
-		if myResumeController == nil {
-			myResumeController = navigationController.centerViewController
-		}
-		
-		let mystoryboard = UIStoryboard(name: "Main", bundle: nil)
-		let controller: UIViewController
-		
-		if (notification.object! as AnyObject).isEqual(to: "homeController") {
-			if homeController == nil {
-				homeController = mystoryboard.instantiateViewController(withIdentifier: notification.object as! String)
-			}
-			controller = homeController!
-		}
-        else if (notification.object! as AnyObject).isEqual(to: "myResumeController") {
-            if myResumeController == nil {
-                myResumeController = mystoryboard.instantiateViewController(withIdentifier: notification.object as! String)
+        if (notification.object! as AnyObject).isEqual(to: "logoutController") {
+            //loginControllerNav
+            activityIndicatorView?.startAnimating()
+            DispatchQueue.global(qos: .background).async {
+                print("This is run on the background queue")
+                let firebaseAuth = Auth.auth()
+                do {
+                    try firebaseAuth.signOut()
+                    DispatchQueue.main.async {
+                        self.activityIndicatorView?.stopAnimating()
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let rootViewController: AnyObject! = storyboard.instantiateViewController(withIdentifier: "loginControllerNav")
+                        
+                        if let window = UIApplication.shared.keyWindow{
+                            window.rootViewController = rootViewController! as? UIViewController
+                        }
+                    }
+                    
+                } catch let signOutError as NSError {
+                    print ("Error signing out: %@", signOutError)
+                    DispatchQueue.main.async {
+                        self.activityIndicatorView?.stopAnimating()
+                    }
+                }
             }
-            controller = myResumeController!
         }
-        else if (notification.object! as AnyObject).isEqual(to: "chatController") {
-			if chatController == nil {
-				chatController = mystoryboard.instantiateViewController(withIdentifier: notification.object as! String)
-			}
-			controller = chatController!
-		} else if (notification.object! as AnyObject).isEqual(to: "locationController") {
-			if locationController == nil {
-				locationController = mystoryboard.instantiateViewController(withIdentifier: notification.object as! String)
+        else
+        {
+            let navigationController = window!.rootViewController as! MSSlidingPanelController
+            
+            if myResumeController == nil {
+                myResumeController = navigationController.centerViewController
             }
-			controller = locationController!
-		} else if (notification.object! as AnyObject).isEqual(to: "settingsController") {
-			if settingsController == nil {
-				settingsController = mystoryboard.instantiateViewController(withIdentifier: notification.object as! String)
-			}
-			controller = settingsController!
-		} else {
-			if inviteController == nil {
-				inviteController = mystoryboard.instantiateViewController(withIdentifier: notification.object as! String)
-			}
-			controller = inviteController!
-		}
-		
-		navigationController.centerViewController = controller
-		navigationController.closePanel()
+            
+            let mystoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller: UIViewController
+            
+            if (notification.object! as AnyObject).isEqual(to: "homeController") {
+                if homeController == nil {
+                    homeController = mystoryboard.instantiateViewController(withIdentifier: notification.object as! String)
+                }
+                controller = homeController!
+            }
+            else if (notification.object! as AnyObject).isEqual(to: "myResumeController") {
+                if myResumeController == nil {
+                    myResumeController = mystoryboard.instantiateViewController(withIdentifier: notification.object as! String)
+                }
+                controller = myResumeController!
+            }
+            else if (notification.object! as AnyObject).isEqual(to: "chatController") {
+                if chatController == nil {
+                    chatController = mystoryboard.instantiateViewController(withIdentifier: notification.object as! String)
+                }
+                controller = chatController!
+            } else if (notification.object! as AnyObject).isEqual(to: "locationController") {
+                if locationController == nil {
+                    locationController = mystoryboard.instantiateViewController(withIdentifier: notification.object as! String)
+                }
+                controller = locationController!
+            } else if (notification.object! as AnyObject).isEqual(to: "settingsController") {
+                if settingsController == nil {
+                    settingsController = mystoryboard.instantiateViewController(withIdentifier: notification.object as! String)
+                }
+                controller = settingsController!
+            } else {
+                if inviteController == nil {
+                    inviteController = mystoryboard.instantiateViewController(withIdentifier: notification.object as! String)
+                }
+                controller = inviteController!
+            }
+            
+            
+            navigationController.centerViewController = controller
+            navigationController.closePanel()
+        }
+        
 	}
 
 	// MARK: - Private Methods
@@ -161,7 +202,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			}
 		}
 	}
-	
+    @available(iOS 9.0, *)
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        //print(url)
+        //let googleDidHandle = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[.sourceApplication] as? String, annotation: options[.annotation])
+        if Twitter.sharedInstance().application(app, open:url, options: options) {
+            return true
+        }
+        let facebookDidHandle = SDKApplicationDelegate.shared.application(app, open: url, options: options)
+        
+        return facebookDidHandle//return googleDidHandle || facebookDidHandle
+        
+        //return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[.sourceApplication] as? String, annotation: options[.annotation])
+        
+    }
 	//MARK: - AdMob
 //	func showInterstitialAd() {
 //		request = GADRequest()

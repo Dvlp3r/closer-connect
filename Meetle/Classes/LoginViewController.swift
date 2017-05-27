@@ -9,8 +9,12 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import NVActivityIndicatorView
+import FacebookLogin
+import FacebookCore
+import TwitterKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, NVActivityIndicatorViewable  {
 
     @IBOutlet weak var spaceViewConstraint: NSLayoutConstraint?
     @IBOutlet weak var mainScrollViewBottomConstraint: NSLayoutConstraint?
@@ -26,6 +30,18 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillChangeFrame(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
 		view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(LoginViewController.hideKeyboard(_:))))
         configureSpaces()
+        
+        if ((Auth.auth().currentUser) != nil)
+        {
+            //loginControllerNav
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let rootViewController: AnyObject! = storyboard.instantiateViewController(withIdentifier: "rootViewController")
+            
+            if let window = UIApplication.shared.keyWindow{
+                window.rootViewController = rootViewController! as? UIViewController
+            }
+            
+        }
 	}
 
 	//MARK: - Private methods
@@ -42,13 +58,13 @@ class LoginViewController: UIViewController {
 	
 	//MARK: - User actions
 	
-	@IBAction func signInPressed(_ sender: AnyObject) {
-//		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//		let rootViewController: AnyObject! = storyboard.instantiateViewController(withIdentifier: "rootViewController")
-//		
-//		if let window = UIApplication.shared.keyWindow{
-//			window.rootViewController = rootViewController! as? UIViewController
-//		}
+    @IBAction func signInPressed(_ sender: AnyObject) {
+        //		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        //		let rootViewController: AnyObject! = storyboard.instantiateViewController(withIdentifier: "rootViewController")
+        //
+        //		if let window = UIApplication.shared.keyWindow{
+        //			window.rootViewController = rootViewController! as? UIViewController
+        //		}
         
         if self.emailTextField?.text == "" || self.passwordTextField?.text == "" {
             
@@ -62,38 +78,132 @@ class LoginViewController: UIViewController {
             self.present(alertController, animated: true, completion: nil)
             
         } else {
+            self.startAnimating()
             
-            Auth.auth().signIn(withEmail: (self.emailTextField?.text!)!, password: (self.passwordTextField?.text!)!) { (user, error) in
-                
-                if error == nil {
+            DispatchQueue.global(qos: .background).async {
+                print("This is run on the background queue")
+                Auth.auth().signIn(withEmail: (self.emailTextField?.text!)!, password: (self.passwordTextField?.text!)!) { (user, error) in
                     
-                    //Print into the console if successfully logged in
-                    print("You have successfully logged in")
-                    
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let rootViewController: AnyObject! = storyboard.instantiateViewController(withIdentifier: "rootViewController")
-                    self.navigationController?.pushViewController(rootViewController as! UIViewController, animated: true)
-                } else {
-                    
-                    //Tells the user that there is an error and then gets firebase to tell them the error
-                    let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
-                    
-                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(defaultAction)
-                    
-                    self.present(alertController, animated: true, completion: nil)
+                    DispatchQueue.main.async {
+                        print("This is run on the main queue, after the previous code in outer block")
+                        self.stopAnimating()
+                        if error == nil {
+                            
+                            //Print into the console if successfully logged in
+                            print("You have successfully logged in")
+                            
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let rootViewController: AnyObject! = storyboard.instantiateViewController(withIdentifier: "rootViewController")
+                            if let window = UIApplication.shared.keyWindow{
+                                window.rootViewController = rootViewController! as? UIViewController
+                            }
+                        } else {
+                            
+                            //Tells the user that there is an error and then gets firebase to tell them the error
+                            let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                            
+                            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                            alertController.addAction(defaultAction)
+                            
+                            self.present(alertController, animated: true, completion: nil)
+                        }
+                    }
                 }
+            }
+            
+            
+        }
+        
+    }
+    //MARK: - Facebook Login Manager
+    
+    @IBAction func facebookSignInPressed(_ sender: AnyObject) {
+        print("facebookSignInPressed")
+        let loginManager = LoginManager()
+        
+        //loginManager.logIn([ .publicProfile, .email], viewController: self)
+        loginManager.logIn([ .publicProfile, .email], viewController: self) { loginResult in
+            //print("LOGIN RESULT! \(loginResult)")
+            self.startAnimating()
+            switch loginResult {
+            case .failed(let error):
+                print("FACEBOOK LOGIN FAILED: \(error)")
+                self.stopAnimating()
+            case .cancelled:
+                print("User cancelled login.")
+                self.stopAnimating()
+            case .success(let grantedPermissions, let declinedPermissions, let accessToken):
+                print("Logged in!")
+                print("GRANTED PERMISSIONS: \(grantedPermissions)")
+                print("DECLINED PERMISSIONS: \(declinedPermissions)")
+                print("ACCESS TOKEN \(accessToken)")
+                
+                let params = ["fields" : "email, name"]
+                let graphRequest = GraphRequest(graphPath: "me", parameters: params)
+                graphRequest.start {
+                    (urlResponse, requestResult) in
+                    
+                    switch requestResult {
+                    case .failed(let error):
+                        print("error in graph request:", error)
+                        self.stopAnimating()
+                        break
+                    case .success(let graphResponse):
+                        if var responseDictionary = graphResponse.dictionaryValue {
+                            print(responseDictionary)
+                            
+                            print(responseDictionary["name"] as! String)
+                            print(responseDictionary["email"] as! String)
+                            //UserDataParser().socialLogin(authId: responseDictionary["id"] as! String )
+                            let facebookUserId = responseDictionary["id"] as! String
+                            print(facebookUserId as Any)
+                            if facebookUserId != ""
+                            {
+                                
+                                //UserDataParser().socialLogin(authId: facebookUserId)
+                                //loginManager.logOut()
+                                let credential = FacebookAuthProvider.credential(withAccessToken: (AccessToken.current?.authenticationToken)!)
+                                // [END headless_facebook_auth]
+                                self.firebaseLoginWithCredential(credential: credential);
+                            }
+                            else
+                            {
+                                self.stopAnimating()
+                            }
+                        }
+                        else
+                        {
+                            self.stopAnimating()
+                        }
+                    }
+                    
+                }
+                
             }
         }
         
-	}
-
-	@IBAction func facebookSignInPressed(_ sender: AnyObject) {
-		print("facebookSignInPressed")
-	}
+    }
 	
 	@IBAction func twitterSignInPressed(_ sender: AnyObject) {
 		print("twitterSignInPressed")
+        Twitter.sharedInstance().logIn {
+            (session, error) -> Void in
+            if (session != nil) {
+                self.startAnimating()
+                let credential = TwitterAuthProvider.credential(withToken: (session?.authToken)!, secret: (session?.authTokenSecret)!)
+                print(session!.userID)
+                print(session!.userName)
+                print(session!.authToken)
+                print(session!.authTokenSecret)
+                // [END headless_twitter_auth]
+                //[self firebaseLoginWithCredential:credential];
+                self.firebaseLoginWithCredential(credential: credential);
+
+                
+            }else {
+                print("Not Login")
+            }
+        }
 	}
 	
 	@IBAction func forgotPasswordPressed(_ sender: AnyObject) {
@@ -102,7 +212,85 @@ class LoginViewController: UIViewController {
 	
 	@IBAction func signUpPressed(_ sender: AnyObject) {
 		print("signUpPressed")
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
 	}
+    
+    func firebaseLoginWithCredential(credential: AuthCredential)
+    {
+        DispatchQueue.global(qos: .background).async {
+            print("This is run on the background queue")
+            if ((Auth.auth().currentUser) != nil)
+            {
+                Auth.auth().currentUser?.link(with: credential, completion: { (user, error) in
+                    
+                    DispatchQueue.main.async {
+                        print("This is run on the main queue, after the previous code in outer block")
+                        self.stopAnimating()
+                        if error == nil {
+                            
+                            //Print into the console if successfully logged in
+                            print("You have successfully logged in")
+                            
+                            //loginControllerNav
+                            
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let rootViewController: AnyObject! = storyboard.instantiateViewController(withIdentifier: "rootViewController")
+                            
+                            if let window = UIApplication.shared.keyWindow{
+                                window.rootViewController = rootViewController! as? UIViewController
+                            }
+                        } else {
+                            
+                            //Tells the user that there is an error and then gets firebase to tell them the error
+                            let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                            
+                            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                            alertController.addAction(defaultAction)
+                            
+                            self.present(alertController, animated: true, completion: nil)
+                        }
+                    }
+                })
+                
+            }
+            else
+            {
+                Auth.auth().signIn(with: credential, completion: { (user, error) in
+                    
+                    DispatchQueue.main.async {
+                        print("This is run on the main queue, after the previous code in outer block")
+                        self.stopAnimating()
+                        if error == nil {
+                            
+                            //Print into the console if successfully logged in
+                            print("You have successfully logged in")
+                            
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let rootViewController: AnyObject! = storyboard.instantiateViewController(withIdentifier: "rootViewController")
+                            if let window = UIApplication.shared.keyWindow{
+                                window.rootViewController = rootViewController! as? UIViewController
+                            }
+                        } else {
+                            
+                            //Tells the user that there is an error and then gets firebase to tell them the error
+                            let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                            
+                            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                            alertController.addAction(defaultAction)
+                            
+                            self.present(alertController, animated: true, completion: nil)
+                        }
+                    }
+                })
+            }
+            
+        }
+    }
     
     //MARK: - Observer methods
     

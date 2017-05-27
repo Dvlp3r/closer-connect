@@ -35,7 +35,9 @@ class SignUpViewController: UIViewController {
                     
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let rootViewController: AnyObject! = storyboard.instantiateViewController(withIdentifier: "rootViewController")
-                    self.navigationController?.pushViewController(rootViewController as! UIViewController, animated: true)
+                    if let window = UIApplication.shared.keyWindow{
+                        window.rootViewController = rootViewController! as? UIViewController
+                    }
                     
                 } else {
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)

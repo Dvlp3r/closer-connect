@@ -14,6 +14,7 @@ enum MenuItem: Int {
     case home
 	case location
 	case settings
+    case logout
 	case count
 }
 
@@ -72,6 +73,10 @@ extension MenuViewController: UITableViewDataSource {
             cell.menuItemIcon!.image = UIImage(named: "MenuSettings")
             cell.menuItemLabel!.text = "settings"
             break
+        case MenuItem.logout.rawValue:
+            cell.menuItemIcon!.image = UIImage(named: "MenuSettings")
+            cell.menuItemLabel!.text = "logout"
+            break
         default:
             break
         }
@@ -101,6 +106,12 @@ extension MenuViewController: UITableViewDelegate {
         case MenuItem.settings.rawValue:
             NotificationCenter.default.post(name: Notification.Name(rawValue: "changeControllerNotification"), object: "settingsController")
             break
+        case MenuItem.logout.rawValue:
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "changeControllerNotification"), object: "logoutController")
+            break
+            
+            
+            
         default:
             break
         }
