@@ -13,4 +13,5 @@ target 'closer-connect' do
     pod 'FacebookLogin'
     pod ’TwitterKit’
     pod 'NVActivityIndicatorView'
+    pod 'Eureka'
 end

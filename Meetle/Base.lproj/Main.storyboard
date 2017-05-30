@@ -161,7 +161,7 @@
         <scene sceneID="7rT-ry-afk">
             <objects>
                 <navigationController storyboardIdentifier="homeController" id="15k-SL-5jA" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="d4Z-pM-iDP">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="d4Z-pM-iDP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -319,7 +319,7 @@
         <scene sceneID="ff5-mr-eNW">
             <objects>
                 <navigationController storyboardIdentifier="chatController" id="0ID-V7-wLu" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="EI0-sL-0HQ">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="EI0-sL-0HQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -537,7 +537,7 @@
         <scene sceneID="mKf-sm-Iwg">
             <objects>
                 <navigationController storyboardIdentifier="locationController" id="e8Q-DV-i0c" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="ncM-ip-vRK">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="ncM-ip-vRK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -637,7 +637,7 @@
         <scene sceneID="V7p-f6-G95">
             <objects>
                 <navigationController storyboardIdentifier="settingsController" id="yup-TP-dyr" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="r4s-7E-RTZ">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="r4s-7E-RTZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -691,16 +691,16 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9tE-rl-phM">
-                                <rect key="frame" x="0.0" y="101" width="320" height="100.5"/>
+                                <rect key="frame" x="0.0" y="101" width="320" height="101"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Me:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Of-WQ-Sgn">
-                                        <rect key="frame" x="124" y="20.5" width="72" height="21"/>
+                                        <rect key="frame" x="124" y="21" width="72" height="21"/>
                                         <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VCt-tu-p03">
-                                        <rect key="frame" x="-4" y="49.5" width="328" height="29"/>
+                                        <rect key="frame" x="-4" y="50" width="328" height="29"/>
                                         <segments>
                                             <segment title="Man"/>
                                             <segment title="Woman"/>
@@ -719,7 +719,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zhR-V4-GnK">
-                                <rect key="frame" x="0.0" y="203.5" width="320" height="101"/>
+                                <rect key="frame" x="0.0" y="204" width="320" height="101"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Limit Search To:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8G-VX-cO7">
                                         <rect key="frame" x="103" y="8" width="114" height="21"/>
@@ -757,7 +757,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Uh-7l-BNZ">
-                                <rect key="frame" x="0.0" y="302.5" width="320" height="100.5"/>
+                                <rect key="frame" x="0.0" y="303" width="320" height="100"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Ages:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHg-ap-MMb">
                                         <rect key="frame" x="117" y="8" width="85" height="21"/>
@@ -766,13 +766,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18 - 60" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i9f-gg-Rfg">
-                                        <rect key="frame" x="135" y="34.5" width="50" height="21"/>
+                                        <rect key="frame" x="135" y="34" width="50" height="21"/>
                                         <fontDescription key="fontDescription" name="Eurofurencelight" family="eurofurence light" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gCF-8W-uQR">
-                                        <rect key="frame" x="6" y="61.5" width="308" height="31"/>
+                                        <rect key="frame" x="6" y="61" width="308" height="31"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="308" id="IB1-8f-cG8"/>
@@ -1153,7 +1153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8MR-aF-pvt" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="144.375" y="135.21126760563379"/>
+            <point key="canvasLocation" x="71" y="176"/>
         </scene>
         <!--her resume-->
         <scene sceneID="ea1-R9-jbq">
@@ -1350,13 +1350,13 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ABOUT:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Chk-Rh-XvK">
-                                        <rect key="frame" x="137" y="29" width="46" height="17"/>
+                                        <rect key="frame" x="138" y="29" width="46" height="17"/>
                                         <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="16"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I'm 22 years old student with a passion for photography and travel - honestly I can't imagine my life without it!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="303" translatesAutoresizingMaskIntoConstraints="NO" id="mmc-9N-wfO">
-                                        <rect key="frame" x="16" y="46" width="288" height="27"/>
+                                        <rect key="frame" x="16" y="46" width="290" height="27"/>
                                         <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="13"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1415,7 +1415,7 @@
         <scene sceneID="kDR-KF-cK9">
             <objects>
                 <navigationController storyboardIdentifier="myResumeController" id="TRf-bU-Igg" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="ven-RW-LCO">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="ven-RW-LCO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1568,11 +1568,146 @@
                     <connections>
                         <outlet property="emailTextField" destination="RQM-Xq-acw" id="ttj-13-Y5e"/>
                         <outlet property="passwordTextField" destination="95A-Lp-cpx" id="cb6-C2-RoH"/>
+                        <segue destination="BzD-zn-vx7" kind="push" id="j3v-1z-jQP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bdo-Aw-vUK" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="889" y="132"/>
+            <point key="canvasLocation" x="743" y="606"/>
+        </scene>
+        <!--More Details View Controller-->
+        <scene sceneID="hPh-3k-3yQ">
+            <objects>
+                <viewController storyboardIdentifier="MoreDetailsViewController" id="BzD-zn-vx7" customClass="MoreDetailsViewController" customModule="closer_connect" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5u4-re-oT0"/>
+                        <viewControllerLayoutGuide type="bottom" id="8eH-GS-zuL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6tn-dA-6ty">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="vWd-nj-qQu">
+                                <rect key="frame" x="0.0" y="176" width="320" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="517832935.26855397">
+                                    <!--2017-05-30 10:28:55 +0000-->
+                                </date>
+                            </datePicker>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bmD-sH-H1p">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nyJ-J6-1fd">
+                                        <rect key="frame" x="67" y="192" width="185" height="40"/>
+                                        <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="HX3-O6-WOK"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BzD-zn-vx7" id="HYt-I7-4Kt"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Date of Birth" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yJr-L1-Dvg">
+                                        <rect key="frame" x="67" y="237" width="185" height="40"/>
+                                        <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="5mB-76-Qfg"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BzD-zn-vx7" id="vPf-gP-Q5q"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D0r-RE-Cwg">
+                                        <rect key="frame" x="109" y="342" width="100" height="40"/>
+                                        <color key="backgroundColor" red="0.92549019610000005" green="0.0" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="EEV-1o-Cuh"/>
+                                            <constraint firstAttribute="width" constant="100" id="p5y-JS-MsF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="20"/>
+                                        <state key="normal" title="Proceed">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="createAccountAction:" destination="BzD-zn-vx7" eventType="touchUpInside" id="8at-0v-Czz"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MainLogo" translatesAutoresizingMaskIntoConstraints="NO" id="zie-wB-B9o">
+                                        <rect key="frame" x="0.0" y="90" width="320" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="gIl-f0-ckv"/>
+                                        </constraints>
+                                    </imageView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Nco-mG-bE7">
+                                        <rect key="frame" x="67" y="285" width="185" height="29"/>
+                                        <segments>
+                                            <segment title="I&quot;m Girl"/>
+                                            <segment title="I&quot;m Boy"/>
+                                        </segments>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="zie-wB-B9o" firstAttribute="top" secondItem="bmD-sH-H1p" secondAttribute="top" constant="90" id="3dO-Zb-dg5"/>
+                                    <constraint firstItem="nyJ-J6-1fd" firstAttribute="leading" secondItem="yJr-L1-Dvg" secondAttribute="leading" id="68Y-DG-Bhw"/>
+                                    <constraint firstItem="zie-wB-B9o" firstAttribute="centerX" secondItem="nyJ-J6-1fd" secondAttribute="centerX" id="9qb-hB-Bbb"/>
+                                    <constraint firstAttribute="trailing" secondItem="zie-wB-B9o" secondAttribute="trailing" id="IhC-nB-scH"/>
+                                    <constraint firstItem="zie-wB-B9o" firstAttribute="leading" secondItem="bmD-sH-H1p" secondAttribute="leading" id="Nwf-3a-c59"/>
+                                    <constraint firstItem="nyJ-J6-1fd" firstAttribute="leading" secondItem="bmD-sH-H1p" secondAttribute="leading" constant="67" id="P2w-jX-aJu"/>
+                                    <constraint firstItem="zie-wB-B9o" firstAttribute="centerX" secondItem="bmD-sH-H1p" secondAttribute="centerX" id="W2l-D2-lbD"/>
+                                    <constraint firstItem="Nco-mG-bE7" firstAttribute="centerX" secondItem="D0r-RE-Cwg" secondAttribute="centerX" id="b42-WZ-Oy5"/>
+                                    <constraint firstItem="yJr-L1-Dvg" firstAttribute="leading" secondItem="Nco-mG-bE7" secondAttribute="leading" id="j98-IF-3IA"/>
+                                    <constraint firstItem="yJr-L1-Dvg" firstAttribute="top" secondItem="nyJ-J6-1fd" secondAttribute="bottom" constant="5" id="jAl-O8-ZfB"/>
+                                    <constraint firstAttribute="bottom" secondItem="D0r-RE-Cwg" secondAttribute="bottom" constant="186" id="jtc-7o-7E4"/>
+                                    <constraint firstItem="nyJ-J6-1fd" firstAttribute="top" secondItem="zie-wB-B9o" secondAttribute="bottom" constant="22" id="l6T-0E-Ji1"/>
+                                    <constraint firstItem="nyJ-J6-1fd" firstAttribute="trailing" secondItem="yJr-L1-Dvg" secondAttribute="trailing" id="nHb-iV-P5b"/>
+                                    <constraint firstItem="yJr-L1-Dvg" firstAttribute="trailing" secondItem="Nco-mG-bE7" secondAttribute="trailing" id="ofv-mQ-jBj"/>
+                                    <constraint firstItem="D0r-RE-Cwg" firstAttribute="top" secondItem="Nco-mG-bE7" secondAttribute="bottom" constant="29" id="pub-4W-teo"/>
+                                    <constraint firstItem="Nco-mG-bE7" firstAttribute="top" secondItem="yJr-L1-Dvg" secondAttribute="bottom" constant="8" symbolic="YES" id="x25-gW-EdE"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bmD-sH-H1p" firstAttribute="leading" secondItem="6tn-dA-6ty" secondAttribute="leading" id="6bO-f9-P8p"/>
+                            <constraint firstItem="bmD-sH-H1p" firstAttribute="top" secondItem="6tn-dA-6ty" secondAttribute="top" id="DsH-jT-8Bz"/>
+                            <constraint firstAttribute="trailing" secondItem="bmD-sH-H1p" secondAttribute="trailing" id="S4n-fp-L5F"/>
+                            <constraint firstItem="bmD-sH-H1p" firstAttribute="bottom" secondItem="8eH-GS-zuL" secondAttribute="top" id="bt5-ch-kqo"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="uUB-ee-jFd"/>
+                    <connections>
+                        <outlet property="datePicker" destination="vWd-nj-qQu" id="ZHD-D5-ckY"/>
+                        <outlet property="dobTextField" destination="yJr-L1-Dvg" id="ggK-Gz-6EM"/>
+                        <outlet property="genderSegment" destination="Nco-mG-bE7" id="Q8B-YQ-RbP"/>
+                        <outlet property="nameTextField" destination="nyJ-J6-1fd" id="6fp-7p-9Ly"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YNR-N4-iQJ" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-375" y="915.84507042253517"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="PQ4-j7-ca3">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fdb-Jm-LD4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController storyboardIdentifier="myDetailsController" id="ch9-Qo-gTQ" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="YZZ-WQ-ZqG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.031372549020000001" green="0.22352941179999999" blue="0.3803921569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="744" y="837"/>
         </scene>
     </scenes>
     <resources>

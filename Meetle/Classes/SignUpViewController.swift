@@ -9,8 +9,9 @@
 import Foundation
 import Firebase
 import FirebaseAuth
+import NVActivityIndicatorView
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, NVActivityIndicatorViewable {
     
     //Outlets
     @IBOutlet weak var emailTextField: UITextField!
@@ -26,28 +27,36 @@ class SignUpViewController: UIViewController {
             
             present(alertController, animated: true, completion: nil)
             
-        } else {
-            Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (user, error) in
-                
-                if error == nil {
-                    print("You have successfully signed up")
-                    //Goes to the Setup page which lets the user take a photo for their profile picture and also chose a username
+        } else
+        {
+            self.startAnimating()
+            
+            DispatchQueue.global(qos: .background).async {
+                Auth.auth().createUser(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!) { (user, error) in
                     
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let rootViewController: AnyObject! = storyboard.instantiateViewController(withIdentifier: "rootViewController")
-                    if let window = UIApplication.shared.keyWindow{
-                        window.rootViewController = rootViewController! as? UIViewController
+                    DispatchQueue.main.async {
+                        if error == nil {
+                            print("You have successfully signed up")
+                            //Goes to the Setup page which lets the user take a photo for their profile picture and also chose a username
+                            
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let rootViewController = storyboard.instantiateViewController(withIdentifier: "MoreDetailsViewController") as! MoreDetailsViewController
+                            self.navigationController?.pushViewController(rootViewController, animated: true)
+                            
+                        } else {
+                            let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                            
+                            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                            alertController.addAction(defaultAction)
+                            
+                            self.present(alertController, animated: true, completion: nil)
+                        }
                     }
                     
-                } else {
-                    let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
-                    
-                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(defaultAction)
-                    
-                    self.present(alertController, animated: true, completion: nil)
                 }
+                
             }
+            
         }
     }
     @IBAction func backAction(_ sender: AnyObject) {

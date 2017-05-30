@@ -22,10 +22,17 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable  {
     @IBOutlet weak var emailTextField: UITextField?
     @IBOutlet weak var passwordTextField: UITextField?
     
+    var ref: DatabaseReference!
+    var nameVal: String?
+    private var databaseHandle: DatabaseHandle!
     var isKeyboardShown = false
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        
+        
+        
+        ref = Database.database().reference()
         
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillChangeFrame(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
 		view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(LoginViewController.hideKeyboard(_:))))
@@ -159,7 +166,7 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable  {
                             print(facebookUserId as Any)
                             if facebookUserId != ""
                             {
-                                
+                                self.nameVal = responseDictionary["name"] as! String
                                 //UserDataParser().socialLogin(authId: facebookUserId)
                                 //loginManager.logOut()
                                 let credential = FacebookAuthProvider.credential(withAccessToken: (AccessToken.current?.authenticationToken)!)
@@ -197,6 +204,7 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable  {
                 print(session!.authTokenSecret)
                 // [END headless_twitter_auth]
                 //[self firebaseLoginWithCredential:credential];
+                self.nameVal = session!.userName
                 self.firebaseLoginWithCredential(credential: credential);
 
                 
@@ -235,7 +243,7 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable  {
                             
                             //Print into the console if successfully logged in
                             print("You have successfully logged in")
-                            
+                            self.ref.child("users").child((user?.uid)!).setValue(["username": "Mahendra"])
                             //loginControllerNav
                             
                             let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -265,16 +273,41 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable  {
                     DispatchQueue.main.async {
                         print("This is run on the main queue, after the previous code in outer block")
                         self.stopAnimating()
-                        if error == nil {
-                            
-                            //Print into the console if successfully logged in
-                            print("You have successfully logged in")
-                            
-                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            let rootViewController: AnyObject! = storyboard.instantiateViewController(withIdentifier: "rootViewController")
-                            if let window = UIApplication.shared.keyWindow{
-                                window.rootViewController = rootViewController! as? UIViewController
+                        if error == nil
+                        {
+                            let userID = user?.uid
+                            self.ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                                // Get user value
+                                let value = snapshot.value as? NSDictionary
+                                //let username = value?["username"] as? String ?? ""
+                                //let user = User.init(username: username)
+                                //print(value!)
+                                if (value != nil)
+                                {
+                                    print("You have successfully logged in")
+                                    
+                                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                    let rootViewController: AnyObject! = storyboard.instantiateViewController(withIdentifier: "rootViewController")
+                                    if let window = UIApplication.shared.keyWindow{
+                                        window.rootViewController = rootViewController! as? UIViewController
+                                    }
+                                }
+                                else
+                                {
+                                    print("You have successfully logged in")
+                                    
+                                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                    let rootViewController = storyboard.instantiateViewController(withIdentifier: "MoreDetailsViewController") as! MoreDetailsViewController
+                                    rootViewController.name = self.nameVal!
+                                    self.navigationController?.pushViewController(rootViewController, animated: true)
+                                }
+                                // ...
+                            }) { (error) in
+                                print(error.localizedDescription)
                             }
+                            //self.ref.child("users").child((user?.uid)!).setValue(["username": "Mahendra", "Name": "Mahen"])
+                            //Print into the console if successfully logged in
+                            
                         } else {
                             
                             //Tells the user that there is an error and then gets firebase to tell them the error
