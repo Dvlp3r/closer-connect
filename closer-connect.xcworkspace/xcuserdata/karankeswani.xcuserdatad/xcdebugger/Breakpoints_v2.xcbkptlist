@@ -138,7 +138,7 @@
                   moduleName = "closer-connect"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///CT%20Apps/DemoCodes/test/cc/CloserConnect2/closer-connect/Meetle/Classes/SignUpViewController.swift"
-                  timestampString = "517834939.360837"
+                  timestampString = "517906486.963265"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "35"
@@ -153,7 +153,7 @@
                   moduleName = "closer-connect"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///CT%20Apps/DemoCodes/test/cc/CloserConnect2/closer-connect/Meetle/Classes/SignUpViewController.swift"
-                  timestampString = "517834939.364379"
+                  timestampString = "517906486.975319"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "37"
@@ -161,6 +161,86 @@
                   offsetFromSymbolStart = "33">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Meetle/Classes/MyResumeViewController.swift"
+            timestampString = "517903436.039722"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closer_connect.MyResumeViewController.(viewDidLoad () -&gt; ()).(closure #1)"
+                  moduleName = "closer-connect"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///CT%20Apps/DemoCodes/test/cc/CloserConnect2/closer-connect/Meetle/Classes/MyResumeViewController.swift"
+                  timestampString = "517906486.982904"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
+                  offsetFromSymbolStart = "1793">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closer_connect.MyResumeViewController.(viewDidLoad () -&gt; ()).(closure #1)"
+                  moduleName = "closer-connect"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///CT%20Apps/DemoCodes/test/cc/CloserConnect2/closer-connect/Meetle/Classes/MyResumeViewController.swift"
+                  timestampString = "517906486.993053"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
+                  offsetFromSymbolStart = "3164">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Meetle/Classes/MyResumeViewController.swift"
+            timestampString = "517903436.039722"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "addPhotoPressed(sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Meetle/Classes/MyResumeViewController.swift"
+            timestampString = "517903436.039722"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "addPhotoPressed(sender:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -33,6 +33,10 @@ class BaseViewController: UIViewController {
         sendMessageWithText("Hi, nice to meet you here!")
     }
     
+    @IBAction func editIconClicked(_ sender: AnyObject) {
+        sendMessageWithText("Hi, nice to meet you here!")
+    }
+    
     @IBAction func goToPreviousView(_ sender: AnyObject) {
         _ = navigationController?.popViewController(animated: true)
     }
@@ -40,6 +44,11 @@ class BaseViewController: UIViewController {
     // MARK - Public Methods
 	
     func initMessageIcon() {
+        let navigationImage = UIImage(named: "MessageWithDot")!.withRenderingMode(.alwaysOriginal)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: navigationImage, style: UIBarButtonItemStyle.plain, target: self, action: #selector(BaseViewController.messageIconClicked(_:)))
+    }
+    
+    func initEditIcon() {
         let navigationImage = UIImage(named: "MessageWithDot")!.withRenderingMode(.alwaysOriginal)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: navigationImage, style: UIBarButtonItemStyle.plain, target: self, action: #selector(BaseViewController.messageIconClicked(_:)))
     }

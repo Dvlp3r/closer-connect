@@ -57,6 +57,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>We wish to capture images from camera</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need access to location services to help find the Malls for your City.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We wish to pick photos library.</string>
 	<key>UIAppFonts</key>

@@ -14,4 +14,5 @@ target 'closer-connect' do
     pod ’TwitterKit’
     pod 'NVActivityIndicatorView'
     pod 'Eureka'
+    pod 'Firebase/Storage'
 end

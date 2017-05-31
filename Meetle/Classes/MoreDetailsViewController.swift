@@ -149,9 +149,15 @@ class MoreDetailsViewController: UIViewController, NVActivityIndicatorViewable, 
             DispatchQueue.global(qos: .background).async {
                 if let user = Auth.auth().currentUser
                 {
+                    var yourArray = [String]()
+                    yourArray.append("https://organicthemes.com/demo/profile/files/2012/12/profile_img.png")
+                    yourArray.append("http://www.qygjxz.com/data/out/190/6179593-profile-pics.jpg")
+                    yourArray.append("http://wallpaper-gallery.net/images/profile-pics/profile-pics-18.jpg")
+                    
+                    
                     if (self.currentLocation != nil)
                     {
-                        self.ref.child("users").child(user.uid).setValue(["Name": self.nameTextField.text!, "DOB": self.dobTextField.text!,  "Gender": self.genderSegment.selectedSegmentIndex,  "Latitude": self.currentLocation.coordinate.latitude,  "Longitude": self.currentLocation.coordinate.longitude])
+                        self.ref.child("users").child(user.uid).setValue(["Name": self.nameTextField.text!, "DOB": self.dobTextField.text!,  "Gender": self.genderSegment.selectedSegmentIndex,  "Latitude": self.currentLocation.coordinate.latitude,  "Longitude": self.currentLocation.coordinate.longitude,  "Photos": yourArray])
                         DispatchQueue.main.async {
                             self.stopAnimating()
                             let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -163,7 +169,7 @@ class MoreDetailsViewController: UIViewController, NVActivityIndicatorViewable, 
                     }
                     else
                     {
-                        self.ref.child("users").child(user.uid).setValue(["Name": self.nameTextField.text!, "DOB": self.dobTextField.text!,  "Gender": self.genderSegment.selectedSegmentIndex])
+                        self.ref.child("users").child(user.uid).setValue(["Name": self.nameTextField.text!, "DOB": self.dobTextField.text!,  "Gender": self.genderSegment.selectedSegmentIndex, "Photos": yourArray])
                         DispatchQueue.main.async {
                             let storyboard = UIStoryboard(name: "Main", bundle: nil)
                             let rootViewController: AnyObject! = storyboard.instantiateViewController(withIdentifier: "rootViewController")
