@@ -11,7 +11,6 @@ import GoogleMobileAds
 import FacebookLogin
 import FacebookCore
 import Firebase
-import Fabric
 import TwitterKit
 import NVActivityIndicatorView
 

@@ -8,6 +8,8 @@
 
 import UIKit
 import QuartzCore
+import FirebaseDatabase
+import GeoFire
 
 class HomeViewController: BaseViewController {
 
@@ -16,6 +18,9 @@ class HomeViewController: BaseViewController {
 	@IBOutlet weak var likeButton: UIButton?
 	@IBOutlet weak var nextButton: UIButton?
 
+    var ref: DatabaseReference!
+    
+    
 	fileprivate let pageViews: NSMutableArray = NSMutableArray(objects: NSNull(), NSNull(), NSNull())
 	fileprivate let imageNames = ["jessy", "man", "Veronika"]
 	fileprivate let centerImageView: UIImageView = UIImageView(image: UIImage(named: "jessy"))
@@ -26,6 +31,30 @@ class HomeViewController: BaseViewController {
         super.viewDidLoad()
 		initMessageIcon()
 		initImageView()
+        ref = Database.database().reference()
+        let center = CLLocation(latitude: 37.7832889, longitude: -122.4056973)
+        let geofireRef = ref.child("users")
+        let geoFire = GeoFire(firebaseRef: geofireRef)
+        
+        // Query locations at [37.7832889, -122.4056973] with a radius of 600 meters
+        let circleQuery = geoFire?.query(at: center, withRadius: 0.6)
+        
+        circleQuery?.observe(.keyEntered, with: { (key: String?, location: CLLocation?) in
+            print("In KeyEntered block ")
+            print("Key '\(key)' entered the search area and is at location '\(location)'")
+        })
+        
+        let queryHandle = circleQuery?.observe(.keyMoved, with: { (key: String?, location: CLLocation?) in
+            print("In KeyEntered block ")
+            print("Key '\(key)' entered the search area and is at location '\(location)'")
+        })
+       /* circleQuery?.observeReady({
+            print("All initial data has been loaded and events have been fired!")
+        })*/
+        
+        
+        
+        
     }
 
 	override func viewDidAppear(_ animated: Bool) {

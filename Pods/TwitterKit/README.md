@@ -1,6 +1,6 @@
-Part of [Fabric](https://www.fabric.io/), Twitter Kit is easiest way to bring real-time conversational content to your apps. Growing an app’s user base and retaining end users can be a challenge for any developer. To keep users engaged, you need rich, unique content that feels natural to your app’s experience.
+Twitter Kit is the easiest way to bring real-time conversational content to your apps. Growing an app’s user base and retaining end users can be a challenge for any developer. To keep users engaged, you need rich, unique content that feels natural to your app’s experience.
 
-To install, follow the instructions [here](https://fabric.io/kits/ios/twitterkit/install).
+To install, add `TwitterKit` to your `Podfile` and run `pod install`. If you already have `TwitterKit` just run `pod update TwitterKit`.
 
 ### Show a Single Tweet
 
@@ -20,7 +20,7 @@ To show a single Tweet, you first need to load that Tweet from the network and t
     }
 ```
 
-<img src="https://docs.fabric.io/apple/_images/show_tweet_compact.png" width="250"/>
+<img src="https://dev.twitter.com/_images/search_timeline.png" width="250"/>
 
 
 #### Configuring Tweet View Colors & Themes
@@ -68,7 +68,7 @@ class UserTimelineViewController: TWTRTimelineViewController {
 
 
 ## Resources		
-		
+
  * [Documentation](https://docs.fabric.io/apple/twitter/overview.html)		
  * [Forums](https://twittercommunity.com/c/fabric/twitter)		
  * [Website](https://docs.fabric.io/apple/twitter/overview.html)		

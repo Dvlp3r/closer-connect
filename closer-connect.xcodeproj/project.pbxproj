@@ -11,8 +11,6 @@
 		3D5809671ED7254500314BF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D5809661ED7254500314BF3 /* GoogleService-Info.plist */; };
 		3D5809691ED727A200314BF3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5809681ED727A200314BF3 /* SignUpViewController.swift */; };
 		3DAFF0C51ED69915008A70CF /* MyResumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAFF0C41ED69915008A70CF /* MyResumeViewController.swift */; };
-		3DC761601EDD49C90005AFF8 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC7615E1EDD49C90005AFF8 /* ImagePickerController.swift */; };
-		3DC761611EDD49C90005AFF8 /* ImageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC7615F1EDD49C90005AFF8 /* ImageRow.swift */; };
 		3DC761631EDD6C120005AFF8 /* MoreDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC761621EDD6C120005AFF8 /* MoreDetailsViewController.swift */; };
 		3DC761651EDDCDA90005AFF8 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC761641EDDCDA90005AFF8 /* EditProfileViewController.swift */; };
 		3DC761681EDE630B0005AFF8 /* LazyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC761671EDE630B0005AFF8 /* LazyImage.swift */; };
@@ -214,8 +212,6 @@
 		3D5809661ED7254500314BF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D5809681ED727A200314BF3 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		3DAFF0C41ED69915008A70CF /* MyResumeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyResumeViewController.swift; sourceTree = "<group>"; };
-		3DC7615E1EDD49C90005AFF8 /* ImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
-		3DC7615F1EDD49C90005AFF8 /* ImageRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRow.swift; sourceTree = "<group>"; };
 		3DC761621EDD6C120005AFF8 /* MoreDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreDetailsViewController.swift; sourceTree = "<group>"; };
 		3DC761641EDDCDA90005AFF8 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		3DC761671EDE630B0005AFF8 /* LazyImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyImage.swift; sourceTree = "<group>"; };
@@ -466,8 +462,6 @@
 		3DC7615D1EDD49C90005AFF8 /* ImageRow */ = {
 			isa = PBXGroup;
 			children = (
-				3DC7615E1EDD49C90005AFF8 /* ImagePickerController.swift */,
-				3DC7615F1EDD49C90005AFF8 /* ImageRow.swift */,
 			);
 			path = ImageRow;
 			sourceTree = "<group>";
@@ -1189,7 +1183,6 @@
 			files = (
 				3DC761651EDDCDA90005AFF8 /* EditProfileViewController.swift in Sources */,
 				3DC7616A1EDE636F0005AFF8 /* MyPhotoCell.swift in Sources */,
-				3DC761611EDD49C90005AFF8 /* ImageRow.swift in Sources */,
 				3D0239AA1ED72E810052D587 /* GoogleService-Info.plist in Sources */,
 				B0D2ED951B724F44007DC099 /* ConfigurationManager.swift in Sources */,
 				E0ED0AF81B99F7570051F65C /* Constants.swift in Sources */,
@@ -1202,7 +1195,6 @@
 				3DAFF0C51ED69915008A70CF /* MyResumeViewController.swift in Sources */,
 				3DC761631EDD6C120005AFF8 /* MoreDetailsViewController.swift in Sources */,
 				B0701D951B73F48F00CACAE5 /* SettingsViewController.swift in Sources */,
-				3DC761601EDD49C90005AFF8 /* ImagePickerController.swift in Sources */,
 				B0701D9A1B73F70D00CACAE5 /* Appirater.m in Sources */,
 				B0D2EDD51B72BFA4007DC099 /* MSSlidingPanelController.m in Sources */,
 				B0701D891B73ACDF00CACAE5 /* ProfileViewController.swift in Sources */,
@@ -1339,6 +1331,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -1350,7 +1343,7 @@
 					"$(PROJECT_DIR)/Meetle/Frameworks",
 				);
 				INFOPLIST_FILE = Meetle/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1377,6 +1370,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1388,7 +1382,7 @@
 					"$(PROJECT_DIR)/Meetle/Frameworks",
 				);
 				INFOPLIST_FILE = Meetle/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
