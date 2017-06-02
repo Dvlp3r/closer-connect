@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -161,7 +160,7 @@
         <scene sceneID="7rT-ry-afk">
             <objects>
                 <navigationController storyboardIdentifier="homeController" id="15k-SL-5jA" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="d4Z-pM-iDP">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="d4Z-pM-iDP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -229,7 +228,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sLU-5f-GX2">
-                                <rect key="frame" x="132" y="377" width="57" height="19"/>
+                                <rect key="frame" x="137" y="377" width="47" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="zWH-R2-XVt"/>
                                 </constraints>
@@ -237,7 +236,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="new york (2 miles away)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a6r-gM-0Cy">
-                                <rect key="frame" x="75.5" y="396" width="170.5" height="19"/>
+                                <rect key="frame" x="91" y="396" width="139" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="v93-SZ-3JZ"/>
                                 </constraints>
@@ -305,7 +304,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="infoButton" destination="1Db-P3-oZC" id="02A-SS-WKj"/>
                         <outlet property="likeButton" destination="wkO-tc-QqI" id="XZF-dB-yZk"/>
+                        <outlet property="locationIcon" destination="COR-bN-ycK" id="rgu-96-ucZ"/>
+                        <outlet property="locationLbl" destination="a6r-gM-0Cy" id="awx-5I-J1t"/>
                         <outlet property="nextButton" destination="c1o-gZ-MCW" id="VAh-V8-QIk"/>
                         <outlet property="pageControl" destination="WnT-pw-ojt" id="64e-PW-lNs"/>
                         <outlet property="scrollView" destination="bKY-oW-CTb" id="iv4-eM-z10"/>
@@ -319,7 +321,7 @@
         <scene sceneID="ff5-mr-eNW">
             <objects>
                 <navigationController storyboardIdentifier="chatController" id="0ID-V7-wLu" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="EI0-sL-0HQ">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="EI0-sL-0HQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -537,7 +539,7 @@
         <scene sceneID="mKf-sm-Iwg">
             <objects>
                 <navigationController storyboardIdentifier="locationController" id="e8Q-DV-i0c" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="ncM-ip-vRK">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="ncM-ip-vRK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -637,7 +639,7 @@
         <scene sceneID="V7p-f6-G95">
             <objects>
                 <navigationController storyboardIdentifier="settingsController" id="yup-TP-dyr" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="r4s-7E-RTZ">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="r4s-7E-RTZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -691,16 +693,16 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9tE-rl-phM">
-                                <rect key="frame" x="0.0" y="101" width="320" height="100.5"/>
+                                <rect key="frame" x="0.0" y="101" width="320" height="101"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Me:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Of-WQ-Sgn">
-                                        <rect key="frame" x="124" y="20.5" width="72" height="21"/>
+                                        <rect key="frame" x="124" y="21" width="72" height="21"/>
                                         <fontDescription key="fontDescription" name="Eurofurenceregular" family="eurofurence" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VCt-tu-p03">
-                                        <rect key="frame" x="-4" y="49.5" width="328" height="29"/>
+                                        <rect key="frame" x="-4" y="50" width="328" height="29"/>
                                         <segments>
                                             <segment title="Man"/>
                                             <segment title="Woman"/>
@@ -719,7 +721,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zhR-V4-GnK">
-                                <rect key="frame" x="0.0" y="203.5" width="320" height="101"/>
+                                <rect key="frame" x="0.0" y="204" width="320" height="101"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Limit Search To:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8G-VX-cO7">
                                         <rect key="frame" x="103" y="8" width="114" height="21"/>
@@ -757,7 +759,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Uh-7l-BNZ">
-                                <rect key="frame" x="0.0" y="302.5" width="320" height="100.5"/>
+                                <rect key="frame" x="0.0" y="303" width="320" height="100"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Ages:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHg-ap-MMb">
                                         <rect key="frame" x="117" y="8" width="85" height="21"/>
@@ -766,13 +768,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18 - 60" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i9f-gg-Rfg">
-                                        <rect key="frame" x="135" y="34.5" width="50" height="21"/>
+                                        <rect key="frame" x="135" y="34" width="50" height="21"/>
                                         <fontDescription key="fontDescription" name="Eurofurencelight" family="eurofurence light" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gCF-8W-uQR">
-                                        <rect key="frame" x="6" y="61.5" width="308" height="31"/>
+                                        <rect key="frame" x="6" y="61" width="308" height="31"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="308" id="IB1-8f-cG8"/>
@@ -1439,7 +1441,7 @@
         <scene sceneID="kDR-KF-cK9">
             <objects>
                 <navigationController storyboardIdentifier="myResumeController" id="TRf-bU-Igg" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="ven-RW-LCO">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="ven-RW-LCO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1457,7 +1459,7 @@
         <scene sceneID="fuJ-UF-f1k">
             <objects>
                 <navigationController storyboardIdentifier="loginControllerNav" navigationBarHidden="YES" id="sQ7-nj-oRW" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="c5W-KV-UA9">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="c5W-KV-UA9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1722,7 +1724,7 @@
         <scene sceneID="PQ4-j7-ca3">
             <objects>
                 <navigationController storyboardIdentifier="myDetailsController" id="ch9-Qo-gTQ" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="YZZ-WQ-ZqG">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="YZZ-WQ-ZqG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

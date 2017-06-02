@@ -11,6 +11,7 @@ import Firebase
 import FirebaseAuth
 import CoreLocation
 import NVActivityIndicatorView
+import GeoFire
 
 class MoreDetailsViewController: UIViewController, NVActivityIndicatorViewable, CLLocationManagerDelegate  {
     
@@ -80,7 +81,9 @@ class MoreDetailsViewController: UIViewController, NVActivityIndicatorViewable, 
         print("locations = \(locValue.latitude) \(locValue.longitude)")
         currentLocation = manager.location!
         self.locationManager.stopUpdatingLocation()
-        
+        let geofireRef = ref.child("locations")//.childByAutoId()//.child((Auth.auth().currentUser?.uid)!)
+        let geoFire = GeoFire(firebaseRef: geofireRef)
+        geoFire?.setLocation(currentLocation, forKey: (Auth.auth().currentUser?.uid)!)
         
     }
     func donePicker () {

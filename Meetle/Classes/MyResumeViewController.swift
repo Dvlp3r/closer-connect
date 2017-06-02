@@ -104,9 +104,12 @@ class MyResumeViewController: BaseViewController, UICollectionViewDelegateFlowLa
             {
                 self.NameLbl?.text = value?.object(forKey: "Name") as! String?
                 print("You have successfully logged in")
+                if let arr = value?.object(forKey: "Photos")
+                {
                 self.imageArr = (value?.object(forKey: "Photos")as? NSArray)!
                 print(self.imageArr!)
                 self.photoCollectionView?.reloadData()
+                }
             }
             // ...
         }) { (error) in
