@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import NVActivityIndicatorView
+import CoreLocation
 
 enum UIUserInterfaceIdiom : Int
 {
@@ -36,13 +37,14 @@ struct DeviceType
     static let IS_IPAD_PRO          = UIDevice.current.userInterfaceIdiom == .pad && ScreenSize.SCREEN_MAX_LENGTH == 1366.0
 }
 
-class MyResumeViewController: BaseViewController, UICollectionViewDelegateFlowLayout,UICollectionViewDelegate, UICollectionViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate, NVActivityIndicatorViewable {
+class MyResumeViewController: BaseViewController, UICollectionViewDelegateFlowLayout,UICollectionViewDelegate, UICollectionViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate, NVActivityIndicatorViewable, UITextFieldDelegate, UITextViewDelegate, UIScrollViewDelegate {
     
-    @IBOutlet weak var photoCollectionView: UICollectionView?
     @IBOutlet weak var pageControl: UIPageControl?
+    @IBOutlet weak var photoCollectionView: UICollectionView?
     @IBOutlet weak var aboutTxtField: UITextView?
-    @IBOutlet weak var NameLbl: UILabel?
+    @IBOutlet weak var NameLbl: UITextField?
     @IBOutlet weak var LocationLbl: UILabel?
+    @IBOutlet weak var inputViewBottomConstrains: NSLayoutConstraint?
     
     let cellReuseIdentifier = "MyPhotoCell"
     var ref: DatabaseReference!
@@ -91,11 +93,10 @@ class MyResumeViewController: BaseViewController, UICollectionViewDelegateFlowLa
         
         
         ref = Database.database().reference()
-        
-        
-        let userID = Auth.auth().currentUser?.uid
-        self.ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
+        self.getPlacemark(user: (Auth.auth().currentUser?.uid)!)
+        self.ref.child("users").child((Auth.auth().currentUser?.uid)!).observe(.value, with: { (snapshot) in
+            
+            // Success
             let value = snapshot.value as? NSDictionary
             //let username = value?["username"] as? String ?? ""
             //let user = User.init(username: username)
@@ -103,12 +104,22 @@ class MyResumeViewController: BaseViewController, UICollectionViewDelegateFlowLa
             if (value != nil)
             {
                 self.NameLbl?.text = value?.object(forKey: "Name") as! String?
+                if let about = value?.object(forKey: "About")
+                {
+                    self.aboutTxtField?.text = about as! String
+                }
+                else
+                {
+                    self.aboutTxtField?.text = "Write something about yourself here!"
+                }
                 print("You have successfully logged in")
                 if let arr = value?.object(forKey: "Photos")
                 {
-                self.imageArr = (value?.object(forKey: "Photos")as? NSArray)!
-                print(self.imageArr!)
-                self.photoCollectionView?.reloadData()
+                    self.imageArr = arr as? NSArray
+                    self.pageControl?.numberOfPages = (self.imageArr?.count)!
+                    self.pageControl?.currentPage = 0
+                    print(self.imageArr!)
+                    self.photoCollectionView?.reloadData()
                 }
             }
             // ...
@@ -116,7 +127,46 @@ class MyResumeViewController: BaseViewController, UICollectionViewDelegateFlowLa
             print(error.localizedDescription)
         }
     }
-    
+    func getPlacemark(user: String) {
+        self.LocationLbl?.isHidden=true
+        self.ref.child("locations").child(user).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            if (value != nil)
+            {
+                let locationArr = value?.object(forKey: "l") as! NSArray
+                
+                let location = CLLocation(latitude: locationArr[0] as! CLLocationDegrees, longitude: locationArr[1] as! CLLocationDegrees)
+                CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
+                    print(location)
+                    
+                    if error != nil {
+                        self.LocationLbl?.isHidden=true
+                        print("Reverse geocoder failed with error" + (error?.localizedDescription)!)
+                        return
+                        
+                    }
+                    
+                    if (placemarks?.count)! > 0 {
+                        let pm = placemarks?[0] as CLPlacemark!
+                        print((pm?.locality!)! as String)
+                        self.LocationLbl?.text = (pm?.locality)!
+                        //self.AlertMessage(messageToDisplay:  String(format: "Current Location: %@",(pm?.locality!)!))
+                        self.LocationLbl?.isHidden=false
+                    }
+                    else {
+                        self.LocationLbl?.isHidden=true
+                        print("Problem with the data received from geocoder")
+                    }
+                })
+            }
+            // ...
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
@@ -124,7 +174,11 @@ class MyResumeViewController: BaseViewController, UICollectionViewDelegateFlowLa
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
+    @IBAction func changePage(sender: UIButton)
+    {
+        let x = CGFloat((pageControl?.currentPage)!) * (photoCollectionView?.frame.size.width)!
+        photoCollectionView?.setContentOffset(CGPoint(x:x, y:0), animated: true)
+    }
     
     //MARK: - User Actions
     @IBAction func addPhotoPressed(sender: UIButton)
@@ -286,6 +340,42 @@ class MyResumeViewController: BaseViewController, UICollectionViewDelegateFlowLa
         }
         return 0
     }
+    func textViewShouldBeginEditing(_ textView: UITextView){
+        
+        inputViewBottomConstrains?.constant = -216
+    }
+    func textViewDidEndEditing(_ textView: UITextView){
+        let dbLocation = "users/\((Auth.auth().currentUser?.uid)! as String)/\("About")"
+        self.ref.child(dbLocation).setValue(aboutTxtField?.text)
+    }
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            inputViewBottomConstrains?.constant = 0
+            return false
+        }
+        else
+        {
+            return true
+        }
+    }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        return true;
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        
+        textField.resignFirstResponder()
+        let dbLocation = "users/\((Auth.auth().currentUser?.uid)! as String)/\("Name")"
+        self.ref.child(dbLocation).setValue(NameLbl?.text)
+        return true
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let pageWidth = scrollView.frame.size.width
+        let page = floor((scrollView.contentOffset.x * 2.0 + pageWidth) / (pageWidth * 2.0))
+        pageControl!.currentPage = Int(page)
+    }
 }
-
 

@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 enum MenuItem: Int {
-	case resume = 0
+	case home = 0
 	case chat
-    case home
+    case pipeline
 	case location
 	case settings
     case logout
@@ -20,10 +22,57 @@ enum MenuItem: Int {
 
 class MenuViewController: BaseViewController {
 
+    @IBOutlet weak var NameLbl: UILabel?
+    @IBOutlet weak var UserImage: UIImageView?
+    
 	@IBOutlet weak var tableView: UITableView?
-
+    var ref: DatabaseReference!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.UserImage?.layer.borderWidth = 1.0;
+        self.UserImage?.layer.borderColor =  UIColor.lightGray.cgColor
+        self.UserImage?.layer.cornerRadius = (self.UserImage?.frame.size.width)!/2.0
+        self.UserImage?.layer.masksToBounds = true
+        
+        ref = Database.database().reference()
+        self.ref.child("users").child((Auth.auth().currentUser?.uid)!).observe(.value, with: { (snapshot) in
+            
+            // Success
+            let value = snapshot.value as? NSDictionary
+            //let username = value?["username"] as? String ?? ""
+            //let user = User.init(username: username)
+            //print(value!)
+            if (value != nil)
+            {
+                self.NameLbl?.text = value?.object(forKey: "Name") as! String?
+                print("You have successfully logged in")
+                
+                if let imageArr = value?.object(forKey: "Photos" as NSString)
+                {
+                    let imgArr = imageArr as! NSArray
+                    LazyImage.show(imageView:self.UserImage!, url:imgArr[0] as? String)
+                    
+                }
+                else
+                {
+                    let gender = value?.object(forKey: "Gender") as! Int?
+                    if (gender == 0)
+                    {
+                        self.UserImage!.image = UIImage(named: "GirlIcon")
+                    }
+                    else
+                    {
+                        self.UserImage!.image = UIImage(named: "BoyIcon")
+                    }
+                    
+                }
+            }
+            // ...
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,6 +88,10 @@ class MenuViewController: BaseViewController {
 			tableView?.selectRow(at: indexPath, animated: true, scrollPosition: UITableViewScrollPosition.bottom)
 		}
 	}
+    @IBAction func ProfilePressed(_ sender: AnyObject) {
+        print("forgotPasswordPressed")
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "changeControllerNotification"), object: "myResumeController")
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -53,15 +106,15 @@ extension MenuViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier) as! MenuTableViewCell
         
         switch indexPath.row {
-        case MenuItem.resume.rawValue:
-            cell.menuItemIcon!.image = UIImage(named: "MenuResume")
-            cell.menuItemLabel!.text = "my resume"
+        case MenuItem.home.rawValue:
+            cell.menuItemIcon!.image = UIImage(named: "menu_home.png")
+            cell.menuItemLabel!.text = "home"
             break
         case MenuItem.chat.rawValue:
             cell.menuItemIcon!.image = UIImage(named: "MenuMessage")
             cell.menuItemLabel!.text = "message"
             break
-        case MenuItem.home.rawValue:
+        case MenuItem.pipeline.rawValue:
             cell.menuItemIcon!.image = UIImage(named: "MenuPipeline")
             cell.menuItemLabel!.text = "pipeline"
             break
@@ -91,14 +144,14 @@ extension MenuViewController: UITableViewDelegate {
    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
-        case MenuItem.resume.rawValue:
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "changeControllerNotification"), object: "myResumeController")
+        case MenuItem.home.rawValue:
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "changeControllerNotification"), object: "homeController")
             break
         case MenuItem.chat.rawValue:
             NotificationCenter.default.post(name: Notification.Name(rawValue: "changeControllerNotification"), object: "chatController")
             break
-        case MenuItem.home.rawValue:
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "changeControllerNotification"), object: "homeController")
+        case MenuItem.pipeline.rawValue:
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "changeControllerNotification"), object: "pipelineController")
             break
         case MenuItem.location.rawValue:
             NotificationCenter.default.post(name: Notification.Name(rawValue: "changeControllerNotification"), object: "locationController")

@@ -34,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NVActivityIndicatorViewab
 	var myResumeController: UIViewController?
     var homeController: UIViewController?
 	var chatController: UIViewController?
+    var pipelineController: UIViewController?
 	var locationController: UIViewController?
 	var settingsController: UIViewController?
 	var inviteController: UIViewController?
@@ -54,7 +55,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NVActivityIndicatorViewab
 		initRateAppTimer()
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.changedController(_:)), name: NSNotification.Name(rawValue: "changeControllerNotification"), object: nil)
-  
 		// Uncomment appropriate line to show ads.
 		
         //AdMob:
@@ -104,8 +104,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NVActivityIndicatorViewab
         {
             let navigationController = window!.rootViewController as! MSSlidingPanelController
             
-            if myResumeController == nil {
-                myResumeController = navigationController.centerViewController
+            if homeController == nil {
+                homeController = navigationController.centerViewController
             }
             
             let mystoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -122,6 +122,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NVActivityIndicatorViewab
                     myResumeController = mystoryboard.instantiateViewController(withIdentifier: notification.object as! String)
                 }
                 controller = myResumeController!
+            }
+            else if (notification.object! as AnyObject).isEqual(to: "pipelineController") {
+                if pipelineController == nil {
+                    pipelineController = mystoryboard.instantiateViewController(withIdentifier: notification.object as! String)
+                }
+                controller = pipelineController!
             }
             else if (notification.object! as AnyObject).isEqual(to: "chatController") {
                 if chatController == nil {

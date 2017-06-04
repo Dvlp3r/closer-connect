@@ -24,17 +24,26 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
     @IBOutlet weak var locationLbl: UILabel?
     @IBOutlet weak var locationTxtLbl: UILabel?
     @IBOutlet weak var locationIcon: UIImageView?
-
+    @IBOutlet weak var backgroundLbl: UILabel?
+    
+    var queryEnterHandle: FirebaseHandle?
+    var queryMovedHandle: FirebaseHandle?
+    var queryExitHandle: FirebaseHandle?
+    
+    var lovedOrMatchedArray = NSMutableDictionary()
+    
+    
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation!
     var profilesDict = NSMutableDictionary()
     var ref: DatabaseReference!
     var circleQuery: GFCircleQuery?
-    var currentProfile: NSDictionary?
+    var myProfile: NSDictionary?
+    var currentProfile: String?
     
 	fileprivate let pageViews: NSMutableArray = NSMutableArray(objects: NSNull(), NSNull(), NSNull())
 	fileprivate let imageNames = ["jessy", "man", "Veronika"]
-	fileprivate let centerImageView: UIImageView = UIImageView(image: UIImage(named: "jessy"))
+	fileprivate let centerImageView: UIImageView = UIImageView(image: UIImage(named: "0"))
 	fileprivate let leftImageView: UIImageView = UIImageView(image: UIImage(named: "like_text"))
 	fileprivate let rightImageView: UIImageView = UIImageView(image: UIImage(named: "next_text"))
 
@@ -43,34 +52,22 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
 		initMessageIcon()
 		initImageView()
         
-        
+       
         
         
         ref = Database.database().reference()
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        if CLLocationManager.locationServicesEnabled()
-        {
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.requestLocation()
-            DispatchQueue.main.async {
-                self.locationManager.startUpdatingLocation()
-            }
-            
-        }
-        else
-        {
-            self.displayAlertMessage(messageToDisplay:  "Please Turn on location services for this app from settings to see malls in your city")
-            
-        }
+        
         self.locationLbl?.isHidden=true
         self.locationTxtLbl?.isHidden=true
         self.locationIcon?.isHidden=true
         self.infoButton?.isHidden=true
+        self.backgroundLbl?.isHidden=false
         self.likeButton?.isHidden=true
         self.nextButton?.isHidden=true
-        
+        self.scrollView?.isHidden=true
         let center = CLLocation(latitude: 0.0, longitude: 0.0)
         let geofireRef = ref.child("locations")//.childByAutoId()//.child((Auth.auth().currentUser?.uid)!)
         let geoFire = GeoFire(firebaseRef: geofireRef)
@@ -78,67 +75,38 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
         print(geofireRef.url)
         //print(geoFire!)
         // Query locations at [37.7832889, -122.4056973] with a radius of 600 meters
-        circleQuery = geoFire?.query(at: center, withRadius: 5.6)
+        circleQuery = geoFire?.query(at: center, withRadius: 50.0)
         //self.startAnimating()
-        circleQuery?.observe(.keyEntered, with: { (key: String?, location: CLLocation?) in
-            print("In KeyEntered block ")
-            print("Key '\(key)' entered the search area and is at location '\(location)'")
-            if (key != (Auth.auth().currentUser?.uid)!)
-            {
-                self.ref.child("users").child(key!).observeSingleEvent(of: .value, with: { (snapshot) in
-                    // Get user value
-                    let value = snapshot.value as? NSDictionary
-                    if (value != nil)
-                    {
-                        self.locationLbl?.isHidden=false
-                        self.locationTxtLbl?.isHidden=false
-                        self.locationIcon?.isHidden=false
-                        self.infoButton?.isHidden=false
-                        self.likeButton?.isHidden=false
-                        self.nextButton?.isHidden=false
-                        self.profilesDict.setObject(value!, forKey: key as! NSCopying)
-                        print(self.profilesDict)
-                        if (self.profilesDict.allKeys.count==1)
-                        {
-                            self.initScrollImageView()
-                        }
-                    }
-                    // ...
-                }) { (error) in
-                    print(error.localizedDescription)
-                }
-            }
-        })
         
-        circleQuery?.observe(.keyMoved, with: { (key: String?, location: CLLocation?) in
-            print("In KeyEntered block ")
-            print("Key '\(key)' entered the search area and is at location '\(location)'")
-            if (key != (Auth.auth().currentUser?.uid)!)
-            {
-                self.ref.child("users").child(key!).observeSingleEvent(of: .value, with: { (snapshot) in
-                    // Get user value
-                    let value = snapshot.value as? NSDictionary
-                    if (value != nil)
-                    {
-                        self.profilesDict.setObject(value!, forKey: key as! NSCopying)
-                    }
-                    // ...
-                }) { (error) in
-                    print(error.localizedDescription)
-                }
-            }
-        })
-        
-        circleQuery?.observe(.keyExited, with: { (key: String?, location: CLLocation?) in
-            print("In KeyEntered block ")
-            print("Key '\(key)' entered the search area and is at location '\(location)'")
-            self.profilesDict.removeObject(forKey: key!)
-        })
         
        /* circleQuery?.observeReady({
             print("All initial data has been loaded and events have been fired!")
         })*/
         
+        
+        self.startObservingAllData()
+        
+        self.ref.child("users").child((Auth.auth().currentUser?.uid)!).observe(.value, with: { (snapshot) in
+            
+            // Success
+            let value = snapshot.value as? NSDictionary
+            //let username = value?["username"] as? String ?? ""
+            //let user = User.init(username: username)
+            //print(value!)
+            if (value != nil)
+            {
+                print("You have successfully logged in")
+                if let requests = value?.object(forKey: "Requests" as NSString)
+                {
+                    self.lovedOrMatchedArray.setDictionary(requests as! [AnyHashable : Any])
+                    print(self.lovedOrMatchedArray);
+                }
+                self.myProfile=value
+                self.startObservingAllData()
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
         
         
         
@@ -159,9 +127,202 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
     }
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		//initScrollImageView()
+		initScrollImageView()
 	}
-	
+    override func viewWillAppear(_ animated: Bool) {
+        if CLLocationManager.locationServicesEnabled()
+        {
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.requestLocation()
+            DispatchQueue.main.async {
+                self.locationManager.startUpdatingLocation()
+            }
+            
+        }
+        else
+        {
+            self.displayAlertMessage(messageToDisplay:  "Please Turn on location services for this app from settings to see malls in your city")
+            
+        }
+    }
+    func startObservingAllData()
+    {
+        circleQuery?.removeAllObservers()
+        queryEnterHandle = circleQuery?.observe(.keyEntered, with: { (key: String?, location: CLLocation?) in
+            print("In KeyEntered block ")
+            print("Key '\(key)' entered the search area and is at location '\(location)'")
+            if (key != (Auth.auth().currentUser?.uid)!)
+            {
+                self.ref.child("users").child(key!).observeSingleEvent(of: .value, with: { (snapshot) in
+                    // Get user value
+                    let value = snapshot.value as? NSDictionary
+                    if (value != nil)
+                    {
+                        
+                        self.profilesDict.setObject(value!, forKey: key as! NSCopying)
+                        print(self.profilesDict)
+                       DispatchQueue.main.async {
+                        if (self.profilesDict.allKeys.count==1)
+                        {
+                            self.initScrollImageView()
+                        }
+                        if (self.currentProfile == nil)
+                        {
+                            var hasData = false
+                            for (key, myValue) in self.profilesDict
+                            {
+                                print(key)
+                                
+                                if self.lovedOrMatchedArray.object(forKey: key) != nil {
+                                    
+                                }
+                                else
+                                {
+                                    let pro = myValue as! NSDictionary
+                                    if let requests = pro.object(forKey: "Requests" as NSString)
+                                    {
+                                        if (requests as AnyObject).object(forKey: (Auth.auth().currentUser?.uid)!) != nil {
+                                            
+                                        }
+                                        else
+                                        {
+                                            hasData = true
+                                            self.currentProfile = key as? String
+                                            
+                                            self.title = pro.object(forKey: "Name") as! String?
+                                            self.getPlacemark(user: key as! String)
+                                            if let imageArr = pro.object(forKey: "Photos" as NSString)
+                                            {
+                                                let imgArr = imageArr as! NSArray
+                                                LazyImage.show(imageView:self.centerImageView, url:imgArr[0] as? String)
+                                                
+                                            }
+                                            else
+                                            {
+                                                let gender = value?.object(forKey: "Gender") as! Int?
+                                                if (gender == 0)
+                                                {
+                                                    self.centerImageView.image = UIImage(named: "GirlIcon")
+                                                }
+                                                else
+                                                {
+                                                    self.centerImageView.image = UIImage(named: "BoyIcon")
+                                                }
+                                                
+                                            }
+                                            break
+                                        }
+                                    }
+                                    else
+                                    {
+                                        hasData = true
+                                        self.currentProfile = key as? String
+                                        
+                                        self.title = pro.object(forKey: "Name") as! String?
+                                        self.getPlacemark(user: key as! String)
+                                        if let imageArr = pro.object(forKey: "Photos" as NSString)
+                                        {
+                                            let imgArr = imageArr as! NSArray
+                                            LazyImage.show(imageView:self.centerImageView, url:imgArr[0] as? String)
+                                            
+                                        }
+                                        else
+                                        {
+                                            let gender = value?.object(forKey: "Gender") as! Int?
+                                            if (gender == 0)
+                                            {
+                                                self.centerImageView.image = UIImage(named: "GirlIcon")
+                                            }
+                                            else
+                                            {
+                                                self.centerImageView.image = UIImage(named: "BoyIcon")
+                                            }
+                                            
+                                        }
+                                        break
+                                    }
+                                    
+                                }
+                                
+                            }
+                            if (!hasData)
+                            {
+                                self.scrollView?.isHidden=true
+                                self.locationLbl?.isHidden=true
+                                self.locationTxtLbl?.isHidden=true
+                                self.locationIcon?.isHidden=true
+                                self.infoButton?.isHidden=true
+                                self.backgroundLbl?.isHidden=false
+                                self.likeButton?.isHidden=true
+                                self.nextButton?.isHidden=true
+                            }
+                            else
+                            {
+                                self.scrollView?.isHidden=false
+                                self.locationLbl?.isHidden=false
+                                self.locationTxtLbl?.isHidden=false
+                                self.locationIcon?.isHidden=false
+                                self.infoButton?.isHidden=false
+                                self.backgroundLbl?.isHidden=true
+                                self.likeButton?.isHidden=false
+                                self.nextButton?.isHidden=false
+                                
+                                let transition = CATransition()
+                                transition.duration = 1.0
+                                transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                                transition.type = kCATransitionFade
+                                self.centerImageView.layer.add(transition, forKey: nil)
+                            }
+                            
+                            
+                            
+                            
+                            }
+                        }
+                    }
+                    // ...
+                }) { (error) in
+                    print(error.localizedDescription)
+                }
+            }
+        })
+        
+        queryMovedHandle = circleQuery?.observe(.keyMoved, with: { (key: String?, location: CLLocation?) in
+            print("In KeyEntered block ")
+            print("Key '\(key)' entered the search area and is at location '\(location)'")
+            if (key != (Auth.auth().currentUser?.uid)!)
+            {
+                self.ref.child("users").child(key!).observeSingleEvent(of: .value, with: { (snapshot) in
+                    // Get user value
+                    let value = snapshot.value as? NSDictionary
+                    if (value != nil)
+                    {
+                        if (self.currentProfile == nil)
+                        {
+                            self.currentProfile = key
+                            self.title = value?.object(forKey: "Name") as! String?
+                            self.getPlacemark(user: key!)
+                            if let imageArr = value?.object(forKey: "Photos" as NSString)
+                            {
+                                let imgArr = imageArr as! NSArray
+                                LazyImage.show(imageView:self.centerImageView, url:imgArr[0] as? String)
+                            }
+                        }
+                        self.profilesDict.setObject(value!, forKey: key as! NSCopying)
+                    }
+                    // ...
+                }) { (error) in
+                    print(error.localizedDescription)
+                }
+            }
+        })
+        
+        queryExitHandle = circleQuery?.observe(.keyExited, with: { (key: String?, location: CLLocation?) in
+            print("In KeyEntered block ")
+            print("Key '\(key)' entered the search area and is at location '\(location)'")
+            self.profilesDict.removeObject(forKey: key!)
+        })
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -237,10 +398,6 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
                         print("Problem with the data received from geocoder")
                     }
                 })
-                if (self.profilesDict.allKeys.count==1)
-                {
-                    self.initScrollImageView()
-                }
             }
             // ...
         }) { (error) in
@@ -274,10 +431,241 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
 	
 	@IBAction func likeButtonPressed(_ sender: AnyObject) {
 		print("likeButtonPressed")
+        if ((self.currentProfile) != nil)
+        {
+            self.lovedOrMatchedArray.setObject("Connect", forKey: self.currentProfile as! NSCopying)
+            if let user = Auth.auth().currentUser
+            {
+                let dbLocation = "users/\(user.uid)/\("Requests")"
+                self.ref.child(dbLocation).child(self.currentProfile!).setValue("Connect")
+                
+                let dbLocation2 = "users/\(self.currentProfile! as String)/\("Requests")"
+                self.ref.child(dbLocation2).child(user.uid).setValue("Meet")
+            }
+            self.currentProfile = nil
+            var hasData = false
+            for (key, myValue) in self.profilesDict
+            {
+                print(key)
+                
+                if self.lovedOrMatchedArray.object(forKey: key) != nil {
+                    
+                }
+                else
+                {
+                    let pro = myValue as! NSDictionary
+                    if let requests = pro.object(forKey: "Requests" as NSString)
+                    {
+                        if (requests as AnyObject).object(forKey: (Auth.auth().currentUser?.uid)!) != nil {
+                            
+                        }
+                        else
+                        {
+                            hasData = true
+                            self.currentProfile = key as? String
+                            
+                            self.title = pro.object(forKey: "Name") as! String?
+                            getPlacemark(user: key as! String)
+                            if let imageArr = pro.object(forKey: "Photos" as NSString)
+                            {
+                                let imgArr = imageArr as! NSArray
+                                LazyImage.show(imageView:centerImageView, url:imgArr[0] as? String)
+                                
+                            }
+                            else
+                            {
+                                let gender = pro.object(forKey: "Gender") as! Int?
+                                if (gender == 0)
+                                {
+                                    self.centerImageView.image = UIImage(named: "GirlIcon")
+                                }
+                                else
+                                {
+                                    self.centerImageView.image = UIImage(named: "BoyIcon")
+                                }
+                                
+                            }
+                            
+                            break
+                        }
+                    }
+                    else
+                    {
+                        hasData = true
+                        self.currentProfile = key as? String
+                        
+                        self.title = pro.object(forKey: "Name") as! String?
+                        getPlacemark(user: key as! String)
+                        if let imageArr = pro.object(forKey: "Photos" as NSString)
+                        {
+                            let imgArr = imageArr as! NSArray
+                            LazyImage.show(imageView:centerImageView, url:imgArr[0] as? String)
+                            
+                        }
+                        else
+                        {
+                            let gender = pro.object(forKey: "Gender") as! Int?
+                            if (gender == 0)
+                            {
+                                self.centerImageView.image = UIImage(named: "GirlIcon")
+                            }
+                            else
+                            {
+                                self.centerImageView.image = UIImage(named: "BoyIcon")
+                            }
+                            
+                        }
+                        break
+                    }
+                    
+                }
+                
+            }
+            if (!hasData)
+            {
+                self.title = "No more users near you!"
+                self.locationLbl?.isHidden=true
+                self.locationTxtLbl?.isHidden=true
+                self.locationIcon?.isHidden=true
+                self.infoButton?.isHidden=true
+                self.backgroundLbl?.isHidden=false
+                self.likeButton?.isHidden=true
+                self.nextButton?.isHidden=true
+                scrollView?.isHidden = true
+            }
+            else
+            {
+                self.locationLbl?.isHidden=false
+                self.locationTxtLbl?.isHidden=false
+                self.locationIcon?.isHidden=false
+                self.infoButton?.isHidden=false
+                self.backgroundLbl?.isHidden=true
+                self.likeButton?.isHidden=false
+                self.nextButton?.isHidden=false
+                scrollView?.isHidden = false
+                let transition = CATransition()
+                transition.duration = 1.0
+                transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                transition.type = kCATransitionFade
+                centerImageView.layer.add(transition, forKey: nil)
+            }
+        }
+        
+        
 	}
 	
 	@IBAction func nextButtonPressed(_ sender: AnyObject) {
 		print("nextButtonPressed")
+        if ((self.currentProfile) != nil)
+        {
+            self.profilesDict.removeObject(forKey: self.currentProfile! as String)
+            self.currentProfile = nil
+            var hasData = false
+            for (key, myValue) in self.profilesDict
+            {
+                print(key)
+                
+                if self.lovedOrMatchedArray.object(forKey: key) != nil {
+                    
+                }
+                else
+                {
+                    let pro = myValue as! NSDictionary
+                    if let requests = pro.object(forKey: "Requests" as NSString)
+                    {
+                        if (requests as AnyObject).object(forKey: (Auth.auth().currentUser?.uid)!) != nil {
+                            
+                        }
+                        else
+                        {
+                            hasData = true
+                            self.currentProfile = key as? String
+                            
+                            self.title = pro.object(forKey: "Name") as! String?
+                            getPlacemark(user: key as! String)
+                            if let imageArr = pro.object(forKey: "Photos" as NSString)
+                            {
+                                let imgArr = imageArr as! NSArray
+                                LazyImage.show(imageView:centerImageView, url:imgArr[0] as? String)
+                                
+                            }
+                            else
+                            {
+                                let gender = pro.object(forKey: "Gender") as! Int?
+                                if (gender == 0)
+                                {
+                                    self.centerImageView.image = UIImage(named: "GirlIcon")
+                                }
+                                else
+                                {
+                                    self.centerImageView.image = UIImage(named: "BoyIcon")
+                                }
+                                
+                            }
+                            break
+                        }
+                    }
+                    else
+                    {
+                        hasData = true
+                        self.currentProfile = key as? String
+                        
+                        self.title = pro.object(forKey: "Name") as! String?
+                        getPlacemark(user: key as! String)
+                        if let imageArr = pro.object(forKey: "Photos" as NSString)
+                        {
+                            let imgArr = imageArr as! NSArray
+                            LazyImage.show(imageView:centerImageView, url:imgArr[0] as? String)
+                            
+                        }
+                        else
+                        {
+                            let gender = pro.object(forKey: "Gender") as! Int?
+                            if (gender == 0)
+                            {
+                                self.centerImageView.image = UIImage(named: "GirlIcon")
+                            }
+                            else
+                            {
+                                self.centerImageView.image = UIImage(named: "BoyIcon")
+                            }
+                            
+                        }
+                        break
+                    }
+                    
+                }
+                
+            }
+            if (!hasData)
+            {
+                self.title = "No more users near you!"
+                self.locationLbl?.isHidden=true
+                self.locationTxtLbl?.isHidden=true
+                self.locationIcon?.isHidden=true
+                self.infoButton?.isHidden=true
+                self.backgroundLbl?.isHidden=false
+                self.likeButton?.isHidden=true
+                self.nextButton?.isHidden=true
+                scrollView?.isHidden = true
+            }
+            else
+            {
+                self.locationLbl?.isHidden=false
+                self.locationTxtLbl?.isHidden=false
+                self.locationIcon?.isHidden=false
+                self.infoButton?.isHidden=false
+                self.backgroundLbl?.isHidden=true
+                self.likeButton?.isHidden=false
+                self.nextButton?.isHidden=false
+                scrollView?.isHidden = false
+                let transition = CATransition()
+                transition.duration = 1.0
+                transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                transition.type = kCATransitionFade
+                centerImageView.layer.add(transition, forKey: nil)
+            }
+        }
 	}
 }
 
@@ -301,36 +689,233 @@ extension HomeViewController: UIScrollViewDelegate {
         //let r = Int(arc4random() % 3)
         if scrollView.contentOffset.x < 0 {
             print("like")
+            
+            self.lovedOrMatchedArray.setObject("Connect", forKey: self.currentProfile as! NSCopying)
+            if let user = Auth.auth().currentUser
+            {
+                let dbLocation = "users/\(user.uid)/\("Requests")"
+                self.ref.child(dbLocation).child(self.currentProfile!).setValue("Connect")
+                let dbLocation2 = "users/\(self.currentProfile! as String)/\("Requests")"
+                self.ref.child(dbLocation2).child(user.uid).setValue("Meet")
+            }
+            self.currentProfile = nil
+            var hasData = false
             for (key, myValue) in self.profilesDict
             {
                 print(key)
                 
-                let pro = myValue as! NSDictionary
-                self.title = pro.object(forKey: "Name") as! String?
-                getPlacemark(user: key as! String)
-                if let imageArr = pro.object(forKey: "Photos" as NSString)
-                {
-                    let imgArr = imageArr as! NSArray
-                    LazyImage.show(imageView:centerImageView, url:imgArr[0] as? String)
-                    break
+                if self.lovedOrMatchedArray.object(forKey: key) != nil {
+                    
                 }
+                else
+                {
+                    let pro = myValue as! NSDictionary
+                    if let requests = pro.object(forKey: "Requests" as NSString)
+                    {
+                        if (requests as AnyObject).object(forKey: (Auth.auth().currentUser?.uid)!) != nil {
+                            
+                        }
+                        else
+                        {
+                            hasData = true
+                            self.currentProfile = key as? String
+                            
+                            self.title = pro.object(forKey: "Name") as! String?
+                            getPlacemark(user: key as! String)
+                            if let imageArr = pro.object(forKey: "Photos" as NSString)
+                            {
+                                let imgArr = imageArr as! NSArray
+                                LazyImage.show(imageView:centerImageView, url:imgArr[0] as? String)
+                                
+                            }
+                            else
+                            {
+                                let gender = pro.object(forKey: "Gender") as! Int?
+                                if (gender == 0)
+                                {
+                                    self.centerImageView.image = UIImage(named: "GirlIcon")
+                                }
+                                else
+                                {
+                                    self.centerImageView.image = UIImage(named: "BoyIcon")
+                                }
+                                
+                            }
+                            break
+                        }
+                    }
+                    else
+                    {
+                        hasData = true
+                        self.currentProfile = key as? String
+                        
+                        self.title = pro.object(forKey: "Name") as! String?
+                        getPlacemark(user: key as! String)
+                        if let imageArr = pro.object(forKey: "Photos" as NSString)
+                        {
+                            let imgArr = imageArr as! NSArray
+                            LazyImage.show(imageView:centerImageView, url:imgArr[0] as? String)
+                            
+                        }
+                        else
+                        {
+                            let gender = pro.object(forKey: "Gender") as! Int?
+                            if (gender == 0)
+                            {
+                                self.centerImageView.image = UIImage(named: "GirlIcon")
+                            }
+                            else
+                            {
+                                self.centerImageView.image = UIImage(named: "BoyIcon")
+                            }
+                            
+                        }
+                        break
+                    }
+                    
+                }
+                
+            }
+            if (!hasData)
+            {
+                self.title = "No more users near you!"
+                scrollView.isHidden = true
+                self.locationLbl?.isHidden=true
+                self.locationTxtLbl?.isHidden=true
+                self.locationIcon?.isHidden=true
+                self.infoButton?.isHidden=true
+                self.backgroundLbl?.isHidden=false
+                self.likeButton?.isHidden=true
+                self.nextButton?.isHidden=true
+            }
+            else
+            {
+                
+                self.locationLbl?.isHidden=false
+                self.locationTxtLbl?.isHidden=false
+                self.locationIcon?.isHidden=false
+                self.infoButton?.isHidden=false
+                self.backgroundLbl?.isHidden=true
+                self.likeButton?.isHidden=false
+                self.nextButton?.isHidden=false
+                scrollView.isHidden = false
+                let transition = CATransition()
+                transition.duration = 1.0
+                transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                transition.type = kCATransitionFade
+                centerImageView.layer.add(transition, forKey: nil)
             }
             
         } else if scrollView.contentOffset.x > scrollView.frame.size.width {
             
             print("next")
+            self.profilesDict.removeObject(forKey: self.currentProfile! as String)
+            self.currentProfile = nil
+            var hasData = false
             for (key, myValue) in self.profilesDict
             {
                 print(key)
-                let pro = myValue as! NSDictionary
-                self.title = pro.object(forKey: "Name") as! String?
-                getPlacemark(user: key as! String)
-                if let imageArr = pro.object(forKey: "Photos" as NSString)
-                {
-                    let imgArr = imageArr as! NSArray
-                    LazyImage.show(imageView:centerImageView, url:imgArr[0] as? String)
-                    break
+                
+                if self.lovedOrMatchedArray.object(forKey: key) != nil {
+                    
                 }
+                else
+                {
+                    let pro = myValue as! NSDictionary
+                    if let requests = pro.object(forKey: "Requests" as NSString)
+                    {
+                        if (requests as AnyObject).object(forKey: (Auth.auth().currentUser?.uid)!) != nil {
+                            
+                        }
+                        else
+                        {
+                            hasData = true
+                            self.currentProfile = key as? String
+                            
+                            self.title = pro.object(forKey: "Name") as! String?
+                            getPlacemark(user: key as! String)
+                            if let imageArr = pro.object(forKey: "Photos" as NSString)
+                            {
+                                let imgArr = imageArr as! NSArray
+                                LazyImage.show(imageView:centerImageView, url:imgArr[0] as? String)
+                                
+                            }
+                            else
+                            {
+                                let gender = pro.object(forKey: "Gender") as! Int?
+                                if (gender == 0)
+                                {
+                                    self.centerImageView.image = UIImage(named: "GirlIcon")
+                                }
+                                else
+                                {
+                                    self.centerImageView.image = UIImage(named: "BoyIcon")
+                                }
+                                
+                            }
+                            break
+                        }
+                    }
+                    else
+                    {
+                        hasData = true
+                        self.currentProfile = key as? String
+                        
+                        self.title = pro.object(forKey: "Name") as! String?
+                        getPlacemark(user: key as! String)
+                        if let imageArr = pro.object(forKey: "Photos" as NSString)
+                        {
+                            let imgArr = imageArr as! NSArray
+                            LazyImage.show(imageView:centerImageView, url:imgArr[0] as? String)
+                            
+                        }
+                        else
+                        {
+                            let gender = pro.object(forKey: "Gender") as! Int?
+                            if (gender == 0)
+                            {
+                                self.centerImageView.image = UIImage(named: "GirlIcon")
+                            }
+                            else
+                            {
+                                self.centerImageView.image = UIImage(named: "BoyIcon")
+                            }
+                            
+                        }
+                        break
+                    }
+                    
+                }
+                
+            }
+            if (!hasData)
+            {
+                self.title = "No more users near you!"
+                self.locationLbl?.isHidden=true
+                self.locationTxtLbl?.isHidden=true
+                self.locationIcon?.isHidden=true
+                self.infoButton?.isHidden=true
+                self.backgroundLbl?.isHidden=false
+                self.likeButton?.isHidden=true
+                self.nextButton?.isHidden=true
+                scrollView.isHidden = true
+            }
+            else
+            {
+                
+                self.locationLbl?.isHidden=false
+                self.locationTxtLbl?.isHidden=false
+                self.locationIcon?.isHidden=false
+                self.infoButton?.isHidden=false
+                self.backgroundLbl?.isHidden=true
+                self.likeButton?.isHidden=false
+                self.nextButton?.isHidden=false
+                scrollView.isHidden = false
+                let transition = CATransition()
+                transition.duration = 1.0
+                transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                transition.type = kCATransitionFade
+                centerImageView.layer.add(transition, forKey: nil)
             }
             //centerImageView.image = UIImage(named: imageNames[r])
         }
@@ -349,8 +934,11 @@ extension HomeViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.x == scrollView.frame.size.width / 2.0 {
-            likeButton?.isHidden = false
-            nextButton?.isHidden = false
+            if (self.currentProfile != nil)
+            {
+                likeButton?.isHidden = false
+                nextButton?.isHidden = false
+            }
         } else if scrollView.contentOffset.x < 0.0 {
             scrollView.backgroundColor = ThemeManager.profileLikeBackgroundColor()
         } else if scrollView.contentOffset.x > scrollView.frame.size.width {
