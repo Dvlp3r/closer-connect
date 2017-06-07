@@ -41,6 +41,10 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
     var myProfile: NSDictionary?
     var currentProfile: String?
     
+    var gender: Int!
+    var minAge: Int!
+    var maxAge: Int!
+    
 	fileprivate let pageViews: NSMutableArray = NSMutableArray(objects: NSNull(), NSNull(), NSNull())
 	fileprivate let imageNames = ["jessy", "man", "Veronika"]
 	fileprivate let centerImageView: UIImageView = UIImageView(image: UIImage(named: "0"))
@@ -96,6 +100,57 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
             if (value != nil)
             {
                 print("You have successfully logged in")
+                if let settings = value?.object(forKey: "Settings" as NSString)
+                {
+                    if let Intrests = (settings as AnyObject).object(forKey: "Intrests" as NSString)
+                    {
+                        self.gender = Intrests as! Int
+                    }
+                    else
+                    {
+                        self.gender = 2
+                        
+                    }
+                    if let Distance = (settings as AnyObject).object(forKey: "Distance" as NSString)
+                    {
+                        self.circleQuery?.radius = (Distance as? Double)!
+                    }
+                    else
+                    {
+                        
+                    }
+                    /*if let DistanceUnit = (settings as AnyObject).object(forKey: "DistanceUnit" as NSString)
+                    {
+                        //self.distance.selectedSegmentIndex = DistanceUnit as! Int
+                    }
+                    else
+                    {
+                        
+                    }*/
+                    if let FromAge = (settings as AnyObject).object(forKey: "FromAge" as NSString)
+                    {
+                        self.minAge = FromAge as! Int
+                    }
+                    else
+                    {
+                        
+                    }
+                    if let ToAge = (settings as AnyObject).object(forKey: "ToAge" as NSString)
+                    {
+                        self.maxAge = ToAge as! Int
+                    }
+                    else
+                    {
+                        
+                    }
+                }
+                else
+                {
+                    self.gender = 2
+                    self.minAge = 18
+                    self.maxAge = 60
+                    
+                }
                 if let requests = value?.object(forKey: "Requests" as NSString)
                 {
                     self.lovedOrMatchedArray.setDictionary(requests as! [AnyHashable : Any])

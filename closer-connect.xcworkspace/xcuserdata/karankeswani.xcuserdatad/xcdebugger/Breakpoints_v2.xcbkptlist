@@ -9,78 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Meetle/Classes/PipelineViewController.swift"
-            timestampString = "518240201.275654"
+            filePath = "Meetle/Classes/ChatViewController.swift"
+            timestampString = "518513057.106835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "selectionButtonClicked(sender:)"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Meetle/Classes/MyResumeViewController.swift"
-            timestampString = "518246317.650688"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
-            landmarkName = "changePage(sender:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Meetle/Classes/MyResumeViewController.swift"
-            timestampString = "518246317.650688"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "getPlacemark(user:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closer_connect.MyResumeViewController.(getPlacemark (user : Swift.String) -&gt; ()).(closure #1).(closure #1)"
-                  moduleName = "closer-connect"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///CT%20Apps/DemoCodes/test/cc/CloserConnect2/closer-connect/Meetle/Classes/MyResumeViewController.swift"
-                  timestampString = "518246798.857649"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "153"
-                  endingLineNumber = "153"
-                  offsetFromSymbolStart = "1679">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closer_connect.MyResumeViewController.(getPlacemark (user : Swift.String) -&gt; ()).(closure #1).(closure #1)"
-                  moduleName = "closer-connect"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///CT%20Apps/DemoCodes/test/cc/CloserConnect2/closer-connect/Meetle/Classes/MyResumeViewController.swift"
-                  timestampString = "518246798.860705"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "153"
-                  endingLineNumber = "153"
-                  offsetFromSymbolStart = "2933">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

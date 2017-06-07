@@ -7,24 +7,52 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
+
 
 class ChatViewController: BaseViewController, UINavigationControllerDelegate {
     
     fileprivate var messages: NSMutableArray = NSMutableArray()
+    
+    var ref: DatabaseReference!
     
     @IBOutlet weak var inputText: UITextField?
     @IBOutlet weak var tableView: UITableView?
     @IBOutlet weak var chatInputView: UIView?
     @IBOutlet weak var inputViewBottomConstrains: NSLayoutConstraint?
     
+    var friendId: String?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        friendId = "o3vRbAXd83aIJZYb7jzOU0bK7wy1"
+        ref = Database.database().reference().child("messages")
         
         initMessageIcon()
         addTopBorderToInput()
         initDefaultMessages()
         addKeyboardNotificationsAndGestureRecognizers()
         showUserName()
+    
+        self.ref.child((Auth.auth().currentUser?.uid)!).child(self.friendId!).queryLimited(toLast: 25).observe(.childAdded, with: { (snapshot) in
+            
+            // Success
+            let value = snapshot.value as? NSDictionary
+            //let username = value?["username"] as? String ?? ""
+            //let user = User.init(username: username)
+            print(value!)
+            if (value != nil)
+            {
+                self.messages.add(value!)
+                //tableView!.insertRows(at: [newIndexPath], with: UITableViewRowAnimation.bottom)
+                self.tableView!.reloadData()
+                self.tableView!.layoutIfNeeded()
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,8 +132,9 @@ class ChatViewController: BaseViewController, UINavigationControllerDelegate {
     
     func initDefaultMessages() {
         messages = NSMutableArray()
-        messages.add("Hi Veronika! That's crazy that we have so many friends in common but I have never heard of you.")
-        messages.add("Hi John! Yeah, I know. Nice to meet you. So how do you know Jessica ?")
+        let obj = ["Message": "HI"]
+        messages.add(obj)
+        
     }
     
     func hideKeyboard(_ recognizer: UITapGestureRecognizer) {
@@ -153,7 +182,8 @@ extension ChatViewController: UITextFieldDelegate {
         }
         
         let newIndexPath = IndexPath(row: messages.count, section: 0)
-
+        self.ref.child((Auth.auth().currentUser?.uid)!).child(self.friendId!).childByAutoId().setValue(["Message": textField.text!,  "Sender": (Auth.auth().currentUser?.uid)!])
+        self.ref.child(self.friendId!).child((Auth.auth().currentUser?.uid)!).childByAutoId().setValue(["Message": textField.text!,  "Sender": (Auth.auth().currentUser?.uid)!])
         messages.add(textField.text!)
         tableView!.insertRows(at: [newIndexPath], with: UITableViewRowAnimation.bottom)
         tableView!.reloadData()
@@ -180,13 +210,18 @@ extension ChatViewController: UITableViewDataSource {
         
         var cell: MessageCell?
         
-        if indexPath.row == 0 {
-            cell = tableView.dequeueReusableCell(withIdentifier: OpponentCellIdentifier) as? MessageCell
-        } else {
+        
+        let dict = messages.object(at: indexPath.row) as? NSDictionary
+        if (dict?.object(forKey: "Sender" as NSString) as! String? == Auth.auth().currentUser?.uid)
+        {
             cell = tableView.dequeueReusableCell(withIdentifier: MyCellIdentifier) as? MessageCell
         }
+        else
+        {
+            cell = tableView.dequeueReusableCell(withIdentifier: OpponentCellIdentifier) as? MessageCell
+        }
         
-        cell!.messageLabel!.text = messages.object(at: indexPath.row) as? String
+        cell!.messageLabel!.text = dict?.object(forKey: "Message" as NSString) as! String?
         return cell!
     }
 }
@@ -197,7 +232,8 @@ extension ChatViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyMessageCell") as! MessageCell
-        cell.messageLabel!.text = messages.object(at: indexPath.row) as? String
+        let dict = messages.object(at: indexPath.row) as? NSDictionary
+        cell.messageLabel!.text = dict?.object(forKey: "Message" as NSString) as! String?
         return cell.contentView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
     }
     
