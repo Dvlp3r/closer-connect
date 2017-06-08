@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3D0239AA1ED72E810052D587 /* GoogleService-Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 3D5809661ED7254500314BF3 /* GoogleService-Info.plist */; };
+		3D20FBDD1EE86E06007B132B /* MessageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D20FBDC1EE86E06007B132B /* MessageListViewController.swift */; };
 		3D5809671ED7254500314BF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D5809661ED7254500314BF3 /* GoogleService-Info.plist */; };
 		3D5809691ED727A200314BF3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5809681ED727A200314BF3 /* SignUpViewController.swift */; };
 		3DAFF0C51ED69915008A70CF /* MyResumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAFF0C41ED69915008A70CF /* MyResumeViewController.swift */; };
@@ -211,6 +212,7 @@
 
 /* Begin PBXFileReference section */
 		10D24337514E7AF3C5593DE5 /* Pods-closer-connect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-closer-connect.release.xcconfig"; path = "Pods/Target Support Files/Pods-closer-connect/Pods-closer-connect.release.xcconfig"; sourceTree = "<group>"; };
+		3D20FBDC1EE86E06007B132B /* MessageListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListViewController.swift; sourceTree = "<group>"; };
 		3D5809661ED7254500314BF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D5809681ED727A200314BF3 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		3DAFF0C41ED69915008A70CF /* MyResumeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyResumeViewController.swift; sourceTree = "<group>"; };
@@ -580,6 +582,7 @@
 				3DC761621EDD6C120005AFF8 /* MoreDetailsViewController.swift */,
 				3DC761641EDDCDA90005AFF8 /* EditProfileViewController.swift */,
 				3DB3A6701EE1CBA300A5E5A7 /* PipelineViewController.swift */,
+				3D20FBDC1EE86E06007B132B /* MessageListViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1213,6 +1216,7 @@
 				3D5809691ED727A200314BF3 /* SignUpViewController.swift in Sources */,
 				B0D2ED971B72536D007DC099 /* ThemeManager.swift in Sources */,
 				B0D2EDD61B72BFA4007DC099 /* MSViewControllerSlidingPanel.m in Sources */,
+				3D20FBDD1EE86E06007B132B /* MessageListViewController.swift in Sources */,
 				3DB3A6711EE1CBA300A5E5A7 /* PipelineViewController.swift in Sources */,
 				3DB3A6731EE1CC3F00A5E5A7 /* PipelineTableViewCell.swift in Sources */,
 				B0D2EDD41B72BFA4007DC099 /* EmptySegue.m in Sources */,

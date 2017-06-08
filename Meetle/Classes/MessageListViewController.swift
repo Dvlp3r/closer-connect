@@ -1,8 +1,8 @@
 //
-//  PipelineViewController.swift
+//  MessageListViewController.swift
 //  closer-connect
 //
-//  Created by Mahendra Singh on 6/2/17.
+//  Created by Mahendra Singh on 6/7/17.
 //  Copyright © 2017 AppsFoundation. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import Firebase
 import NVActivityIndicatorView
 import FirebaseDatabase
 
-class PipelineViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource,NVActivityIndicatorViewable {
+class MessageListViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource,NVActivityIndicatorViewable {
     //MARK: - IBOutlets
     @IBOutlet var pipelineTblView: UITableView!
     var ref: DatabaseReference!
@@ -20,7 +20,7 @@ class PipelineViewController: BaseViewController , UITableViewDelegate, UITableV
     let cellReuseIdentifier = "PipelineTableViewCell"
     
     //MARK: - Arrays & Dictionaries
-    var pipelinesDict = NSMutableDictionary()
+    var pipelinesDict = NSMutableArray()
     var profilesDict = NSMutableDictionary()
     var keysArray = NSMutableArray()
     //MARK: -ViewController LifeCycle
@@ -31,30 +31,35 @@ class PipelineViewController: BaseViewController , UITableViewDelegate, UITableV
         self.pipelineTblView.delegate = self
         self.pipelineTblView.dataSource = self
         ref = Database.database().reference()
-        self.ref.child("users").child((Auth.auth().currentUser?.uid)!).observe(.value, with: { (snapshot) in
+        self.ref.child("messages").child((Auth.auth().currentUser?.uid)!).observe(.childAdded, with: { (snapshot) in
             
             // Success
-            let value = snapshot.value as? NSDictionary
+            let value = snapshot.key as? String
             //let username = value?["username"] as? String ?? ""
             //let user = User.init(username: username)
-            //print(value!)
+            
             if (value != nil)
             {
-                print("You have successfully logged in")
-                if let requests = value?.object(forKey: "Requests" as NSString)
+                print(value!)
+                if (self.pipelinesDict.contains(value!))
                 {
-                    self.pipelinesDict.setDictionary(requests as! [AnyHashable : Any])
-                    print(self.pipelinesDict);
-                    self.keysArray.removeAllObjects()
-                    self.keysArray.addObjects(from: self.pipelinesDict.allKeys)
-                    self.pipelineTblView.reloadData()
+                    
                 }
                 else
                 {
-                    self.keysArray.removeAllObjects()
+                    self.pipelinesDict.add(value!)
                     self.pipelineTblView.reloadData()
                 }
-                self.myProfile=value
+//                    print(self.pipelinesDict);
+//                    self.keysArray.removeAllObjects()
+//                    self.keysArray.addObjects(from: self.pipelinesDict.allKeys)
+//                    self.pipelineTblView.reloadData()
+//                }
+//                else
+//                {
+//                    self.keysArray.removeAllObjects()
+//                    self.pipelineTblView.reloadData()
+//                }
                 
             }
         }) { (error) in
@@ -74,7 +79,7 @@ class PipelineViewController: BaseViewController , UITableViewDelegate, UITableV
         // Dispose of any resources that can be recreated.
     }
     override func viewWillAppear(_ animated: Bool) {
-    
+        
         
     }
     
@@ -112,43 +117,16 @@ class PipelineViewController: BaseViewController , UITableViewDelegate, UITableV
         let location = self.pipelineTblView.convert(sender.bounds.origin, from:sender)
         let indexPath = self.pipelineTblView.indexPathForRow(at: location)
         /*if let cell = self.pipelineTblView.cellForRow(at: indexPath!) as? PipelineTableViewCell
-        {
-            
-        }*/
-        let key = keysArray[(indexPath?.row)!]
-        let val = self.pipelinesDict.object(forKey: key) as! String
-        if (val == "Connect")
-        {
-            if let user = Auth.auth().currentUser
-            {
-                let dbLocation = "users/\(user.uid)/\("Requests")"
-                self.ref.child(dbLocation).child(key as! String).removeValue()
-                
-                let dbLocation2 = "users/\(key as! String)/\("Requests")"
-                self.ref.child(dbLocation2).child(user.uid).removeValue()
-                
-            }
-        }
-        else if (val == "Meet")
-        {
-            if let user = Auth.auth().currentUser
-            {
-                let dbLocation = "users/\(user.uid)/\("Requests")"
-                self.ref.child(dbLocation).child(key as! String).setValue("Friend")
-                
-                let dbLocation2 = "users/\(key as! String)/\("Requests")"
-                self.ref.child(dbLocation2).child(user.uid).setValue("Friend")
-            }
-        }
-        else if (val == "Friend")
-        {
-        }
+         {
+         
+         }*/
+        
     }
     //MARK: - UITableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (keysArray.count) > 0
+        if (pipelinesDict.count) > 0
         {
-            return  keysArray.count
+            return  pipelinesDict.count
         }
         self.pipelineTblView.separatorStyle = UITableViewCellSeparatorStyle.none
         return 0
@@ -163,28 +141,12 @@ class PipelineViewController: BaseViewController , UITableViewDelegate, UITableV
         self.pipelineTblView.separatorStyle = UITableViewCellSeparatorStyle.none
         // create a new cell if needed or reuse an old one
         let cell:PipelineTableViewCell = self.pipelineTblView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)  as! PipelineTableViewCell
-        let key = keysArray[indexPath.row]
-        let val = self.pipelinesDict.object(forKey: key) as! String
+        let key = pipelinesDict[indexPath.row]
         cell.messageLbl?.text = ""
         cell.acceptBtn?.isHidden = true
         if let userData = self.profilesDict.object(forKey: key)
         {
-            cell.acceptBtn?.isHidden = false
-            if (val == "Connect")
-            {
-                cell.messageLbl?.text = String(format: "You sent a connection request to %@.", ((userData as AnyObject).object(forKey: "Name") as! String?)!)
-                cell.acceptBtn?.setTitle("Cancel", for: .normal)
-            }
-            else if (val == "Meet")
-            {
-                cell.messageLbl?.text = String(format: "%@ sent you a connection request.", ((userData as AnyObject).object(forKey: "Name") as! String?)!)
-                cell.acceptBtn?.setTitle("Accept", for: .normal)
-            }
-            else if (val == "Friend")
-            {
-                cell.messageLbl?.text = String(format: "You and %@ are connected now", ((userData as AnyObject).object(forKey: "Name") as! String?)!)
-                cell.acceptBtn?.setTitle("Chat", for: .normal)
-            }
+            cell.messageLbl?.text = String(format: "%@", ((userData as AnyObject).object(forKey: "Name") as! String?)!)
             if let imageArr = (userData as AnyObject).object(forKey: "Photos" as NSString)
             {
                 let imgArr = imageArr as! NSArray
@@ -214,21 +176,7 @@ class PipelineViewController: BaseViewController , UITableViewDelegate, UITableV
                 {
                     cell.acceptBtn?.isHidden = false
                     self.profilesDict.setObject(value!, forKey: key as! NSCopying)
-                    if (val == "Connect")
-                    {
-                        cell.messageLbl?.text = String(format: "You sent a connection request to %@.", ((value as AnyObject).object(forKey: "Name") as! String?)!)
-                        cell.acceptBtn?.setTitle("Cancel", for: .normal)
-                    }
-                    else if (val == "Meet")
-                    {
-                        cell.messageLbl?.text = String(format: "%@ sent you a connection request.", ((value as AnyObject).object(forKey: "Name") as! String?)!)
-                        cell.acceptBtn?.setTitle("Accept", for: .normal)
-                    }
-                    else if (val == "Friend")
-                    {
-                        cell.messageLbl?.text = String(format: "You and %@ are connected now", ((value as AnyObject).object(forKey: "Name") as! String?)!)
-                        cell.acceptBtn?.setTitle("Chat", for: .normal)
-                    }
+                    cell.messageLbl?.text = String(format: "%@", ((value as AnyObject).object(forKey: "Name") as! String?)!)
                     if let imageArr = value?.object(forKey: "Photos" as NSString)
                     {
                         let imgArr = imageArr as! NSArray
@@ -255,7 +203,7 @@ class PipelineViewController: BaseViewController , UITableViewDelegate, UITableV
             }
         }
         
-
+        
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         return cell
     }

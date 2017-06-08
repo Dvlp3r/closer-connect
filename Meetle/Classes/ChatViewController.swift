@@ -28,7 +28,7 @@ class ChatViewController: BaseViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         friendId = "o3vRbAXd83aIJZYb7jzOU0bK7wy1"
-        ref = Database.database().reference().child("messages")
+        ref = Database.database().reference()
         
         initMessageIcon()
         addTopBorderToInput()
@@ -36,7 +36,7 @@ class ChatViewController: BaseViewController, UINavigationControllerDelegate {
         addKeyboardNotificationsAndGestureRecognizers()
         showUserName()
     
-        self.ref.child((Auth.auth().currentUser?.uid)!).child(self.friendId!).queryLimited(toLast: 25).observe(.childAdded, with: { (snapshot) in
+        self.ref.child("messages").child(self.friendId!).queryLimited(toLast: 25).observe(.childAdded, with: { (snapshot) in
             
             // Success
             let value = snapshot.value as? NSDictionary
@@ -182,8 +182,8 @@ extension ChatViewController: UITextFieldDelegate {
         }
         
         let newIndexPath = IndexPath(row: messages.count, section: 0)
-        self.ref.child((Auth.auth().currentUser?.uid)!).child(self.friendId!).childByAutoId().setValue(["Message": textField.text!,  "Sender": (Auth.auth().currentUser?.uid)!])
-        self.ref.child(self.friendId!).child((Auth.auth().currentUser?.uid)!).childByAutoId().setValue(["Message": textField.text!,  "Sender": (Auth.auth().currentUser?.uid)!])
+        self.ref.child("messages").child(self.friendId!).childByAutoId().setValue(["Message": textField.text!,  "Sender": (Auth.auth().currentUser?.uid)!])
+        self.ref.child("users").child((Auth.auth().currentUser?.uid)!).child("messages").child(self.friendId!).child((Auth.auth().currentUser?.uid)!).childByAutoId().setValue(["Message": textField.text!,  "Sender": (Auth.auth().currentUser?.uid)!])
         messages.add(textField.text!)
         tableView!.insertRows(at: [newIndexPath], with: UITableViewRowAnimation.bottom)
         tableView!.reloadData()
