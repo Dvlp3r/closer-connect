@@ -115,34 +115,7 @@ class PipelineViewController: BaseViewController , UITableViewDelegate, UITableV
         {
             
         }*/
-        let key = keysArray[(indexPath?.row)!]
-        let val = self.pipelinesDict.object(forKey: key) as! String
-        if (val == "Connect")
-        {
-            if let user = Auth.auth().currentUser
-            {
-                let dbLocation = "users/\(user.uid)/\("Requests")"
-                self.ref.child(dbLocation).child(key as! String).removeValue()
-                
-                let dbLocation2 = "users/\(key as! String)/\("Requests")"
-                self.ref.child(dbLocation2).child(user.uid).removeValue()
-                
-            }
-        }
-        else if (val == "Meet")
-        {
-            if let user = Auth.auth().currentUser
-            {
-                let dbLocation = "users/\(user.uid)/\("Requests")"
-                self.ref.child(dbLocation).child(key as! String).setValue("Friend")
-                
-                let dbLocation2 = "users/\(key as! String)/\("Requests")"
-                self.ref.child(dbLocation2).child(user.uid).setValue("Friend")
-            }
-        }
-        else if (val == "Friend")
-        {
-        }
+        
     }
     //MARK: - UITableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -262,6 +235,16 @@ class PipelineViewController: BaseViewController , UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
+        
+        let key = keysArray[(indexPath.row)]
+        let val = self.pipelinesDict.object(forKey: key) as! String
+        
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller: LocationMatchViewController = storyboard.instantiateViewController(withIdentifier: "LocationMatchViewController") as! LocationMatchViewController
+        controller.friendId = key as! String
+        controller.requestType = val
+        self.navigationController?.pushViewController(controller, animated: true)
+        
         
         
     }

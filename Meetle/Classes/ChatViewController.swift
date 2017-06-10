@@ -22,12 +22,12 @@ class ChatViewController: BaseViewController, UINavigationControllerDelegate {
     @IBOutlet weak var chatInputView: UIView?
     @IBOutlet weak var inputViewBottomConstrains: NSLayoutConstraint?
     
-    var friendId: String?
+    var friendId: String!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        friendId = "o3vRbAXd83aIJZYb7jzOU0bK7wy1"
+        //friendId = "o3vRbAXd83aIJZYb7jzOU0bK7wy1"
         ref = Database.database().reference()
         
         initMessageIcon()
@@ -183,7 +183,8 @@ extension ChatViewController: UITextFieldDelegate {
         
         let newIndexPath = IndexPath(row: messages.count, section: 0)
         self.ref.child("messages").child(self.friendId!).childByAutoId().setValue(["Message": textField.text!,  "Sender": (Auth.auth().currentUser?.uid)!])
-        self.ref.child("users").child((Auth.auth().currentUser?.uid)!).child("messages").child(self.friendId!).child((Auth.auth().currentUser?.uid)!).childByAutoId().setValue(["Message": textField.text!,  "Sender": (Auth.auth().currentUser?.uid)!])
+        let timeInt = NSDate().timeIntervalSince1970
+    self.ref.child("users").child((Auth.auth().currentUser?.uid)!).child("messages").child(self.friendId!).setValue(["ChatId": timeInt,  "Sender": (Auth.auth().currentUser?.uid)!])
         messages.add(textField.text!)
         tableView!.insertRows(at: [newIndexPath], with: UITableViewRowAnimation.bottom)
         tableView!.reloadData()

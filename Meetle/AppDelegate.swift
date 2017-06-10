@@ -151,7 +151,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NVActivityIndicatorViewab
                 controller = inviteController!
             }
             
-            
+            //controller.navigationController?.popToRootViewController(animated: true)
             navigationController.centerViewController = controller
             navigationController.closePanel()
         }
