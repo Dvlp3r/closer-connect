@@ -38,19 +38,21 @@ class SettingsViewController: BaseViewController, NVActivityIndicatorViewable {
 		initRangeSlider()
         
         ref = Database.database().reference()
-        self.ref.child("users").child((Auth.auth().currentUser?.uid)!).observe(.value, with: { (snapshot) in
+        
+    }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		slidingPanelController.delegate = self
+        self.ref.child("users").child((Auth.auth().currentUser?.uid)!).observeSingleEvent(of: .value, with: { (snapshot) in
             
             // Success
-            let value = snapshot.value as? NSDictionary
-            //let username = value?["username"] as? String ?? ""
-            //let user = User.init(username: username)
-            //print(value!)
-            if (value != nil)
+            if let value = snapshot.value as? NSDictionary
             {
                 print("You have successfully logged in")
-                if let settings = value?.object(forKey: "Settings" as NSString)
+                if let settings = value.object(forKey: "Settings" as NSString)
                 {
-                    if let gender = value?.object(forKey: "Gender" as NSString)
+                    if let gender = value.object(forKey: "Gender" as NSString)
                     {
                         self.userSex.selectedSegmentIndex = gender as! Int
                     }
@@ -60,7 +62,7 @@ class SettingsViewController: BaseViewController, NVActivityIndicatorViewable {
                     }
                     else
                     {
-                        if let gender = value?.object(forKey: "Gender" as NSString)
+                        if let gender = value.object(forKey: "Gender" as NSString)
                         {
                             self.userSex.selectedSegmentIndex = gender as! Int
                             if (self.userSex.selectedSegmentIndex==1)
@@ -118,11 +120,6 @@ class SettingsViewController: BaseViewController, NVActivityIndicatorViewable {
         }) { (error) in
             print(error.localizedDescription)
         }
-    }
-	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		slidingPanelController.delegate = self
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {

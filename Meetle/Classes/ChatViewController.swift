@@ -23,6 +23,9 @@ class ChatViewController: BaseViewController, UINavigationControllerDelegate {
     @IBOutlet weak var inputViewBottomConstrains: NSLayoutConstraint?
     
     var friendId: String!
+    var chatId: String!
+    var msgCount: String!
+    var unreadCount: NSNumber!
     
     
     override func viewDidLoad() {
@@ -30,38 +33,125 @@ class ChatViewController: BaseViewController, UINavigationControllerDelegate {
         //friendId = "o3vRbAXd83aIJZYb7jzOU0bK7wy1"
         ref = Database.database().reference()
         
-        initMessageIcon()
+        //initMessageIcon()
         addTopBorderToInput()
         initDefaultMessages()
         addKeyboardNotificationsAndGestureRecognizers()
-        showUserName()
-    
-        self.ref.child("messages").child(self.friendId!).queryLimited(toLast: 25).observe(.childAdded, with: { (snapshot) in
+        //showUserName()
+        
+        
+        self.ref.child("users").child(self.friendId).observeSingleEvent(of: .value, with: { (snapshot) in
             
             // Success
-            let value = snapshot.value as? NSDictionary
+            //let value = snapshot.value as? NSDictionary
             //let username = value?["username"] as? String ?? ""
             //let user = User.init(username: username)
-            print(value!)
-            if (value != nil)
+            //print(value!)
+            if let value = snapshot.value as? NSDictionary
             {
-                self.messages.add(value!)
-                //tableView!.insertRows(at: [newIndexPath], with: UITableViewRowAnimation.bottom)
-                self.tableView!.reloadData()
-                self.tableView!.layoutIfNeeded()
+                self.title = value.object(forKey: "Name") as! String?
+                print("You have successfully logged in")
+                
+                /*if let imageArr = value?.object(forKey: "Photos" as NSString)
+                {
+                    let imgArr = imageArr as! NSArray
+                    LazyImage.show(imageView:self.UserImage!, url:imgArr[0] as? String)
+                    
+                }
+                else
+                {
+                    let gender = value?.object(forKey: "Gender") as! Int?
+                    if (gender == 0)
+                    {
+                        self.UserImage!.image = UIImage(named: "GirlIcon")
+                    }
+                    else
+                    {
+                        self.UserImage!.image = UIImage(named: "BoyIcon")
+                    }
+                    
+                }*/
             }
+            // ...
         }) { (error) in
             print(error.localizedDescription)
         }
+    
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        
+        
+        self.ref.child("users").child(self.friendId).child("Messages").child((Auth.auth().currentUser?.uid)!).observe(.value, with: { (snapshot) in
+            
+            // Success
+            
+            
+            //let username = value?["username"] as? String ?? ""
+            //let user = User.init(username: username)
+            
+            if let value = snapshot.value as? NSDictionary
+            {
+                print(value)
+                self.chatId = value.object(forKey: "ChatId") as! String!
+                self.msgCount = String(format: "%d", value.object(forKey: "TotalMessages") as! NSNumber)
+                self.unreadCount = value.object(forKey: "UnreadMessages") as! NSNumber
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        
+        self.ref.child("messages").child(self.chatId!).queryLimited(toLast: 25).observe(.childAdded, with: { (snapshot) in
+            
+            
+            let dbLocation3 = "users/\((Auth.auth().currentUser?.uid)! as String)/\("Messages")"
+            self.ref.child(dbLocation3).child(self.friendId as String).setValue(["ChatId": self.chatId,  "TotalMessages": 0,  "UnreadMessages": 0], withCompletionBlock: { (error, ref) -> Void in
+                if (!(error != nil))
+                {
+                }
+            })
+            
+            // Success
+            //let value = snapshot.value as? NSDictionary
+            //let username = value?["username"] as? String ?? ""
+            //let user = User.init(username: username)
+            //print(value!)
+            if let value = snapshot.value as? NSDictionary
+            {
+                self.messages.add(value)
+                //tableView!.insertRows(at: [newIndexPath], with: UITableViewRowAnimation.bottom)
+                let newIndexPath = IndexPath(row: self.messages.count-1, section: 0)
+                if (value.object(forKey: "Sender" as NSString) as! String? == Auth.auth().currentUser?.uid)
+                {
+                    self.tableView!.insertRows(at: [newIndexPath], with: UITableViewRowAnimation.bottom)
+                    self.tableView!.reloadData()
+                    self.tableView!.layoutIfNeeded()
+                    
+                    self.scrollChatToTheBottom()
+                }
+                else
+                {
+                    self.tableView!.reloadData()
+                    self.tableView!.layoutIfNeeded()
+                }
+                
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
         tableView!.reloadData()
         scrollChatToTheBottom()
     }
-
+    override func viewWillDisappear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.ref.child("users").child(self.friendId).child("Messages").child(appDelegate.currentUserId).removeAllObservers()
+        self.ref.child("messages").child(self.chatId!).queryLimited(toLast: 25).removeAllObservers()
+    }
     //MARK: - User Actions
 	
     @IBAction override func menuIconClicked(_ sender: AnyObject) {
@@ -72,7 +162,9 @@ class ChatViewController: BaseViewController, UINavigationControllerDelegate {
     @IBAction func onMicro(_ sender: AnyObject) {
         print("OnMicro")
     }
-    
+    @IBAction func backPressed(_ sender: AnyObject) {
+        self.navigationController?.popViewController(animated: true)
+    }
     @IBAction func onCamera(_ sender: AnyObject) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             let imagePicker = UIImagePickerController()
@@ -119,8 +211,11 @@ class ChatViewController: BaseViewController, UINavigationControllerDelegate {
     
     
     func scrollChatToTheBottom() {
-        let newIndexPath = IndexPath(row: messages.count - 1, section: 0)
-        tableView?.scrollToRow(at: newIndexPath, at: UITableViewScrollPosition.top, animated: true)
+        if (messages.count > 0)
+        {
+            let newIndexPath = IndexPath(row: messages.count - 1, section: 0)
+            tableView?.scrollToRow(at: newIndexPath, at: UITableViewScrollPosition.top, animated: true)
+        }
     }
     
     func addTopBorderToInput() {
@@ -132,8 +227,8 @@ class ChatViewController: BaseViewController, UINavigationControllerDelegate {
     
     func initDefaultMessages() {
         messages = NSMutableArray()
-        let obj = ["Message": "HI"]
-        messages.add(obj)
+        //let obj = ["Message": "HI"]
+        //messages.add(obj)
         
     }
     
@@ -181,12 +276,28 @@ extension ChatViewController: UITextFieldDelegate {
             return false
         }
         
-        let newIndexPath = IndexPath(row: messages.count, section: 0)
-        self.ref.child("messages").child(self.friendId!).childByAutoId().setValue(["Message": textField.text!,  "Sender": (Auth.auth().currentUser?.uid)!])
-        let timeInt = NSDate().timeIntervalSince1970
-    self.ref.child("users").child((Auth.auth().currentUser?.uid)!).child("messages").child(self.friendId!).setValue(["ChatId": timeInt,  "Sender": (Auth.auth().currentUser?.uid)!])
-        messages.add(textField.text!)
-        tableView!.insertRows(at: [newIndexPath], with: UITableViewRowAnimation.bottom)
+        //let newIndexPath = IndexPath(row: messages.count, section: 0)
+        self.ref.child("messages").child(self.chatId!).childByAutoId().setValue(["Message": textField.text!,  "Sender": (Auth.auth().currentUser?.uid)!])
+
+        if let user = Auth.auth().currentUser
+        {
+            let userID: String!
+            userID = user.uid
+            
+            unreadCount = NSNumber(value: unreadCount.intValue + 1)
+            //let dbLocation1 = "users/\((Auth.auth().currentUser?.uid)!)/\("Messages")"
+            self.ref.child("users").child(self.friendId).child("Messages").child(userID!).setValue(["ChatId": self.chatId,  "TotalMessages": 0,  "UnreadMessages": unreadCount], withCompletionBlock: { (error, ref) -> Void in
+                if (!(error != nil))
+                {
+                    
+                }
+            })
+
+        }
+        
+        
+        //messages.add(textField.text!)
+        //tableView!.insertRows(at: [newIndexPath], with: UITableViewRowAnimation.bottom)
         tableView!.reloadData()
         tableView!.layoutIfNeeded()
         

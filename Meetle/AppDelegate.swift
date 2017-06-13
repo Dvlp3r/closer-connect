@@ -13,6 +13,7 @@ import FacebookCore
 import Firebase
 import TwitterKit
 import NVActivityIndicatorView
+import FirebaseDatabase
 
 let rateDelay: NSInteger  = 60
 
@@ -31,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NVActivityIndicatorViewab
 	//var request: GADRequest?
 	//var revMobFullscreen: RevMobFullscreen?
 	
+    var ref: DatabaseReference!
+    var currentUserId: String!
 	var myResumeController: UIViewController?
     var homeController: UIViewController?
 	var chatController: UIViewController?
@@ -68,6 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NVActivityIndicatorViewab
         //showRevMob()
         Twitter.sharedInstance().start(withConsumerKey: "zEDwWj3RrugAu55MaJpCHZ7Kj", consumerSecret: "BM9k6jaSa2cFpLN2SlDqJfvh1ABQmnYPW5u0Vz0GjpogXfh6th")
         
+        ref = Database.database().reference()
         
 		return true
 	}
@@ -90,6 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NVActivityIndicatorViewab
                         if let window = UIApplication.shared.keyWindow{
                             window.rootViewController = rootViewController! as? UIViewController
                         }
+                        self.ref.child("users").child(self.currentUserId).removeAllObservers()
                     }
                     
                 } catch let signOutError as NSError {

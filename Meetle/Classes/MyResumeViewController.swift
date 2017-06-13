@@ -93,18 +93,18 @@ class MyResumeViewController: BaseViewController, UICollectionViewDelegateFlowLa
         
         
         ref = Database.database().reference()
+        
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
         self.getPlacemark(user: (Auth.auth().currentUser?.uid)!)
         self.ref.child("users").child((Auth.auth().currentUser?.uid)!).observe(.value, with: { (snapshot) in
             
             // Success
-            let value = snapshot.value as? NSDictionary
-            //let username = value?["username"] as? String ?? ""
-            //let user = User.init(username: username)
-            //print(value!)
-            if (value != nil)
+            if let value = snapshot.value as? NSDictionary
             {
-                self.NameLbl?.text = value?.object(forKey: "Name") as! String?
-                if let about = value?.object(forKey: "About")
+                self.NameLbl?.text = value.object(forKey: "Name") as! String?
+                if let about = value.object(forKey: "About")
                 {
                     self.aboutTxtField?.text = about as! String
                 }
@@ -113,7 +113,7 @@ class MyResumeViewController: BaseViewController, UICollectionViewDelegateFlowLa
                     self.aboutTxtField?.text = "Write something about yourself here!"
                 }
                 print("You have successfully logged in")
-                if let arr = value?.object(forKey: "Photos")
+                if let arr = value.object(forKey: "Photos")
                 {
                     self.imageArr = arr as? NSArray
                     self.pageControl?.numberOfPages = (self.imageArr?.count)!
@@ -127,14 +127,18 @@ class MyResumeViewController: BaseViewController, UICollectionViewDelegateFlowLa
             print(error.localizedDescription)
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.ref.child("users").child(appDelegate.currentUserId).removeAllObservers()
+    }
     func getPlacemark(user: String) {
         self.LocationLbl?.isHidden=true
         self.ref.child("locations").child(user).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
-            let value = snapshot.value as? NSDictionary
-            if (value != nil)
+            if let value = snapshot.value as? NSDictionary
             {
-                let locationArr = value?.object(forKey: "l") as! NSArray
+                let locationArr = value.object(forKey: "l") as! NSArray
                 
                 let location = CLLocation(latitude: locationArr[0] as! CLLocationDegrees, longitude: locationArr[1] as! CLLocationDegrees)
                 CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in

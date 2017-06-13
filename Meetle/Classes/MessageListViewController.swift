@@ -17,10 +17,10 @@ class MessageListViewController: BaseViewController , UITableViewDelegate, UITab
     var ref: DatabaseReference!
     //MARK: - Variables & Constants
     var myProfile: NSDictionary?
-    let cellReuseIdentifier = "PipelineTableViewCell"
+    let cellReuseIdentifier = "MessageTableViewCell"
     
     //MARK: - Arrays & Dictionaries
-    var pipelinesDict = NSMutableArray()
+    var pipelinesDict = NSMutableDictionary()
     var profilesDict = NSMutableDictionary()
     var keysArray = NSMutableArray()
     //MARK: -ViewController LifeCycle
@@ -31,47 +31,8 @@ class MessageListViewController: BaseViewController , UITableViewDelegate, UITab
         self.pipelineTblView.delegate = self
         self.pipelineTblView.dataSource = self
         ref = Database.database().reference()
-        self.ref.child("messages").child((Auth.auth().currentUser?.uid)!).observe(.childAdded, with: { (snapshot) in
-            
-            // Success
-            let value = snapshot.key as? String
-            //let username = value?["username"] as? String ?? ""
-            //let user = User.init(username: username)
-            
-            if (value != nil)
-            {
-                print(value!)
-                if (self.pipelinesDict.contains(value!))
-                {
-                    
-                }
-                else
-                {
-                    self.pipelinesDict.add(value!)
-                    self.pipelineTblView.reloadData()
-                }
-//                    print(self.pipelinesDict);
-//                    self.keysArray.removeAllObjects()
-//                    self.keysArray.addObjects(from: self.pipelinesDict.allKeys)
-//                    self.pipelineTblView.reloadData()
-//                }
-//                else
-//                {
-//                    self.keysArray.removeAllObjects()
-//                    self.pipelineTblView.reloadData()
-//                }
-                
-            }
-        }) { (error) in
-            print(error.localizedDescription)
-        }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(userUpdatedProfile(_:)), name: NSNotification.Name(rawValue: "userUpdatedProfile"), object: nil)
-    }
-    func userUpdatedProfile(_ notification: Notification) {
         
-        if (notification.object! as AnyObject).isEqual(to: "logoutController") {
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -79,12 +40,41 @@ class MessageListViewController: BaseViewController , UITableViewDelegate, UITab
         // Dispose of any resources that can be recreated.
     }
     override func viewWillAppear(_ animated: Bool) {
-        
+        self.ref.child("users").child((Auth.auth().currentUser?.uid)!).child("Messages").observe(.value, with: { (snapshot) in
+            
+            // Success
+            
+            //let username = value?["username"] as? String ?? ""
+            //let user = User.init(username: username)
+            self.pipelinesDict.removeAllObjects()
+            if let value = snapshot.value as? NSDictionary
+            {
+                print(value)
+                self.pipelinesDict.setDictionary(value as! [AnyHashable : Any])
+                self.keysArray.removeAllObjects()
+                self.keysArray.addObjects(from: self.pipelinesDict.allKeys)
+                self.pipelineTblView.reloadData()
+                //                    print(self.pipelinesDict);
+                //                    self.keysArray.removeAllObjects()
+                //                    self.keysArray.addObjects(from: self.pipelinesDict.allKeys)
+                //                    self.pipelineTblView.reloadData()
+                //                }
+                //                else
+                //                {
+                //                    self.keysArray.removeAllObjects()
+                //                    self.pipelineTblView.reloadData()
+                //                }
+                
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
         
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.ref.child("users").child(appDelegate.currentUserId).child("Messages").removeAllObservers()
     }
     
     //MARK: - Class Methods
@@ -124,9 +114,9 @@ class MessageListViewController: BaseViewController , UITableViewDelegate, UITab
     }
     //MARK: - UITableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (pipelinesDict.count) > 0
+        if (keysArray.count) > 0
         {
-            return  pipelinesDict.count
+            return  keysArray.count
         }
         self.pipelineTblView.separatorStyle = UITableViewCellSeparatorStyle.none
         return 0
@@ -140,10 +130,28 @@ class MessageListViewController: BaseViewController , UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         self.pipelineTblView.separatorStyle = UITableViewCellSeparatorStyle.none
         // create a new cell if needed or reuse an old one
-        let cell:PipelineTableViewCell = self.pipelineTblView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)  as! PipelineTableViewCell
-        let key = pipelinesDict[indexPath.row]
+        let cell:MessageTableViewCell = self.pipelineTblView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)  as! MessageTableViewCell
+        let key = keysArray[indexPath.row]
+        print(key)
         cell.messageLbl?.text = ""
-        cell.acceptBtn?.isHidden = true
+        cell.countLbl?.isHidden = true
+        if let messageData = self.pipelinesDict.object(forKey: key)
+        {
+            print(messageData)
+            let count = (messageData as AnyObject).object(forKey: "UnreadMessages") as! NSNumber
+            if (count.intValue > 0)
+            {
+                cell.countLbl?.isHidden = false
+                if (count.intValue > 99)
+                {
+                    cell.countLbl?.text = "99+"
+                }
+                else
+                {
+                    cell.countLbl?.text = String(format: "%d", count.intValue)
+                }
+            }
+        }
         if let userData = self.profilesDict.object(forKey: key)
         {
             cell.messageLbl?.text = String(format: "%@", ((userData as AnyObject).object(forKey: "Name") as! String?)!)
@@ -171,13 +179,11 @@ class MessageListViewController: BaseViewController , UITableViewDelegate, UITab
         {
             self.ref.child("users").child(key as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
-                let value = snapshot.value as? NSDictionary
-                if (value != nil)
+                if let value = snapshot.value as? NSDictionary
                 {
-                    cell.acceptBtn?.isHidden = false
-                    self.profilesDict.setObject(value!, forKey: key as! NSCopying)
+                    self.profilesDict.setObject(value, forKey: key as! NSCopying)
                     cell.messageLbl?.text = String(format: "%@", ((value as AnyObject).object(forKey: "Name") as! String?)!)
-                    if let imageArr = value?.object(forKey: "Photos" as NSString)
+                    if let imageArr = value.object(forKey: "Photos" as NSString)
                     {
                         let imgArr = imageArr as! NSArray
                         LazyImage.show(imageView:cell.userIcon!, url:imgArr[0] as? String)
@@ -185,7 +191,7 @@ class MessageListViewController: BaseViewController , UITableViewDelegate, UITab
                     }
                     else
                     {
-                        let gender = value?.object(forKey: "Gender") as! Int?
+                        let gender = value.object(forKey: "Gender") as! Int?
                         if (gender == 0)
                         {
                             cell.userIcon?.image = UIImage(named: "GirlIcon")
@@ -211,6 +217,17 @@ class MessageListViewController: BaseViewController , UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
         
+        let key = keysArray[indexPath.row]
+        print(key)
+        if let userData = self.pipelinesDict.object(forKey: key)
+        {
+            let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller: ChatViewController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+            controller.friendId = key as! String
+            controller.chatId = ((userData as AnyObject).object(forKey: "ChatId") as! String?)!
+            controller.msgCount = String(format: "%d", (userData as AnyObject).object(forKey: "TotalMessages") as! NSNumber)
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
         
     }
 }

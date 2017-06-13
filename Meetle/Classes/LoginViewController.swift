@@ -97,12 +97,30 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable  {
                         if error == nil {
                             
                             //Print into the console if successfully logged in
-                            print("You have successfully logged in")
-                            
-                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            let rootViewController: AnyObject! = storyboard.instantiateViewController(withIdentifier: "rootViewController")
-                            if let window = UIApplication.shared.keyWindow{
-                                window.rootViewController = rootViewController! as? UIViewController
+                            let userID = user?.uid
+                            self.ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                                // Get user value
+                                if let value = snapshot.value as? NSDictionary
+                                {
+                                    print("You have successfully logged in")
+                                    
+                                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                    let rootViewController: AnyObject! = storyboard.instantiateViewController(withIdentifier: "rootViewController")
+                                    if let window = UIApplication.shared.keyWindow{
+                                        window.rootViewController = rootViewController! as? UIViewController
+                                    }
+                                }
+                                else
+                                {
+                                    print("You have successfully logged in")
+                                    
+                                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                    let rootViewController = storyboard.instantiateViewController(withIdentifier: "MoreDetailsViewController") as! MoreDetailsViewController
+                                    self.navigationController?.pushViewController(rootViewController, animated: true)
+                                }
+                                // ...
+                            }) { (error) in
+                                print(error.localizedDescription)
                             }
                         } else {
                             
@@ -278,11 +296,7 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable  {
                             let userID = user?.uid
                             self.ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
                                 // Get user value
-                                let value = snapshot.value as? NSDictionary
-                                //let username = value?["username"] as? String ?? ""
-                                //let user = User.init(username: username)
-                                //print(value!)
-                                if (value != nil)
+                                if let value = snapshot.value as? NSDictionary
                                 {
                                     print("You have successfully logged in")
                                     

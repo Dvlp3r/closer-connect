@@ -56,7 +56,8 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
 		initMessageIcon()
 		initImageView()
         
-       
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.currentUserId = Auth.auth().currentUser?.uid
         
         
         ref = Database.database().reference()
@@ -88,80 +89,8 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
         })*/
         
         
-        self.startObservingAllData()
         
-        self.ref.child("users").child((Auth.auth().currentUser?.uid)!).observe(.value, with: { (snapshot) in
-            
-            // Success
-            let value = snapshot.value as? NSDictionary
-            //let username = value?["username"] as? String ?? ""
-            //let user = User.init(username: username)
-            //print(value!)
-            if (value != nil)
-            {
-                print("You have successfully logged in")
-                if let settings = value?.object(forKey: "Settings" as NSString)
-                {
-                    if let Intrests = (settings as AnyObject).object(forKey: "Intrests" as NSString)
-                    {
-                        self.gender = Intrests as! Int
-                    }
-                    else
-                    {
-                        self.gender = 2
-                        
-                    }
-                    if let Distance = (settings as AnyObject).object(forKey: "Distance" as NSString)
-                    {
-                        self.circleQuery?.radius = (Distance as? Double)!
-                    }
-                    else
-                    {
-                        
-                    }
-                    /*if let DistanceUnit = (settings as AnyObject).object(forKey: "DistanceUnit" as NSString)
-                    {
-                        //self.distance.selectedSegmentIndex = DistanceUnit as! Int
-                    }
-                    else
-                    {
-                        
-                    }*/
-                    if let FromAge = (settings as AnyObject).object(forKey: "FromAge" as NSString)
-                    {
-                        self.minAge = FromAge as! Int
-                    }
-                    else
-                    {
-                        
-                    }
-                    if let ToAge = (settings as AnyObject).object(forKey: "ToAge" as NSString)
-                    {
-                        self.maxAge = ToAge as! Int
-                    }
-                    else
-                    {
-                        
-                    }
-                }
-                else
-                {
-                    self.gender = 2
-                    self.minAge = 18
-                    self.maxAge = 60
-                    
-                }
-                if let requests = value?.object(forKey: "Requests" as NSString)
-                {
-                    self.lovedOrMatchedArray.setDictionary(requests as! [AnyHashable : Any])
-                    print(self.lovedOrMatchedArray);
-                }
-                self.myProfile=value
-                self.startObservingAllData()
-            }
-        }) { (error) in
-            print(error.localizedDescription)
-        }
+        
         
         
         
@@ -199,9 +128,89 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
             self.displayAlertMessage(messageToDisplay:  "Please Turn on location services for this app from settings to see malls in your city")
             
         }
+        
+        self.ref.child("users").child((Auth.auth().currentUser?.uid)!).observe(.value, with: { (snapshot) in
+            
+            // Success
+            //let value = snapshot.value as? NSDictionary
+            //let username = value?["username"] as? String ?? ""
+            //let user = User.init(username: username)
+            //print(value!)
+            if let value = snapshot.value as? NSDictionary
+            {
+                print("You have successfully logged in")
+                if let settings = value.object(forKey: "Settings" as NSString)
+                {
+                    if let Intrests = (settings as AnyObject).object(forKey: "Intrests" as NSString)
+                    {
+                        self.gender = Intrests as! Int
+                    }
+                    else
+                    {
+                        self.gender = 2
+                        
+                    }
+                    if let Distance = (settings as AnyObject).object(forKey: "Distance" as NSString)
+                    {
+                        self.circleQuery?.radius = (Distance as? Double)!
+                    }
+                    else
+                    {
+                        
+                    }
+                    /*if let DistanceUnit = (settings as AnyObject).object(forKey: "DistanceUnit" as NSString)
+                     {
+                     //self.distance.selectedSegmentIndex = DistanceUnit as! Int
+                     }
+                     else
+                     {
+                     
+                     }*/
+                    if let FromAge = (settings as AnyObject).object(forKey: "FromAge" as NSString)
+                    {
+                        self.minAge = FromAge as! Int
+                    }
+                    else
+                    {
+                        
+                    }
+                    if let ToAge = (settings as AnyObject).object(forKey: "ToAge" as NSString)
+                    {
+                        self.maxAge = ToAge as! Int
+                    }
+                    else
+                    {
+                        
+                    }
+                }
+                else
+                {
+                    self.gender = 2
+                    self.minAge = 18
+                    self.maxAge = 60
+                    
+                }
+                if let requests = value.object(forKey: "Requests" as NSString)
+                {
+                    self.lovedOrMatchedArray.setDictionary(requests as! [AnyHashable : Any])
+                    print(self.lovedOrMatchedArray);
+                }
+                self.myProfile=value
+                self.startObservingAllData()
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        self.startObservingAllData()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        circleQuery?.removeAllObservers()
+        self.ref.child("users").child(appDelegate.currentUserId).removeAllObservers()
     }
     func startObservingAllData()
     {
+        
         circleQuery?.removeAllObservers()
         queryEnterHandle = circleQuery?.observe(.keyEntered, with: { (key: String?, location: CLLocation?) in
             print("In KeyEntered block ")
@@ -210,11 +219,10 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
             {
                 self.ref.child("users").child(key!).observeSingleEvent(of: .value, with: { (snapshot) in
                     // Get user value
-                    let value = snapshot.value as? NSDictionary
-                    if (value != nil)
+                    if let value = snapshot.value as? NSDictionary
                     {
                         
-                        self.profilesDict.setObject(value!, forKey: key as! NSCopying)
+                        self.profilesDict.setObject(value, forKey: key as! NSCopying)
                         print(self.profilesDict)
                        DispatchQueue.main.async {
                         if (self.profilesDict.allKeys.count==1)
@@ -254,7 +262,7 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
                                             }
                                             else
                                             {
-                                                let gender = value?.object(forKey: "Gender") as! Int?
+                                                let gender = value.object(forKey: "Gender") as! Int?
                                                 if (gender == 0)
                                                 {
                                                     self.centerImageView.image = UIImage(named: "GirlIcon")
@@ -283,7 +291,7 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
                                         }
                                         else
                                         {
-                                            let gender = value?.object(forKey: "Gender") as! Int?
+                                            let gender = value.object(forKey: "Gender") as! Int?
                                             if (gender == 0)
                                             {
                                                 self.centerImageView.image = UIImage(named: "GirlIcon")
@@ -349,21 +357,20 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
             {
                 self.ref.child("users").child(key!).observeSingleEvent(of: .value, with: { (snapshot) in
                     // Get user value
-                    let value = snapshot.value as? NSDictionary
-                    if (value != nil)
+                    if let value = snapshot.value as? NSDictionary
                     {
                         if (self.currentProfile == nil)
                         {
                             self.currentProfile = key
-                            self.title = value?.object(forKey: "Name") as! String?
+                            self.title = value.object(forKey: "Name") as! String?
                             self.getPlacemark(user: key!)
-                            if let imageArr = value?.object(forKey: "Photos" as NSString)
+                            if let imageArr = value.object(forKey: "Photos" as NSString)
                             {
                                 let imgArr = imageArr as! NSArray
                                 LazyImage.show(imageView:self.centerImageView, url:imgArr[0] as? String)
                             }
                         }
-                        self.profilesDict.setObject(value!, forKey: key as! NSCopying)
+                        self.profilesDict.setObject(value, forKey: key as! NSCopying)
                     }
                     // ...
                 }) { (error) in
@@ -419,10 +426,9 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
         self.locationIcon?.isHidden=true
         self.ref.child("locations").child(user).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
-            let value = snapshot.value as? NSDictionary
-            if (value != nil)
+            if let value = snapshot.value as? NSDictionary
             {
-                let locationArr = value?.object(forKey: "l") as! NSArray
+                let locationArr = value.object(forKey: "l") as! NSArray
                 
                 let location = CLLocation(latitude: locationArr[0] as! CLLocationDegrees, longitude: locationArr[1] as! CLLocationDegrees)
                 CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in

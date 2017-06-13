@@ -37,19 +37,18 @@ class MenuViewController: BaseViewController {
         self.UserImage?.layer.masksToBounds = true
         
         ref = Database.database().reference()
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
         self.ref.child("users").child((Auth.auth().currentUser?.uid)!).observe(.value, with: { (snapshot) in
             
             // Success
-            let value = snapshot.value as? NSDictionary
-            //let username = value?["username"] as? String ?? ""
-            //let user = User.init(username: username)
-            //print(value!)
-            if (value != nil)
+            if let value = snapshot.value as? NSDictionary
             {
-                self.NameLbl?.text = value?.object(forKey: "Name") as! String?
+                self.NameLbl?.text = value.object(forKey: "Name") as! String?
                 print("You have successfully logged in")
                 
-                if let imageArr = value?.object(forKey: "Photos" as NSString)
+                if let imageArr = value.object(forKey: "Photos" as NSString)
                 {
                     let imgArr = imageArr as! NSArray
                     LazyImage.show(imageView:self.UserImage!, url:imgArr[0] as? String)
@@ -57,7 +56,7 @@ class MenuViewController: BaseViewController {
                 }
                 else
                 {
-                    let gender = value?.object(forKey: "Gender") as! Int?
+                    let gender = value.object(forKey: "Gender") as! Int?
                     if (gender == 0)
                     {
                         self.UserImage!.image = UIImage(named: "GirlIcon")
@@ -73,8 +72,13 @@ class MenuViewController: BaseViewController {
         }) { (error) in
             print(error.localizedDescription)
         }
+        
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.ref.child("users").child(appDelegate.currentUserId).removeAllObservers()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

@@ -23,20 +23,11 @@ class LocationViewController: BaseViewController {
 	//MARK: - User Actions
 	
 	@IBAction func inviteFriend(_ sender: AnyObject) {
-		inviteByMail()
+		//inviteByMail()
 	}
 	
 	@IBAction func searchAgain(_ sender: AnyObject) {
-		let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-		let controller: LocationMatchViewController = storyboard.instantiateViewController(withIdentifier: "LocationMatchViewController") as! LocationMatchViewController
-		
-		let viewControllers: NSMutableArray = NSMutableArray()
-		viewControllers.add(navigationController!.viewControllers)
-		viewControllers.removeLastObject()
-		viewControllers.add(controller)
-		
-		let swiftArray = viewControllers as NSArray as? [UIViewController]
-		navigationController!.setViewControllers(swiftArray!, animated: true)
+		NotificationCenter.default.post(name: Notification.Name(rawValue: "changeControllerNotification"), object: "homeController")
 	}
 	
 	//MARK: - Private methods

@@ -31,17 +31,22 @@ class PipelineViewController: BaseViewController , UITableViewDelegate, UITableV
         self.pipelineTblView.delegate = self
         self.pipelineTblView.dataSource = self
         ref = Database.database().reference()
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+    
         self.ref.child("users").child((Auth.auth().currentUser?.uid)!).observe(.value, with: { (snapshot) in
             
             // Success
-            let value = snapshot.value as? NSDictionary
-            //let username = value?["username"] as? String ?? ""
-            //let user = User.init(username: username)
-            //print(value!)
-            if (value != nil)
+            if let value = snapshot.value as? NSDictionary
             {
                 print("You have successfully logged in")
-                if let requests = value?.object(forKey: "Requests" as NSString)
+                if let requests = value.object(forKey: "Requests" as NSString)
                 {
                     self.pipelinesDict.setDictionary(requests as! [AnyHashable : Any])
                     print(self.pipelinesDict);
@@ -60,26 +65,12 @@ class PipelineViewController: BaseViewController , UITableViewDelegate, UITableV
         }) { (error) in
             print(error.localizedDescription)
         }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(userUpdatedProfile(_:)), name: NSNotification.Name(rawValue: "userUpdatedProfile"), object: nil)
-    }
-    func userUpdatedProfile(_ notification: Notification) {
-        
-        if (notification.object! as AnyObject).isEqual(to: "logoutController") {
-        }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    override func viewWillAppear(_ animated: Bool) {
-    
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
+        self.ref.child("users").child(appDelegate.currentUserId).removeAllObservers()
     }
     
     //MARK: - Class Methods
@@ -182,11 +173,10 @@ class PipelineViewController: BaseViewController , UITableViewDelegate, UITableV
         {
             self.ref.child("users").child(key as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
-                let value = snapshot.value as? NSDictionary
-                if (value != nil)
+                if let value = snapshot.value as? NSDictionary
                 {
                     cell.acceptBtn?.isHidden = false
-                    self.profilesDict.setObject(value!, forKey: key as! NSCopying)
+                    self.profilesDict.setObject(value, forKey: key as! NSCopying)
                     if (val == "Connect")
                     {
                         cell.messageLbl?.text = String(format: "You sent a connection request to %@.", ((value as AnyObject).object(forKey: "Name") as! String?)!)
@@ -202,7 +192,7 @@ class PipelineViewController: BaseViewController , UITableViewDelegate, UITableV
                         cell.messageLbl?.text = String(format: "You and %@ are connected now", ((value as AnyObject).object(forKey: "Name") as! String?)!)
                         cell.acceptBtn?.setTitle("Chat", for: .normal)
                     }
-                    if let imageArr = value?.object(forKey: "Photos" as NSString)
+                    if let imageArr = value.object(forKey: "Photos" as NSString)
                     {
                         let imgArr = imageArr as! NSArray
                         LazyImage.show(imageView:cell.userIcon!, url:imgArr[0] as? String)
@@ -210,7 +200,7 @@ class PipelineViewController: BaseViewController , UITableViewDelegate, UITableV
                     }
                     else
                     {
-                        let gender = value?.object(forKey: "Gender") as! Int?
+                        let gender = value.object(forKey: "Gender") as! Int?
                         if (gender == 0)
                         {
                             cell.userIcon?.image = UIImage(named: "GirlIcon")
