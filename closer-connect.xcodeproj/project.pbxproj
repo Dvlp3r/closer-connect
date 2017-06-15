@@ -10,6 +10,7 @@
 		3D0239AA1ED72E810052D587 /* GoogleService-Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 3D5809661ED7254500314BF3 /* GoogleService-Info.plist */; };
 		3D20FBDD1EE86E06007B132B /* MessageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D20FBDC1EE86E06007B132B /* MessageListViewController.swift */; };
 		3D20FBDF1EEFA538007B132B /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D20FBDE1EEFA538007B132B /* MessageTableViewCell.swift */; };
+		3D20FBE11EF19813007B132B /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D20FBE01EF19813007B132B /* EventListViewController.swift */; };
 		3D5809671ED7254500314BF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D5809661ED7254500314BF3 /* GoogleService-Info.plist */; };
 		3D5809691ED727A200314BF3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5809681ED727A200314BF3 /* SignUpViewController.swift */; };
 		3DAFF0C51ED69915008A70CF /* MyResumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAFF0C41ED69915008A70CF /* MyResumeViewController.swift */; };
@@ -19,6 +20,10 @@
 		3DC761651EDDCDA90005AFF8 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC761641EDDCDA90005AFF8 /* EditProfileViewController.swift */; };
 		3DC761681EDE630B0005AFF8 /* LazyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC761671EDE630B0005AFF8 /* LazyImage.swift */; };
 		3DC7616A1EDE636F0005AFF8 /* MyPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC761691EDE636F0005AFF8 /* MyPhotoCell.swift */; };
+		3DCFFCAF1EF26A0B00C65CF3 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCFFCAE1EF26A0A00C65CF3 /* AddEventViewController.swift */; };
+		3DCFFCB21EF26C5E00C65CF3 /* CustomCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCFFCB11EF26C5E00C65CF3 /* CustomCells.swift */; };
+		3DCFFCB41EF26CA500C65CF3 /* FloatLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCFFCB31EF26CA500C65CF3 /* FloatLabelTextField.swift */; };
+		3DCFFCBA1EF27E6800C65CF3 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCFFCB81EF27E6800C65CF3 /* HMSegmentedControl.m */; };
 		6D80864E25FF9DA88456350B /* Pods_closer_connect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC108578DE87A638D3A29530 /* Pods_closer_connect.framework */; };
 		B0701D891B73ACDF00CACAE5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0701D881B73ACDF00CACAE5 /* ProfileViewController.swift */; };
 		B0701D8D1B73AD1E00CACAE5 /* RangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = B0701D8C1B73AD1E00CACAE5 /* RangeSlider.m */; };
@@ -215,6 +220,7 @@
 		10D24337514E7AF3C5593DE5 /* Pods-closer-connect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-closer-connect.release.xcconfig"; path = "Pods/Target Support Files/Pods-closer-connect/Pods-closer-connect.release.xcconfig"; sourceTree = "<group>"; };
 		3D20FBDC1EE86E06007B132B /* MessageListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListViewController.swift; sourceTree = "<group>"; };
 		3D20FBDE1EEFA538007B132B /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		3D20FBE01EF19813007B132B /* EventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
 		3D5809661ED7254500314BF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D5809681ED727A200314BF3 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		3DAFF0C41ED69915008A70CF /* MyResumeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyResumeViewController.swift; sourceTree = "<group>"; };
@@ -224,6 +230,11 @@
 		3DC761641EDDCDA90005AFF8 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		3DC761671EDE630B0005AFF8 /* LazyImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyImage.swift; sourceTree = "<group>"; };
 		3DC761691EDE636F0005AFF8 /* MyPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotoCell.swift; sourceTree = "<group>"; };
+		3DCFFCAE1EF26A0A00C65CF3 /* AddEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
+		3DCFFCB11EF26C5E00C65CF3 /* CustomCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCells.swift; sourceTree = "<group>"; };
+		3DCFFCB31EF26CA500C65CF3 /* FloatLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatLabelTextField.swift; sourceTree = "<group>"; };
+		3DCFFCB71EF27E6800C65CF3 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
+		3DCFFCB81EF27E6800C65CF3 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		AC108578DE87A638D3A29530 /* Pods_closer_connect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_closer_connect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0701D881B73ACDF00CACAE5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B0701D8B1B73AD1E00CACAE5 /* RangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeSlider.h; sourceTree = "<group>"; };
@@ -482,6 +493,23 @@
 			name = OtherFiles;
 			sourceTree = "<group>";
 		};
+		3DCFFCB51EF27E6800C65CF3 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				3DCFFCB61EF27E6800C65CF3 /* HMSegmentedControl */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		3DCFFCB61EF27E6800C65CF3 /* HMSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				3DCFFCB71EF27E6800C65CF3 /* HMSegmentedControl.h */,
+				3DCFFCB81EF27E6800C65CF3 /* HMSegmentedControl.m */,
+			);
+			path = HMSegmentedControl;
+			sourceTree = "<group>";
+		};
 		6721F45BC5D36152AA1AA6D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -542,6 +570,7 @@
 		B0D2EC021B7227D7007DC099 /* Meetle */ = {
 			isa = PBXGroup;
 			children = (
+				3DCFFCB51EF27E6800C65CF3 /* Utilities */,
 				3D5809661ED7254500314BF3 /* GoogleService-Info.plist */,
 				B0D2EDCD1B72BF52007DC099 /* 3rdParty */,
 				B0D2EC391B722A84007DC099 /* Configuration */,
@@ -585,6 +614,8 @@
 				3DC761641EDDCDA90005AFF8 /* EditProfileViewController.swift */,
 				3DB3A6701EE1CBA300A5E5A7 /* PipelineViewController.swift */,
 				3D20FBDC1EE86E06007B132B /* MessageListViewController.swift */,
+				3D20FBE01EF19813007B132B /* EventListViewController.swift */,
+				3DCFFCAE1EF26A0A00C65CF3 /* AddEventViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -592,6 +623,8 @@
 		B0D2EC371B722A67007DC099 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				3DCFFCB31EF26CA500C65CF3 /* FloatLabelTextField.swift */,
+				3DCFFCB11EF26C5E00C65CF3 /* CustomCells.swift */,
 				B0D2ED981B725599007DC099 /* MenuTableViewCell.swift */,
 				E0924BE21B99FA1E0063A07B /* MessageCell.swift */,
 				B0D2ED9A1B7257B7007DC099 /* MyMessageCell.swift */,
@@ -1202,18 +1235,22 @@
 				B0D2EC061B7227D7007DC099 /* AppDelegate.swift in Sources */,
 				B0701D8F1B73BA6300CACAE5 /* ChatViewController.swift in Sources */,
 				B0D2ED991B725599007DC099 /* MenuTableViewCell.swift in Sources */,
+				3DCFFCBA1EF27E6800C65CF3 /* HMSegmentedControl.m in Sources */,
 				E0924BE31B99FA1E0063A07B /* MessageCell.swift in Sources */,
 				B0701D911B73EA2300CACAE5 /* LocationViewController.swift in Sources */,
+				3DCFFCAF1EF26A0B00C65CF3 /* AddEventViewController.swift in Sources */,
 				3DAFF0C51ED69915008A70CF /* MyResumeViewController.swift in Sources */,
 				3DC761631EDD6C120005AFF8 /* MoreDetailsViewController.swift in Sources */,
 				B0701D951B73F48F00CACAE5 /* SettingsViewController.swift in Sources */,
 				B0701D9A1B73F70D00CACAE5 /* Appirater.m in Sources */,
 				B0D2EDD51B72BFA4007DC099 /* MSSlidingPanelController.m in Sources */,
 				B0701D891B73ACDF00CACAE5 /* ProfileViewController.swift in Sources */,
+				3D20FBE11EF19813007B132B /* EventListViewController.swift in Sources */,
 				B0701D8D1B73AD1E00CACAE5 /* RangeSlider.m in Sources */,
 				B0D2ED9B1B7257B7007DC099 /* MyMessageCell.swift in Sources */,
 				B0701D931B73EBE500CACAE5 /* LocationMatchViewController.swift in Sources */,
 				B0D2ED9D1B7257DF007DC099 /* OpponentMessageCell.swift in Sources */,
+				3DCFFCB41EF26CA500C65CF3 /* FloatLabelTextField.swift in Sources */,
 				B0D2ED9F1B726DFC007DC099 /* BaseViewController.swift in Sources */,
 				B0D2EDDB1B7380C7007DC099 /* MenuViewController.swift in Sources */,
 				3D5809691ED727A200314BF3 /* SignUpViewController.swift in Sources */,
@@ -1225,6 +1262,7 @@
 				3DB3A6731EE1CC3F00A5E5A7 /* PipelineTableViewCell.swift in Sources */,
 				B0D2EDD41B72BFA4007DC099 /* EmptySegue.m in Sources */,
 				B0D2EDDD1B7389A8007DC099 /* HomeViewController.swift in Sources */,
+				3DCFFCB21EF26C5E00C65CF3 /* CustomCells.swift in Sources */,
 				B0D2EDD91B72C030007DC099 /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

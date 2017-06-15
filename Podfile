@@ -16,4 +16,5 @@ pod 'FacebookLogin'
 pod ’TwitterKit’
 pod 'NVActivityIndicatorView'
 pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
+pod 'Eureka'
 end

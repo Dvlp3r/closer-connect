@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5B7DD62425BBB77E0D039BC24967A5B4"
+               BlueprintIdentifier = "3E55CFF19881CF22594C09ED350080BE"
                BuildableName = "Pods_closer_connect.framework"
                BlueprintName = "Pods-closer-connect"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5B7DD62425BBB77E0D039BC24967A5B4"
+            BlueprintIdentifier = "3E55CFF19881CF22594C09ED350080BE"
             BuildableName = "Pods_closer_connect.framework"
             BlueprintName = "Pods-closer-connect"
             ReferencedContainer = "container:Pods.xcodeproj">
