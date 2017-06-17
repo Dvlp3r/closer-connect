@@ -292,10 +292,14 @@ class MyResumeViewController: BaseViewController, UICollectionViewDelegateFlowLa
                     {
                         var yourArray = [String]()
                         yourArray.append(downloadURL!)
-                        for item in self.imageArr!
+                        if ((self.imageArr) != nil)
                         {
-                            yourArray.append(item as! String)
+                            for item in self.imageArr!
+                            {
+                                yourArray.append(item as! String)
+                            }
                         }
+                        
                         let dbLocation = "users/\(user.uid)/\("Photos")"
                         self.ref.child(dbLocation).setValue(yourArray)
                         DispatchQueue.main.async {

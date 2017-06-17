@@ -10,29 +10,55 @@ import Foundation
 import Firebase
 import NVActivityIndicatorView
 import FirebaseDatabase
+import GeoFire
+import CoreLocation
 
-class EventListViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource,NVActivityIndicatorViewable {
+class EventListViewController: BaseViewController , UITableViewDelegate, UITableViewDataSource,NVActivityIndicatorViewable, CLLocationManagerDelegate {
     //MARK: - IBOutlets
     @IBOutlet var pipelineTblView: UITableView!
     var ref: DatabaseReference!
+    var circleQuery: GFCircleQuery?
     //MARK: - Variables & Constants
     var segmentControl : HMSegmentedControl!
     let segmentedControlClass:HMSegmentedControl = HMSegmentedControl()
     var myProfile: NSDictionary?
-    let cellReuseIdentifier = "PipelineTableViewCell"
+    let cellReuseIdentifier = "EventsCell"
+    
+    var locationManager = CLLocationManager()
+    var currentLocation: CLLocation!
     
     //MARK: - Arrays & Dictionaries
+    var eventsDict = NSMutableDictionary()
     var pipelinesDict = NSMutableDictionary()
     var profilesDict = NSMutableDictionary()
-    var keysArray = NSMutableArray()
+    var keysArray = [String]()
+
     //MARK: -ViewController LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.currentUserId = Auth.auth().currentUser?.uid
+        
+        
+        ref = Database.database().reference()
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        let center = CLLocation(latitude: 0.0, longitude: 0.0)
+        let geofireRef = ref.child("eventsLocation")//.childByAutoId()//.child((Auth.auth().currentUser?.uid)!)
+        let geoFire = GeoFire(firebaseRef: geofireRef)
+        //geoFire?.setLocation(center, forKey: "FHVajYei3cQ5SbcTbHxYDSmnIOT2")
+        print(geofireRef.url)
+        //print(geoFire!)
+        // Query locations at [37.7832889, -122.4056973] with a radius of 600 meters
+        circleQuery = geoFire?.query(at: center, withRadius: 500.0)
+        
         // Do any additional setup after loading the view.
         self.pipelineTblView.delegate = self
         self.pipelineTblView.dataSource = self
-        ref = Database.database().reference()
+        
         
         self.segmentedControlClass.frame = CGRect (x:0 , y:0, width:self.view.frame.size.width ,height: 50)
         self.segmentedControlClass.backgroundColor = UIColor.white
@@ -56,40 +82,113 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
         // Dispose of any resources that can be recreated.
     }
     override func viewWillAppear(_ animated: Bool) {
-        
-        self.ref.child("users").child((Auth.auth().currentUser?.uid)!).observe(.value, with: { (snapshot) in
+        if CLLocationManager.locationServicesEnabled()
+        {
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.requestLocation()
+            DispatchQueue.main.async {
+                self.locationManager.startUpdatingLocation()
+            }
             
-            // Success
+        }
+        else
+        {
+            //self.displayAlertMessage(messageToDisplay:  "Please Turn on location services for this app from settings to see malls in your city")
+            
+        }
+        self.ref.child("events").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
             if let value = snapshot.value as? NSDictionary
             {
-                print("You have successfully logged in")
-                if let requests = value.object(forKey: "Requests" as NSString)
-                {
-                    self.pipelinesDict.setDictionary(requests as! [AnyHashable : Any])
-                    print(self.pipelinesDict);
-                    self.keysArray.removeAllObjects()
-                    self.keysArray.addObjects(from: self.pipelinesDict.allKeys)
-                    self.pipelineTblView.reloadData()
-                }
-                else
-                {
-                    self.keysArray.removeAllObjects()
-                    self.pipelineTblView.reloadData()
-                }
-                self.myProfile=value
-                
+                print(value)
+                self.eventsDict.setDictionary(value as! [AnyHashable : Any])
+                self.keysArray = self.eventsDict.allKeys as! [String]
+                self.pipelineTblView.reloadData()
             }
+            // ...
         }) { (error) in
             print(error.localizedDescription)
         }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
-        self.ref.child("users").child(appDelegate.currentUserId).removeAllObservers()
+        self.startObservingAllData()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        circleQuery?.removeAllObservers()
+    }
+    func startObservingAllData()
+    {
+        
+        circleQuery?.removeAllObservers()
+        circleQuery?.observe(.keyEntered, with: { (key: String?, location: CLLocation?) in
+            print("In KeyEntered block ")
+            print("Key '\(key)' entered the search area and is at location '\(location)'")
+            /*if (key != (Auth.auth().currentUser?.uid)!)
+            {
+                self.ref.child("eventsLocation").child(key!).observeSingleEvent(of: .value, with: { (snapshot) in
+                    // Get user value
+                    if let value = snapshot.value as? NSDictionary
+                    {
+                        if (self.currentProfile == nil)
+                        {
+                            self.currentProfile = key
+                            self.title = value.object(forKey: "Name") as! String?
+                            self.getPlacemark(user: key!)
+                            if let imageArr = value.object(forKey: "Photos" as NSString)
+                            {
+                                let imgArr = imageArr as! NSArray
+                                LazyImage.show(imageView:self.centerImageView, url:imgArr[0] as? String)
+                            }
+                        }
+                        self.profilesDict.setObject(value, forKey: key as! NSCopying)
+                    }
+                    // ...
+                }) { (error) in
+                    print(error.localizedDescription)
+                }
+            }*/
+        })
+        
+        circleQuery?.observe(.keyMoved, with: { (key: String?, location: CLLocation?) in
+            print("In KeyEntered block ")
+            print("Key '\(key)' entered the search area and is at location '\(location)'")
+            if (key != (Auth.auth().currentUser?.uid)!)
+            {
+                
+            }
+        })
+        
+        circleQuery?.observe(.keyExited, with: { (key: String?, location: CLLocation?) in
+            print("In KeyEntered block ")
+            print("Key '\(key)' entered the search area and is at location '\(location)'")
+            //self.profilesDict.removeObject(forKey: key!)
+        })
+    }
+    //MARK: - Private Methods
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        currentLocation = manager.location!
+        self.locationManager.stopUpdatingLocation()
+        let geofireRef = ref.child("locations")//.childByAutoId()//.child((Auth.auth().currentUser?.uid)!)
+        let geoFire = GeoFire(firebaseRef: geofireRef)
+        geoFire?.setLocation(currentLocation, forKey: (Auth.auth().currentUser?.uid)!)
+        //geoFire?.setLocation(currentLocation, forKey: "FHVajYei3cQ5SbcTbHxYDSmnIOT2")
+        circleQuery?.center = currentLocation
     }
     
+    private func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            locationManager.requestLocation()
+        }
+        else
+        {
+            //self.displayAlertMessage(messageToDisplay:  "Please Turn on location services for this app from settings to see malls in your city")
+        }
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("error:: (error)")
+        //self.displayAlertMessage(messageToDisplay:  "Please Turn on location services for this app from settings to see malls in your city")
+    }
     //MARK: - Class Methods
     
     func AlertMessage(messageToDisplay: String)
@@ -118,7 +217,67 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
     }
     @IBAction func AddEventPressed(sender: UIButton)
     {
-        
+        self.startAnimating()
+        self.ref.child("users").child((Auth.auth().currentUser?.uid)!).child("Requests").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            // Success
+            print(snapshot)
+            if let value = snapshot.value as? NSDictionary
+            {
+                print(value)
+                self.pipelinesDict.setDictionary(value as! [AnyHashable : Any])
+                print(self.pipelinesDict);
+                for key in self.pipelinesDict.allKeys
+                {
+                    if self.profilesDict.object(forKey: key) != nil
+                    {
+                        if (self.pipelinesDict.allKeys.count == self.profilesDict.allKeys.count)
+                        {
+                            DispatchQueue.main.async {
+                                self.stopAnimating()
+                                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                let rootViewController = storyboard.instantiateViewController(withIdentifier: "AddEventViewController") as! AddEventViewController
+                                rootViewController.keysArray = self.profilesDict.allKeys as! [String]
+                                rootViewController.profilesDict = self.profilesDict
+                                self.navigationController?.pushViewController(rootViewController, animated: true)
+                            }
+                        }
+                    }
+                    else
+                    {
+                        self.ref.child("users").child(key as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+                            // Get user value
+                            if let value = snapshot.value as? NSDictionary
+                            {
+                                self.profilesDict.setObject(value, forKey: key as! NSCopying)
+                                if (self.pipelinesDict.allKeys.count == self.profilesDict.allKeys.count)
+                                {
+                                    DispatchQueue.main.async {
+                                        self.stopAnimating()
+                                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                        let rootViewController = storyboard.instantiateViewController(withIdentifier: "AddEventViewController") as! AddEventViewController
+                                        rootViewController.keysArray = self.profilesDict.allKeys as! [String]
+                                        rootViewController.profilesDict = self.profilesDict
+                                        self.navigationController?.pushViewController(rootViewController, animated: true)
+                                    }
+                                }
+                            }
+                            // ...
+                        }) { (error) in
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
+            }
+            else
+            {
+                DispatchQueue.main.async {
+                    self.stopAnimating()
+                }
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
         
     }
     @IBAction func selectionButtonClicked(sender: UIButton) {
@@ -148,99 +307,15 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         self.pipelineTblView.separatorStyle = UITableViewCellSeparatorStyle.none
         // create a new cell if needed or reuse an old one
-        let cell:PipelineTableViewCell = self.pipelineTblView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)  as! PipelineTableViewCell
+        let cell:EventsCell = self.pipelineTblView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)  as! EventsCell
         let key = keysArray[indexPath.row]
-        let val = self.pipelinesDict.object(forKey: key) as! String
-        cell.messageLbl?.text = ""
-        cell.acceptBtn?.isHidden = true
-        if let userData = self.profilesDict.object(forKey: key)
+        cell.eventLbl?.text = ""
+        cell.placeLbl?.text = ""
+        if let userData = self.eventsDict.object(forKey: key)
         {
-            cell.acceptBtn?.isHidden = false
-            if (val == "Connect")
-            {
-                cell.messageLbl?.text = String(format: "You sent a connection request to %@.", ((userData as AnyObject).object(forKey: "Name") as! String?)!)
-                cell.acceptBtn?.setTitle("Cancel", for: .normal)
-            }
-            else if (val == "Meet")
-            {
-                cell.messageLbl?.text = String(format: "%@ sent you a connection request.", ((userData as AnyObject).object(forKey: "Name") as! String?)!)
-                cell.acceptBtn?.setTitle("Accept", for: .normal)
-            }
-            else if (val == "Friend")
-            {
-                cell.messageLbl?.text = String(format: "You and %@ are connected now", ((userData as AnyObject).object(forKey: "Name") as! String?)!)
-                cell.acceptBtn?.setTitle("Chat", for: .normal)
-            }
-            if let imageArr = (userData as AnyObject).object(forKey: "Photos" as NSString)
-            {
-                let imgArr = imageArr as! NSArray
-                LazyImage.show(imageView:cell.userIcon!, url:imgArr[0] as? String)
-                
-            }
-            else
-            {
-                let gender = (userData as AnyObject).object(forKey: "Gender") as! Int?
-                if (gender == 0)
-                {
-                    cell.userIcon?.image = UIImage(named: "GirlIcon")
-                }
-                else
-                {
-                    cell.userIcon?.image = UIImage(named: "BoyIcon")
-                }
-                
-            }
+            cell.eventLbl?.text = ((userData as AnyObject).object(forKey: "Title") as! String?)!
+            cell.placeLbl?.text = String(format: "Place: %@", ((userData as AnyObject).object(forKey: "Place") as! String?)!)
         }
-        else
-        {
-            self.ref.child("users").child(key as! String).observeSingleEvent(of: .value, with: { (snapshot) in
-                // Get user value
-                if let value = snapshot.value as? NSDictionary
-                {
-                    cell.acceptBtn?.isHidden = false
-                    self.profilesDict.setObject(value, forKey: key as! NSCopying)
-                    if (val == "Connect")
-                    {
-                        cell.messageLbl?.text = String(format: "You sent a connection request to %@.", ((value as AnyObject).object(forKey: "Name") as! String?)!)
-                        cell.acceptBtn?.setTitle("Cancel", for: .normal)
-                    }
-                    else if (val == "Meet")
-                    {
-                        cell.messageLbl?.text = String(format: "%@ sent you a connection request.", ((value as AnyObject).object(forKey: "Name") as! String?)!)
-                        cell.acceptBtn?.setTitle("Accept", for: .normal)
-                    }
-                    else if (val == "Friend")
-                    {
-                        cell.messageLbl?.text = String(format: "You and %@ are connected now", ((value as AnyObject).object(forKey: "Name") as! String?)!)
-                        cell.acceptBtn?.setTitle("Chat", for: .normal)
-                    }
-                    if let imageArr = value.object(forKey: "Photos" as NSString)
-                    {
-                        let imgArr = imageArr as! NSArray
-                        LazyImage.show(imageView:cell.userIcon!, url:imgArr[0] as? String)
-                        
-                    }
-                    else
-                    {
-                        let gender = value.object(forKey: "Gender") as! Int?
-                        if (gender == 0)
-                        {
-                            cell.userIcon?.image = UIImage(named: "GirlIcon")
-                        }
-                        else
-                        {
-                            cell.userIcon?.image = UIImage(named: "BoyIcon")
-                        }
-                        
-                    }
-                }
-                // ...
-            }) { (error) in
-                print(error.localizedDescription)
-            }
-        }
-        
-        
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         return cell
     }
@@ -248,14 +323,6 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
         
-        let key = keysArray[(indexPath.row)]
-        let val = self.pipelinesDict.object(forKey: key) as! String
-        
-        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller: LocationMatchViewController = storyboard.instantiateViewController(withIdentifier: "LocationMatchViewController") as! LocationMatchViewController
-        controller.friendId = key as! String
-        controller.requestType = val
-        self.navigationController?.pushViewController(controller, animated: true)
         
         
         

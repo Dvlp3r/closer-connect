@@ -26,9 +26,6 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
     @IBOutlet weak var locationIcon: UIImageView?
     @IBOutlet weak var backgroundLbl: UILabel?
     
-    var queryEnterHandle: FirebaseHandle?
-    var queryMovedHandle: FirebaseHandle?
-    var queryExitHandle: FirebaseHandle?
     
     var lovedOrMatchedArray = NSMutableDictionary()
     
@@ -212,7 +209,7 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
     {
         
         circleQuery?.removeAllObservers()
-        queryEnterHandle = circleQuery?.observe(.keyEntered, with: { (key: String?, location: CLLocation?) in
+        circleQuery?.observe(.keyEntered, with: { (key: String?, location: CLLocation?) in
             print("In KeyEntered block ")
             print("Key '\(key)' entered the search area and is at location '\(location)'")
             if (key != (Auth.auth().currentUser?.uid)!)
@@ -350,7 +347,7 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
             }
         })
         
-        queryMovedHandle = circleQuery?.observe(.keyMoved, with: { (key: String?, location: CLLocation?) in
+        circleQuery?.observe(.keyMoved, with: { (key: String?, location: CLLocation?) in
             print("In KeyEntered block ")
             print("Key '\(key)' entered the search area and is at location '\(location)'")
             if (key != (Auth.auth().currentUser?.uid)!)
@@ -379,7 +376,7 @@ class HomeViewController: BaseViewController, NVActivityIndicatorViewable, CLLoc
             }
         })
         
-        queryExitHandle = circleQuery?.observe(.keyExited, with: { (key: String?, location: CLLocation?) in
+        circleQuery?.observe(.keyExited, with: { (key: String?, location: CLLocation?) in
             print("In KeyEntered block ")
             print("Key '\(key)' entered the search area and is at location '\(location)'")
             self.profilesDict.removeObject(forKey: key!)

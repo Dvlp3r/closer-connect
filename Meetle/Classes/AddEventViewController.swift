@@ -9,34 +9,40 @@
 import Foundation
 import Eureka
 import CoreLocation
+import Firebase
+import FirebaseDatabase
+import GeoFire
 
 class AddEventViewController : FormViewController {
     
+    var ref: DatabaseReference!
+    var profilesDict = NSMutableDictionary()
+    var keysArray = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //keysArray = ["asdasdasdas","erewrwerwer", "adaddasdasd"]
+        ref = Database.database().reference()
         initializeForm()
-        
         //navigationItem.leftBarButtonItem?.target = self
         //navigationItem.leftBarButtonItem?.action = #selector(NativeEventFormViewController.cancelTapped(_:))
     }
-    
     private func initializeForm() {
-        
+        //MARK: Emoji
         
         form +++
             TextRow("Title").cellSetup { cell, row in
                 cell.textField.placeholder = row.tag
             }
             
-            <<< TextRow("Location").cellSetup {
+            <<< TextRow("Place").cellSetup {
                 $1.cell.textField.placeholder = $0.row.tag
             }
             
             +++
             
-            LocationRow(){
-                $0.title = "LocationRow"
+            LocationRow("Location"){
+                $0.title = "Location"
                 $0.value = CLLocation(latitude: -34.91, longitude: -56.1646)
             }
             <<< SwitchRow("All-day") {
@@ -141,6 +147,10 @@ class AddEventViewController : FormViewController {
                 $0.options = EventAlert.allValues
                 $0.value = .Never
                 }
+                .onPresent({ (_, vc) in
+                    vc.enableDeselection = false
+                    vc.dismissOnSelection = false
+                })
                 .onChange { [weak self] row in
                     if row.value == .Never {
                         if let second : PushRow<EventAlert> = self?.form.rowBy(tag: "Another Alert"), let secondIndexPath = second.indexPath {
@@ -161,11 +171,44 @@ class AddEventViewController : FormViewController {
         }
         
         form +++
-            
-            PushRow<EventState>("Show As") {
-                $0.title = "Show As"
-                $0.options = EventState.allValues
+            MultipleSelectorRow<String>("Invities") { row in
+                row.title = "Invite Friends"
+                row.options = self.keysArray
+                row.cellUpdate { cell, row in
+                        if (row.value != nil)
+                        {
+                            if (row.value!.count == 0)
+                            {
+                                cell.detailTextLabel?.text =  ""
+                            }
+                            else if (row.value!.count == 1)
+                            {
+                                cell.detailTextLabel?.text =  String(format: "%d friend",row.value!.count)
+                            }
+                            else
+                            {
+                                cell.detailTextLabel?.text =  String(format: "%d friends",row.value!.count)
+                            }
+                            
+                        }
+                    else
+                        {
+                            cell.detailTextLabel?.text =  ""
+                    }
+                }
+                row.onPresent({ from, to in
+                    // Decode the value in row title
+                    to.selectableRowCellSetup = { cell, row in
+                        if let value = row.selectableValue {
+                            if let userData = self.profilesDict.object(forKey: value)
+                            {
+                                row.title = ((userData as AnyObject).object(forKey: "Name") as! String?)!
+                            }
+                        }
+                    }
+                })
         }
+        
         
         form +++
             
@@ -179,11 +222,116 @@ class AddEventViewController : FormViewController {
         }
         
     }
-    
+    func multipleSelectorDone(_ item:UIBarButtonItem) {
+            _ = navigationController?.popViewController(animated: true)
+    }
     func cancelTapped(_ barButtonItem: UIBarButtonItem) {
         //(navigationController as? NativeEventNavigationController)?.onDismissCallback?(self)
     }
-    
+    @IBAction func SavePressed(_ sender: UIBarButtonItem) {
+        //(navigationController as? NativeEventNavigationController)?.onDismissCallback?(self)
+//        
+//        let row: MultipleSelectorRow <String> = form.rowBy(tag: "Invities")!
+//        let value = row.value
+//        print (value)
+        
+        
+        let valuesDictionary = form.values() as NSDictionary
+        print(valuesDictionary)
+        
+        
+        
+        if valuesDictionary.object(forKey: "Title") as? String != nil
+        {
+            if valuesDictionary.object(forKey: "Place") as? String != nil
+            {
+                let keyValueDict = NSMutableDictionary ()
+                for key in valuesDictionary.allKeys
+                {
+                    if let val = valuesDictionary.object(forKey: key)
+                    {
+                        let keyStr = key as! String
+                        if (keyStr == "Invities")
+                        {
+                            
+                        }
+                        else
+                        {
+                            let value = String(format:"%@", val as! CVarArg)
+                            keyValueDict.setObject(value, forKey: keyStr as NSCopying)
+                        }
+                        
+                    }
+                }
+                let timeInterval = Date().timeIntervalSince1970
+                print(timeInterval)
+                let eventId = String(format: "%@%d",(Auth.auth().currentUser?.uid)!, timeInterval)
+                print(eventId)
+                self.ref.child("events").child(eventId).setValue(keyValueDict, withCompletionBlock: { (error, ref) -> Void in
+                    if (!(error != nil))
+                    {
+                        let locationVal = valuesDictionary.object(forKey: "Location")
+                        let geofireRef = self.ref.child("eventsLocation")//.childByAutoId()//.child((Auth.auth().currentUser?.uid)!)
+                        let geoFire = GeoFire(firebaseRef: geofireRef)
+                        geoFire?.setLocation(locationVal as! CLLocation!, forKey: eventId)
+                        
+                        if let second : MultipleSelectorRow <String> = self.form.rowBy(tag: "Invities"){
+                            if let participients = second.value
+                            {
+                                print (participients)
+                                //print ((val as AnyObject).map({ $0.first! }) ?? [])
+                                var ct = 0
+                                for item in participients
+                                {
+                                    self.ref.child("eventsLocation").child(eventId).childByAutoId().setValue(item, withCompletionBlock: { (error, ref) -> Void in
+                                        if (!(error != nil))
+                                        {
+                                            ct += 1
+                                            if (ct == participients.count)
+                                            {
+                                                self.navigationController?.popViewController(animated: true)
+                                            }
+                                        }
+                                    })
+                                }
+                            }
+                            else
+                            {
+                                self.navigationController?.popViewController(animated: true)
+                            }
+                        }
+                        else
+                        {
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
+                })
+            }
+            else
+            {
+                self.displayAlertMessage(messageToDisplay:  "Please add place of event.")
+            }
+        }
+        else
+        {
+            self.displayAlertMessage(messageToDisplay:  "Please add title to event.")
+        }
+        
+    }
+    func displayAlertMessage(messageToDisplay: String)
+    {
+        let alertController = UIAlertController(title: "Message", message: messageToDisplay, preferredStyle: .alert)
+        
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in
+            
+            // Code in this block will trigger when OK button tapped.
+            print("Ok button tapped");
+        }
+        
+        alertController.addAction(OKAction)
+        
+        self.present(alertController, animated: true, completion:nil)
+    }
     enum RepeatInterval : String, CustomStringConvertible {
         case Never = "Never"
         case Every_Day = "Every Day"

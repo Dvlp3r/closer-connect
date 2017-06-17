@@ -13,6 +13,7 @@
 		3D20FBE11EF19813007B132B /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D20FBE01EF19813007B132B /* EventListViewController.swift */; };
 		3D5809671ED7254500314BF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D5809661ED7254500314BF3 /* GoogleService-Info.plist */; };
 		3D5809691ED727A200314BF3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5809681ED727A200314BF3 /* SignUpViewController.swift */; };
+		3D68AC2E1EF52CFF0085CAC6 /* EventsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D68AC2D1EF52CFF0085CAC6 /* EventsCell.swift */; };
 		3DAFF0C51ED69915008A70CF /* MyResumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAFF0C41ED69915008A70CF /* MyResumeViewController.swift */; };
 		3DB3A6711EE1CBA300A5E5A7 /* PipelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3A6701EE1CBA300A5E5A7 /* PipelineViewController.swift */; };
 		3DB3A6731EE1CC3F00A5E5A7 /* PipelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3A6721EE1CC3F00A5E5A7 /* PipelineTableViewCell.swift */; };
@@ -223,6 +224,7 @@
 		3D20FBE01EF19813007B132B /* EventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
 		3D5809661ED7254500314BF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D5809681ED727A200314BF3 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		3D68AC2D1EF52CFF0085CAC6 /* EventsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsCell.swift; sourceTree = "<group>"; };
 		3DAFF0C41ED69915008A70CF /* MyResumeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyResumeViewController.swift; sourceTree = "<group>"; };
 		3DB3A6701EE1CBA300A5E5A7 /* PipelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PipelineViewController.swift; sourceTree = "<group>"; };
 		3DB3A6721EE1CC3F00A5E5A7 /* PipelineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PipelineTableViewCell.swift; sourceTree = "<group>"; };
@@ -632,6 +634,7 @@
 				3DC761691EDE636F0005AFF8 /* MyPhotoCell.swift */,
 				3DB3A6721EE1CC3F00A5E5A7 /* PipelineTableViewCell.swift */,
 				3D20FBDE1EEFA538007B132B /* MessageTableViewCell.swift */,
+				3D68AC2D1EF52CFF0085CAC6 /* EventsCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1247,6 +1250,7 @@
 				B0701D891B73ACDF00CACAE5 /* ProfileViewController.swift in Sources */,
 				3D20FBE11EF19813007B132B /* EventListViewController.swift in Sources */,
 				B0701D8D1B73AD1E00CACAE5 /* RangeSlider.m in Sources */,
+				3D68AC2E1EF52CFF0085CAC6 /* EventsCell.swift in Sources */,
 				B0D2ED9B1B7257B7007DC099 /* MyMessageCell.swift in Sources */,
 				B0701D931B73EBE500CACAE5 /* LocationMatchViewController.swift in Sources */,
 				B0D2ED9D1B7257DF007DC099 /* OpponentMessageCell.swift in Sources */,
