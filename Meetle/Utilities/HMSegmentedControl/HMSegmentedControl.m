@@ -628,7 +628,7 @@
     self.badgeScrollView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
     
     if ([self sectionCount] > 0) {
-        self.segmentWidth = self.frame.size.width / 2.0;//[self sectionCount];
+        self.segmentWidth = self.frame.size.width / 3.0;//[self sectionCount];
     }
     
     if (self.type == HMSegmentedControlTypeText && self.segmentWidthStyle == HMSegmentedControlSegmentWidthStyleFixed) {

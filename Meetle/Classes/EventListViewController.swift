@@ -28,11 +28,15 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
     var currentLocation: CLLocation!
     
     //MARK: - Arrays & Dictionaries
-    var eventsDict = NSMutableDictionary()
+    var eventsDictMy = NSMutableDictionary()
+    var keysArrayMy = [String]()
+    var eventsDictExplore = NSMutableDictionary()
+    var keysArrayExplore = [String]()
+    var eventsDictUpcoming = NSMutableDictionary()
+    var keysArrayUpcoming = [String]()
+    var eventDetailsDict = NSMutableDictionary()
     var pipelinesDict = NSMutableDictionary()
     var profilesDict = NSMutableDictionary()
-    var keysArray = [String]()
-
     //MARK: -ViewController LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +66,7 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
         
         self.segmentedControlClass.frame = CGRect (x:0 , y:0, width:self.view.frame.size.width ,height: 50)
         self.segmentedControlClass.backgroundColor = UIColor.white
-        self.segmentedControlClass.sectionTitles = ["Upcoming", "Explore"]
+        self.segmentedControlClass.sectionTitles = ["Upcoming", "Explore", "My Events"]
         self.segmentedControlClass.selectionIndicatorHeight = 4.0
         self.segmentedControlClass.selectionIndicatorColor = UIColor.red
         self.segmentedControlClass.segmentWidthStyle = HMSegmentedControlSegmentWidthStyle.fixed
@@ -71,7 +75,7 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
         self.segmentedControlClass.isVerticalDividerEnabled = true
         self.segmentedControlClass.verticalDividerColor = UIColor.clear
         self.segmentedControlClass.verticalDividerWidth = 1.0
-        self.segmentedControlClass.addTarget(self, action: #selector(getter: self.segmentedControlClass), for: .valueChanged)
+        self.segmentedControlClass.addTarget(self, action: #selector(self.segmentedControlChanged), for: .valueChanged)
         self.view.addSubview(self.segmentedControlClass)
         
         
@@ -96,19 +100,38 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
             //self.displayAlertMessage(messageToDisplay:  "Please Turn on location services for this app from settings to see malls in your city")
             
         }
-        self.ref.child("events").observeSingleEvent(of: .value, with: { (snapshot) in
+        
+        
+        self.ref.child("eventsLocation").queryOrdered(byChild: (Auth.auth().currentUser?.uid)!).queryEqual(toValue: true).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
+            print(snapshot)
             if let value = snapshot.value as? NSDictionary
             {
                 print(value)
-                self.eventsDict.setDictionary(value as! [AnyHashable : Any])
-                self.keysArray = self.eventsDict.allKeys as! [String]
+                self.eventsDictUpcoming.setDictionary(value as! [AnyHashable : Any])
+                self.keysArrayUpcoming = self.eventsDictUpcoming.allKeys as! [String]
                 self.pipelineTblView.reloadData()
             }
             // ...
         }) { (error) in
             print(error.localizedDescription)
         }
+        
+        self.ref.child("users").child((Auth.auth().currentUser?.uid)!).child("MyEvents").queryOrdered(byChild: "StartDate").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            print(snapshot)
+            if let value = snapshot.value as? NSDictionary
+            {
+                print(value)
+                self.eventsDictMy.setDictionary(value as! [AnyHashable : Any])
+                self.keysArrayMy = self.eventsDictMy.allKeys as! [String]
+                self.pipelineTblView.reloadData()
+            }
+            // ...
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
         
         self.startObservingAllData()
     }
@@ -122,46 +145,56 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
         circleQuery?.observe(.keyEntered, with: { (key: String?, location: CLLocation?) in
             print("In KeyEntered block ")
             print("Key '\(key)' entered the search area and is at location '\(location)'")
-            /*if (key != (Auth.auth().currentUser?.uid)!)
-            {
-                self.ref.child("eventsLocation").child(key!).observeSingleEvent(of: .value, with: { (snapshot) in
-                    // Get user value
-                    if let value = snapshot.value as? NSDictionary
+            self.ref.child("eventsLocation").child(key! as String).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                if let value = snapshot.value as? NSDictionary
+                {
+                    print(value)
+                    if value.object(forKey: (Auth.auth().currentUser?.uid)!) != nil
                     {
-                        if (self.currentProfile == nil)
-                        {
-                            self.currentProfile = key
-                            self.title = value.object(forKey: "Name") as! String?
-                            self.getPlacemark(user: key!)
-                            if let imageArr = value.object(forKey: "Photos" as NSString)
-                            {
-                                let imgArr = imageArr as! NSArray
-                                LazyImage.show(imageView:self.centerImageView, url:imgArr[0] as? String)
-                            }
-                        }
-                        self.profilesDict.setObject(value, forKey: key as! NSCopying)
+                        self.eventsDictExplore.setObject(value, forKey: key as! NSCopying)
+                        self.keysArrayExplore = self.eventsDictExplore.allKeys as! [String]
+                        self.pipelineTblView.reloadData()
                     }
-                    // ...
-                }) { (error) in
-                    print(error.localizedDescription)
                 }
-            }*/
+                // ...
+            }) { (error) in
+                print(error.localizedDescription)
+            }
         })
         
         circleQuery?.observe(.keyMoved, with: { (key: String?, location: CLLocation?) in
             print("In KeyEntered block ")
             print("Key '\(key)' entered the search area and is at location '\(location)'")
-            if (key != (Auth.auth().currentUser?.uid)!)
-            {
-                
+            self.ref.child("eventsLocation").child(key! as String).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                if let value = snapshot.value as? NSDictionary
+                {
+                    print(value)
+                    if value.object(forKey: (Auth.auth().currentUser?.uid)!) == nil
+                    {
+                        self.eventsDictExplore.setObject(value, forKey: key as! NSCopying)
+                        self.keysArrayExplore = self.eventsDictExplore.allKeys as! [String]
+                        self.pipelineTblView.reloadData()
+                    }
+                }
+                // ...
+            }) { (error) in
+                print(error.localizedDescription)
             }
         })
         
         circleQuery?.observe(.keyExited, with: { (key: String?, location: CLLocation?) in
             print("In KeyEntered block ")
             print("Key '\(key)' entered the search area and is at location '\(location)'")
-            //self.profilesDict.removeObject(forKey: key!)
+            self.eventsDictExplore.removeObject(forKey: key!)
+            self.keysArrayExplore = self.eventsDictExplore.allKeys as! [String]
+            self.pipelineTblView.reloadData()
         })
+    }
+    func segmentedControlChanged(hmSegmentControl : HMSegmentedControl) -> Void {
+        
+        self.pipelineTblView.reloadData()
     }
     //MARK: - Private Methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -227,29 +260,16 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
                 print(value)
                 self.pipelinesDict.setDictionary(value as! [AnyHashable : Any])
                 print(self.pipelinesDict);
-                for key in self.pipelinesDict.allKeys
+                self.profilesDict.removeAllObjects()
+                if (self.pipelinesDict.allKeys.count > 0)
                 {
-                    if self.profilesDict.object(forKey: key) != nil
+                    for key in self.pipelinesDict.allKeys
                     {
-                        if (self.pipelinesDict.allKeys.count == self.profilesDict.allKeys.count)
+                        if let val = self.pipelinesDict.object(forKey: key)
                         {
-                            DispatchQueue.main.async {
-                                self.stopAnimating()
-                                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                                let rootViewController = storyboard.instantiateViewController(withIdentifier: "AddEventViewController") as! AddEventViewController
-                                rootViewController.keysArray = self.profilesDict.allKeys as! [String]
-                                rootViewController.profilesDict = self.profilesDict
-                                self.navigationController?.pushViewController(rootViewController, animated: true)
-                            }
-                        }
-                    }
-                    else
-                    {
-                        self.ref.child("users").child(key as! String).observeSingleEvent(of: .value, with: { (snapshot) in
-                            // Get user value
-                            if let value = snapshot.value as? NSDictionary
+                            if (val as! String != "Friend")
                             {
-                                self.profilesDict.setObject(value, forKey: key as! NSCopying)
+                                self.pipelinesDict.removeObject(forKey: key)
                                 if (self.pipelinesDict.allKeys.count == self.profilesDict.allKeys.count)
                                 {
                                     DispatchQueue.main.async {
@@ -262,17 +282,76 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
                                     }
                                 }
                             }
-                            // ...
-                        }) { (error) in
-                            print(error.localizedDescription)
+                            else
+                            {
+                                if self.profilesDict.object(forKey: key) != nil
+                                {
+                                    if (self.pipelinesDict.allKeys.count == self.profilesDict.allKeys.count)
+                                    {
+                                        DispatchQueue.main.async {
+                                            self.stopAnimating()
+                                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                            let rootViewController = storyboard.instantiateViewController(withIdentifier: "AddEventViewController") as! AddEventViewController
+                                            rootViewController.keysArray = self.profilesDict.allKeys as! [String]
+                                            rootViewController.profilesDict = self.profilesDict
+                                            self.navigationController?.pushViewController(rootViewController, animated: true)
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    self.ref.child("users").child(key as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+                                        // Get user value
+                                        if let value = snapshot.value as? NSDictionary
+                                        {
+                                            self.profilesDict.setObject(value, forKey: key as! NSCopying)
+                                            if (self.pipelinesDict.allKeys.count == self.profilesDict.allKeys.count)
+                                            {
+                                                DispatchQueue.main.async {
+                                                    self.stopAnimating()
+                                                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                                    let rootViewController = storyboard.instantiateViewController(withIdentifier: "AddEventViewController") as! AddEventViewController
+                                                    rootViewController.keysArray = self.profilesDict.allKeys as! [String]
+                                                    rootViewController.profilesDict = self.profilesDict
+                                                    self.navigationController?.pushViewController(rootViewController, animated: true)
+                                                }
+                                            }
+                                        }
+                                        // ...
+                                    }) { (error) in
+                                        print(error.localizedDescription)
+                                    }
+                                }
+                            }
                         }
+                        
                     }
                 }
+                else
+                {
+                    DispatchQueue.main.async {
+                        self.stopAnimating()
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let rootViewController = storyboard.instantiateViewController(withIdentifier: "AddEventViewController") as! AddEventViewController
+                        rootViewController.keysArray = self.profilesDict.allKeys as! [String]
+                        rootViewController.profilesDict = self.profilesDict
+                        self.navigationController?.pushViewController(rootViewController, animated: true)
+                    }
+                }
+                
             }
             else
             {
                 DispatchQueue.main.async {
                     self.stopAnimating()
+                    DispatchQueue.main.async {
+                        self.stopAnimating()
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let rootViewController = storyboard.instantiateViewController(withIdentifier: "AddEventViewController") as! AddEventViewController
+                        rootViewController.keysArray = self.profilesDict.allKeys as! [String]
+                        rootViewController.profilesDict = self.profilesDict
+                        self.navigationController?.pushViewController(rootViewController, animated: true)
+                    }
                 }
             }
         }) { (error) in
@@ -290,14 +369,35 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
         
     }
     //MARK: - UITableView DataSource
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (keysArray.count) > 0
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        if (segmentedControlClass.selectedSegmentIndex==0)
         {
-            return  keysArray.count
+            if (keysArrayUpcoming.count) > 0
+            {
+                return  keysArrayUpcoming.count
+            }
+            self.pipelineTblView.separatorStyle = UITableViewCellSeparatorStyle.none
+            return 0
         }
-        self.pipelineTblView.separatorStyle = UITableViewCellSeparatorStyle.none
-        return 0
-        
+        else if (segmentedControlClass.selectedSegmentIndex==1)
+        {
+            if (keysArrayExplore.count) > 0
+            {
+                return  keysArrayExplore.count
+            }
+            self.pipelineTblView.separatorStyle = UITableViewCellSeparatorStyle.none
+            return 0
+        }
+        else
+        {
+            if (keysArrayMy.count) > 0
+            {
+                return  keysArrayMy.count
+            }
+            self.pipelineTblView.separatorStyle = UITableViewCellSeparatorStyle.none
+            return 0
+        }
         
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
@@ -307,24 +407,116 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         self.pipelineTblView.separatorStyle = UITableViewCellSeparatorStyle.none
         // create a new cell if needed or reuse an old one
-        let cell:EventsCell = self.pipelineTblView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)  as! EventsCell
-        let key = keysArray[indexPath.row]
-        cell.eventLbl?.text = ""
-        cell.placeLbl?.text = ""
-        if let userData = self.eventsDict.object(forKey: key)
+        if (segmentedControlClass.selectedSegmentIndex==0)
         {
-            cell.eventLbl?.text = ((userData as AnyObject).object(forKey: "Title") as! String?)!
-            cell.placeLbl?.text = String(format: "Place: %@", ((userData as AnyObject).object(forKey: "Place") as! String?)!)
+            let cell:EventsCell = self.pipelineTblView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)  as! EventsCell
+            let key = keysArrayUpcoming[indexPath.row]
+            cell.eventLbl?.text = ""
+            cell.placeLbl?.text = ""
+            if let userData = self.eventDetailsDict.object(forKey: key)
+            {
+                cell.eventLbl?.text = ((userData as AnyObject).object(forKey: "Title") as! String?)!
+                cell.placeLbl?.text = String(format: "Place: %@", ((userData as AnyObject).object(forKey: "Place") as! String?)!)
+            }
+            else
+            {
+                self.ref.child("events").child(key).observeSingleEvent(of: .value, with: { (snapshot) in
+                    // Get user value
+                    if let value = snapshot.value as? NSDictionary
+                    {
+                        print(value)
+                        self.eventDetailsDict.setObject(value, forKey: key as NSCopying)
+                        if let userData = self.eventDetailsDict.object(forKey: key)
+                        {
+                            cell.eventLbl?.text = ((userData as AnyObject).object(forKey: "Title") as! String?)!
+                            cell.placeLbl?.text = String(format: "Place: %@", ((userData as AnyObject).object(forKey: "Place") as! String?)!)
+                        }
+                    }
+                    // ...
+                }) { (error) in
+                    print(error.localizedDescription)
+                }
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            return cell
         }
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
-        return cell
+        else if (segmentedControlClass.selectedSegmentIndex==1)
+        {
+            let cell:EventsCell = self.pipelineTblView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)  as! EventsCell
+            let key = keysArrayExplore[indexPath.row]
+            cell.eventLbl?.text = ""
+            cell.placeLbl?.text = ""
+            if let userData = self.eventDetailsDict.object(forKey: key)
+            {
+                cell.eventLbl?.text = ((userData as AnyObject).object(forKey: "Title") as! String?)!
+                cell.placeLbl?.text = String(format: "Place: %@", ((userData as AnyObject).object(forKey: "Place") as! String?)!)
+            }
+            else
+            {
+                self.ref.child("events").child(key).observeSingleEvent(of: .value, with: { (snapshot) in
+                    // Get user value
+                    if let value = snapshot.value as? NSDictionary
+                    {
+                        print(value)
+                        self.eventDetailsDict.setObject(value, forKey: key as NSCopying)
+                        if let userData = self.eventDetailsDict.object(forKey: key)
+                        {
+                            cell.eventLbl?.text = ((userData as AnyObject).object(forKey: "Title") as! String?)!
+                            cell.placeLbl?.text = String(format: "Place: %@", ((userData as AnyObject).object(forKey: "Place") as! String?)!)
+                        }
+                    }
+                    // ...
+                }) { (error) in
+                    print(error.localizedDescription)
+                }
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            return cell
+        }
+        else
+        {
+            let cell:EventsCell = self.pipelineTblView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)  as! EventsCell
+            let key = keysArrayMy[indexPath.row]
+            cell.eventLbl?.text = ""
+            cell.placeLbl?.text = ""
+            if let userData = self.eventDetailsDict.object(forKey: key)
+            {
+                cell.eventLbl?.text = ((userData as AnyObject).object(forKey: "Title") as! String?)!
+                cell.placeLbl?.text = String(format: "Place: %@", ((userData as AnyObject).object(forKey: "Place") as! String?)!)
+            }
+            else
+            {
+                self.ref.child("events").child(key).observeSingleEvent(of: .value, with: { (snapshot) in
+                    // Get user value
+                    if let value = snapshot.value as? NSDictionary
+                    {
+                        print(value)
+                        self.eventDetailsDict.setObject(value, forKey: key as NSCopying)
+                        if let userData = self.eventDetailsDict.object(forKey: key)
+                        {
+                            cell.eventLbl?.text = ((userData as AnyObject).object(forKey: "Title") as! String?)!
+                            cell.placeLbl?.text = String(format: "Place: %@", ((userData as AnyObject).object(forKey: "Place") as! String?)!)
+                        }
+                    }
+                    // ...
+                }) { (error) in
+                    print(error.localizedDescription)
+                }
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
-        
-        
-        
-        
+        if (segmentedControlClass.selectedSegmentIndex==0)
+        {
+            
+        }
+        else
+        {
+            
+        }
     }
 }

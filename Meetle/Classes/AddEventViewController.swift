@@ -283,13 +283,25 @@ class AddEventViewController : FormViewController {
                                 var ct = 0
                                 for item in participients
                                 {
-                                    self.ref.child("eventsLocation").child(eventId).childByAutoId().setValue(item, withCompletionBlock: { (error, ref) -> Void in
+                                    self.ref.child("eventsLocation").child(eventId).child(item).setValue(true, withCompletionBlock: { (error, ref) -> Void in
                                         if (!(error != nil))
                                         {
                                             ct += 1
                                             if (ct == participients.count)
                                             {
-                                                self.navigationController?.popViewController(animated: true)
+                                                let startDate = valuesDictionary.object(forKey: "Starts")
+                                                let startDateStr = String(format:"%@", startDate as! CVarArg)
+                                                self.ref.child("eventsLocation").child(eventId).child("StartDate").setValue(startDateStr, withCompletionBlock: { (error, ref) -> Void in
+                                                    if (!(error != nil))
+                                                    {
+                                                        self.ref.child("users").child((Auth.auth().currentUser?.uid)!).child("MyEvents").child(eventId).child("StartDate").setValue(startDateStr, withCompletionBlock: { (error, ref) -> Void in
+                                                            if (!(error != nil))
+                                                            {
+                                                                self.navigationController?.popViewController(animated: true)
+                                                            }
+                                                        })
+                                                    }
+                                                })
                                             }
                                         }
                                     })
