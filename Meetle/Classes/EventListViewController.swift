@@ -512,11 +512,30 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
         print("You tapped cell number \(indexPath.row).")
         if (segmentedControlClass.selectedSegmentIndex==0)
         {
-            
+            let cell:EventsCell = self.pipelineTblView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)  as! EventsCell
+            let key = keysArrayUpcoming[indexPath.row]
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let rootViewController = storyboard.instantiateViewController(withIdentifier: "EventDetailsViewController") as! EventDetailsViewController
+            rootViewController.eventId = key
+            self.navigationController?.pushViewController(rootViewController, animated: true)
+        }
+        else if (segmentedControlClass.selectedSegmentIndex==1)
+        {
+            let cell:EventsCell = self.pipelineTblView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)  as! EventsCell
+            let key = keysArrayExplore[indexPath.row]
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let rootViewController = storyboard.instantiateViewController(withIdentifier: "EventDetailsViewController") as! EventDetailsViewController
+            rootViewController.eventId = key
+            self.navigationController?.pushViewController(rootViewController, animated: true)
         }
         else
         {
-            
+            let cell:EventsCell = self.pipelineTblView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)  as! EventsCell
+            let key = keysArrayMy[indexPath.row]
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let rootViewController = storyboard.instantiateViewController(withIdentifier: "EventDetailsViewController") as! EventDetailsViewController
+            rootViewController.eventId = key
+            self.navigationController?.pushViewController(rootViewController, animated: true)
         }
     }
 }

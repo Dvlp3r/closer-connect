@@ -14,6 +14,13 @@
 		3D5809671ED7254500314BF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D5809661ED7254500314BF3 /* GoogleService-Info.plist */; };
 		3D5809691ED727A200314BF3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5809681ED727A200314BF3 /* SignUpViewController.swift */; };
 		3D68AC2E1EF52CFF0085CAC6 /* EventsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D68AC2D1EF52CFF0085CAC6 /* EventsCell.swift */; };
+		3DAA64821EF8F9AB007F539C /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAA64811EF8F9AB007F539C /* EventDetailsViewController.swift */; };
+		3DAA64841EF92A82007F539C /* EventDetailCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAA64831EF92A81007F539C /* EventDetailCell1.swift */; };
+		3DAA64861EF92A91007F539C /* EventDetailCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAA64851EF92A91007F539C /* EventDetailCell2.swift */; };
+		3DAA64881EF92A9E007F539C /* EventDetailCell3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAA64871EF92A9E007F539C /* EventDetailCell3.swift */; };
+		3DAA648A1EF92ADD007F539C /* EventDetailCell4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAA64891EF92ADD007F539C /* EventDetailCell4.swift */; };
+		3DAA648C1EF92AEB007F539C /* EventDetailCell5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAA648B1EF92AEB007F539C /* EventDetailCell5.swift */; };
+		3DAA648E1EF92AF7007F539C /* EventDetailCell6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAA648D1EF92AF7007F539C /* EventDetailCell6.swift */; };
 		3DAFF0C51ED69915008A70CF /* MyResumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAFF0C41ED69915008A70CF /* MyResumeViewController.swift */; };
 		3DB3A6711EE1CBA300A5E5A7 /* PipelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3A6701EE1CBA300A5E5A7 /* PipelineViewController.swift */; };
 		3DB3A6731EE1CC3F00A5E5A7 /* PipelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3A6721EE1CC3F00A5E5A7 /* PipelineTableViewCell.swift */; };
@@ -225,6 +232,13 @@
 		3D5809661ED7254500314BF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D5809681ED727A200314BF3 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		3D68AC2D1EF52CFF0085CAC6 /* EventsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsCell.swift; sourceTree = "<group>"; };
+		3DAA64811EF8F9AB007F539C /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
+		3DAA64831EF92A81007F539C /* EventDetailCell1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailCell1.swift; sourceTree = "<group>"; };
+		3DAA64851EF92A91007F539C /* EventDetailCell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailCell2.swift; sourceTree = "<group>"; };
+		3DAA64871EF92A9E007F539C /* EventDetailCell3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailCell3.swift; sourceTree = "<group>"; };
+		3DAA64891EF92ADD007F539C /* EventDetailCell4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailCell4.swift; sourceTree = "<group>"; };
+		3DAA648B1EF92AEB007F539C /* EventDetailCell5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailCell5.swift; sourceTree = "<group>"; };
+		3DAA648D1EF92AF7007F539C /* EventDetailCell6.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailCell6.swift; sourceTree = "<group>"; };
 		3DAFF0C41ED69915008A70CF /* MyResumeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyResumeViewController.swift; sourceTree = "<group>"; };
 		3DB3A6701EE1CBA300A5E5A7 /* PipelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PipelineViewController.swift; sourceTree = "<group>"; };
 		3DB3A6721EE1CC3F00A5E5A7 /* PipelineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PipelineTableViewCell.swift; sourceTree = "<group>"; };
@@ -618,6 +632,7 @@
 				3D20FBDC1EE86E06007B132B /* MessageListViewController.swift */,
 				3D20FBE01EF19813007B132B /* EventListViewController.swift */,
 				3DCFFCAE1EF26A0A00C65CF3 /* AddEventViewController.swift */,
+				3DAA64811EF8F9AB007F539C /* EventDetailsViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -635,6 +650,12 @@
 				3DB3A6721EE1CC3F00A5E5A7 /* PipelineTableViewCell.swift */,
 				3D20FBDE1EEFA538007B132B /* MessageTableViewCell.swift */,
 				3D68AC2D1EF52CFF0085CAC6 /* EventsCell.swift */,
+				3DAA64831EF92A81007F539C /* EventDetailCell1.swift */,
+				3DAA64851EF92A91007F539C /* EventDetailCell2.swift */,
+				3DAA64871EF92A9E007F539C /* EventDetailCell3.swift */,
+				3DAA64891EF92ADD007F539C /* EventDetailCell4.swift */,
+				3DAA648B1EF92AEB007F539C /* EventDetailCell5.swift */,
+				3DAA648D1EF92AF7007F539C /* EventDetailCell6.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1230,9 +1251,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DC761651EDDCDA90005AFF8 /* EditProfileViewController.swift in Sources */,
+				3DAA64881EF92A9E007F539C /* EventDetailCell3.swift in Sources */,
+				3DAA648E1EF92AF7007F539C /* EventDetailCell6.swift in Sources */,
 				3DC7616A1EDE636F0005AFF8 /* MyPhotoCell.swift in Sources */,
+				3DAA64861EF92A91007F539C /* EventDetailCell2.swift in Sources */,
 				3D0239AA1ED72E810052D587 /* GoogleService-Info.plist in Sources */,
 				B0D2ED951B724F44007DC099 /* ConfigurationManager.swift in Sources */,
+				3DAA648A1EF92ADD007F539C /* EventDetailCell4.swift in Sources */,
 				E0ED0AF81B99F7570051F65C /* Constants.swift in Sources */,
 				3DC761681EDE630B0005AFF8 /* LazyImage.swift in Sources */,
 				B0D2EC061B7227D7007DC099 /* AppDelegate.swift in Sources */,
@@ -1261,10 +1286,13 @@
 				B0D2ED971B72536D007DC099 /* ThemeManager.swift in Sources */,
 				B0D2EDD61B72BFA4007DC099 /* MSViewControllerSlidingPanel.m in Sources */,
 				3D20FBDF1EEFA538007B132B /* MessageTableViewCell.swift in Sources */,
+				3DAA64841EF92A82007F539C /* EventDetailCell1.swift in Sources */,
 				3D20FBDD1EE86E06007B132B /* MessageListViewController.swift in Sources */,
 				3DB3A6711EE1CBA300A5E5A7 /* PipelineViewController.swift in Sources */,
+				3DAA648C1EF92AEB007F539C /* EventDetailCell5.swift in Sources */,
 				3DB3A6731EE1CC3F00A5E5A7 /* PipelineTableViewCell.swift in Sources */,
 				B0D2EDD41B72BFA4007DC099 /* EmptySegue.m in Sources */,
+				3DAA64821EF8F9AB007F539C /* EventDetailsViewController.swift in Sources */,
 				B0D2EDDD1B7389A8007DC099 /* HomeViewController.swift in Sources */,
 				3DCFFCB21EF26C5E00C65CF3 /* CustomCells.swift in Sources */,
 				B0D2EDD91B72C030007DC099 /* LoginViewController.swift in Sources */,
