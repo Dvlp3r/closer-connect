@@ -283,7 +283,7 @@ class AddEventViewController : FormViewController {
                                 var ct = 0
                                 for item in participients
                                 {
-                                    self.ref.child("eventsLocation").child(eventId).child(item).setValue(true, withCompletionBlock: { (error, ref) -> Void in
+                                    self.ref.child("eventsLocation").child(eventId).child(item).setValue(["Invited": true, "IsGoing": -1], withCompletionBlock: { (error, ref) -> Void in
                                         if (!(error != nil))
                                         {
                                             ct += 1

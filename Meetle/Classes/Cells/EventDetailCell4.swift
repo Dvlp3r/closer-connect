@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import MapKit
 class EventDetailCell4: UITableViewCell {
     
-    @IBOutlet weak var eventMap: MKMapView?
+    @IBOutlet weak var mapImage: UIImageView?
     
     override func awakeFromNib() {
         super.awakeFromNib()
