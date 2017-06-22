@@ -11,6 +11,7 @@
 		3D20FBDD1EE86E06007B132B /* MessageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D20FBDC1EE86E06007B132B /* MessageListViewController.swift */; };
 		3D20FBDF1EEFA538007B132B /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D20FBDE1EEFA538007B132B /* MessageTableViewCell.swift */; };
 		3D20FBE11EF19813007B132B /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D20FBE01EF19813007B132B /* EventListViewController.swift */; };
+		3D5501CB1EFBB62C005B19B3 /* ParticipientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5501CA1EFBB62C005B19B3 /* ParticipientViewController.swift */; };
 		3D5809671ED7254500314BF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D5809661ED7254500314BF3 /* GoogleService-Info.plist */; };
 		3D5809691ED727A200314BF3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5809681ED727A200314BF3 /* SignUpViewController.swift */; };
 		3D68AC2E1EF52CFF0085CAC6 /* EventsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D68AC2D1EF52CFF0085CAC6 /* EventsCell.swift */; };
@@ -229,6 +230,7 @@
 		3D20FBDC1EE86E06007B132B /* MessageListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageListViewController.swift; sourceTree = "<group>"; };
 		3D20FBDE1EEFA538007B132B /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		3D20FBE01EF19813007B132B /* EventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
+		3D5501CA1EFBB62C005B19B3 /* ParticipientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipientViewController.swift; sourceTree = "<group>"; };
 		3D5809661ED7254500314BF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D5809681ED727A200314BF3 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		3D68AC2D1EF52CFF0085CAC6 /* EventsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsCell.swift; sourceTree = "<group>"; };
@@ -633,6 +635,7 @@
 				3D20FBE01EF19813007B132B /* EventListViewController.swift */,
 				3DCFFCAE1EF26A0A00C65CF3 /* AddEventViewController.swift */,
 				3DAA64811EF8F9AB007F539C /* EventDetailsViewController.swift */,
+				3D5501CA1EFBB62C005B19B3 /* ParticipientViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1290,6 +1293,7 @@
 				3D20FBDD1EE86E06007B132B /* MessageListViewController.swift in Sources */,
 				3DB3A6711EE1CBA300A5E5A7 /* PipelineViewController.swift in Sources */,
 				3DAA648C1EF92AEB007F539C /* EventDetailCell5.swift in Sources */,
+				3D5501CB1EFBB62C005B19B3 /* ParticipientViewController.swift in Sources */,
 				3DB3A6731EE1CC3F00A5E5A7 /* PipelineTableViewCell.swift in Sources */,
 				B0D2EDD41B72BFA4007DC099 /* EmptySegue.m in Sources */,
 				3DAA64821EF8F9AB007F539C /* EventDetailsViewController.swift in Sources */,

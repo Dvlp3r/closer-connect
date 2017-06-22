@@ -37,9 +37,19 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
     var eventDetailsDict = NSMutableDictionary()
     var pipelinesDict = NSMutableDictionary()
     var profilesDict = NSMutableDictionary()
+    let dateFormatter = DateFormatter()
+    let dateFormatter2 = DateFormatter()
+    
     //MARK: -ViewController LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        dateFormatter.timeZone = NSTimeZone(name: "UTC") as! TimeZone
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        
+        dateFormatter2.dateFormat = "dd MMM, yyyy HH:mm a"
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.currentUserId = Auth.auth().currentUser?.uid
@@ -417,6 +427,11 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
             {
                 cell.eventLbl?.text = ((userData as AnyObject).object(forKey: "Title") as! String?)!
                 cell.placeLbl?.text = String(format: "Place: %@", ((userData as AnyObject).object(forKey: "Place") as! String?)!)
+                let dateStr = String(format: "%@", ((userData as AnyObject).object(forKey: "Starts") as! String?)!)
+                print(dateStr)
+                let dataVar = self.dateFormatter.date(from: dateStr)
+                print(dataVar!)
+                cell.startDateLbl?.text = dateFormatter2.string(from: dataVar!)
             }
             else
             {
@@ -430,6 +445,11 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
                         {
                             cell.eventLbl?.text = ((userData as AnyObject).object(forKey: "Title") as! String?)!
                             cell.placeLbl?.text = String(format: "Place: %@", ((userData as AnyObject).object(forKey: "Place") as! String?)!)
+                            let dateStr = String(format: "%@", ((userData as AnyObject).object(forKey: "Starts") as! String?)!)
+                            print(dateStr)
+                            let dataVar = self.dateFormatter.date(from: dateStr)
+                            print(dataVar!)
+                            cell.startDateLbl?.text = self.dateFormatter2.string(from: dataVar!)
                         }
                     }
                     // ...
@@ -450,6 +470,11 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
             {
                 cell.eventLbl?.text = ((userData as AnyObject).object(forKey: "Title") as! String?)!
                 cell.placeLbl?.text = String(format: "Place: %@", ((userData as AnyObject).object(forKey: "Place") as! String?)!)
+                let dateStr = String(format: "%@", ((userData as AnyObject).object(forKey: "Starts") as! String?)!)
+                print(dateStr)
+                let dataVar = self.dateFormatter.date(from: dateStr)
+                print(dataVar!)
+                cell.startDateLbl?.text = dateFormatter2.string(from: dataVar!)
             }
             else
             {
@@ -463,6 +488,11 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
                         {
                             cell.eventLbl?.text = ((userData as AnyObject).object(forKey: "Title") as! String?)!
                             cell.placeLbl?.text = String(format: "Place: %@", ((userData as AnyObject).object(forKey: "Place") as! String?)!)
+                            let dateStr = String(format: "%@", ((userData as AnyObject).object(forKey: "Starts") as! String?)!)
+                            print(dateStr)
+                            let dataVar = self.dateFormatter.date(from: dateStr)
+                            print(dataVar!)
+                            cell.startDateLbl?.text = self.dateFormatter2.string(from: dataVar!)
                         }
                     }
                     // ...
@@ -483,6 +513,11 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
             {
                 cell.eventLbl?.text = ((userData as AnyObject).object(forKey: "Title") as! String?)!
                 cell.placeLbl?.text = String(format: "Place: %@", ((userData as AnyObject).object(forKey: "Place") as! String?)!)
+                let dateStr = String(format: "%@", ((userData as AnyObject).object(forKey: "Starts") as! String?)!)
+                print(dateStr)
+                let dataVar = self.dateFormatter.date(from: dateStr)
+                print(dataVar!)
+                cell.startDateLbl?.text = dateFormatter2.string(from: dataVar!)
             }
             else
             {
@@ -496,6 +531,11 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
                         {
                             cell.eventLbl?.text = ((userData as AnyObject).object(forKey: "Title") as! String?)!
                             cell.placeLbl?.text = String(format: "Place: %@", ((userData as AnyObject).object(forKey: "Place") as! String?)!)
+                            let dateStr = String(format: "%@", ((userData as AnyObject).object(forKey: "Starts") as! String?)!)
+                            print(dateStr)
+                            let dataVar = self.dateFormatter.date(from: dateStr)
+                            print(dataVar!)
+                            cell.startDateLbl?.text = self.dateFormatter2.string(from: dataVar!)
                         }
                     }
                     // ...
@@ -516,6 +556,7 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let rootViewController = storyboard.instantiateViewController(withIdentifier: "EventDetailsViewController") as! EventDetailsViewController
             rootViewController.eventId = key
+            rootViewController.myEvent = 0
             self.navigationController?.pushViewController(rootViewController, animated: true)
         }
         else if (segmentedControlClass.selectedSegmentIndex==1)
@@ -524,6 +565,7 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let rootViewController = storyboard.instantiateViewController(withIdentifier: "EventDetailsViewController") as! EventDetailsViewController
             rootViewController.eventId = key
+            rootViewController.myEvent = 0
             self.navigationController?.pushViewController(rootViewController, animated: true)
         }
         else
@@ -532,6 +574,7 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let rootViewController = storyboard.instantiateViewController(withIdentifier: "EventDetailsViewController") as! EventDetailsViewController
             rootViewController.eventId = key
+            rootViewController.myEvent = 1
             self.navigationController?.pushViewController(rootViewController, animated: true)
         }
     }

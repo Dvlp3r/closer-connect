@@ -260,9 +260,9 @@ class AddEventViewController : FormViewController {
                             let value = String(format:"%@", val as! CVarArg)
                             keyValueDict.setObject(value, forKey: keyStr as NSCopying)
                         }
-                        
                     }
                 }
+                keyValueDict.setObject((Auth.auth().currentUser?.uid)!, forKey: "Owner" as NSCopying)
                 let timeInterval = Date().timeIntervalSince1970
                 print(timeInterval)
                 let eventId = String(format: "%@%d",(Auth.auth().currentUser?.uid)!, timeInterval)

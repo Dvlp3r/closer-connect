@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Meetle/Classes/EventListViewController.swift"
-            timestampString = "519566209.926257"
+            timestampString = "519819913.617747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "startObservingAllData()"
             landmarkType = "7">
             <Locations>
@@ -26,11 +26,11 @@
                   moduleName = "closer-connect"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///CT%20Apps/DemoCodes/test/cc/CloserConnect2/closer-connect/Meetle/Classes/EventListViewController.swift"
-                  timestampString = "519735403.138818"
+                  timestampString = "519819969.993971"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "153"
-                  endingLineNumber = "153"
+                  startingLineNumber = "163"
+                  endingLineNumber = "163"
                   offsetFromSymbolStart = "747">
                </Location>
                <Location
@@ -41,11 +41,11 @@
                   moduleName = "closer-connect"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///CT%20Apps/DemoCodes/test/cc/CloserConnect2/closer-connect/Meetle/Classes/EventListViewController.swift"
-                  timestampString = "519735403.150554"
+                  timestampString = "519819969.997657"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "153"
-                  endingLineNumber = "153"
+                  startingLineNumber = "163"
+                  endingLineNumber = "163"
                   offsetFromSymbolStart = "2388">
                </Location>
             </Locations>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Meetle/Classes/EventListViewController.swift"
-            timestampString = "519566291.392535"
+            timestampString = "519819913.617747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "startObservingAllData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Meetle/Classes/EventListViewController.swift"
-            timestampString = "519566293.000472"
+            timestampString = "519819913.617747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "startObservingAllData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -89,12 +89,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Meetle/Classes/EventDetailsViewController.swift"
-            timestampString = "519738621.269338"
+            filePath = "Meetle/Classes/EventListViewController.swift"
+            timestampString = "519819913.617747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "293"
-            endingLineNumber = "293"
+            startingLineNumber = "433"
+            endingLineNumber = "433"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -105,14 +105,62 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Meetle/Classes/EventDetailsViewController.swift"
-            timestampString = "519738621.269338"
+            filePath = "Meetle/Classes/EventListViewController.swift"
+            timestampString = "519819763.940501"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "288"
-            endingLineNumber = "288"
+            startingLineNumber = "449"
+            endingLineNumber = "449"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Meetle/Classes/EventListViewController.swift"
+            timestampString = "519819763.940501"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closer_connect.EventListViewController.(tableView (__ObjC.UITableView, cellForRowAt : Foundation.IndexPath) -&gt; __ObjC.UITableViewCell).(closure #1)"
+                  moduleName = "closer-connect"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///CT%20Apps/DemoCodes/test/cc/CloserConnect2/closer-connect/Meetle/Classes/EventListViewController.swift"
+                  timestampString = "519819970.039707"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "448"
+                  endingLineNumber = "448"
+                  offsetFromSymbolStart = "3596">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closer_connect.EventListViewController.(tableView (__ObjC.UITableView, cellForRowAt : Foundation.IndexPath) -&gt; __ObjC.UITableViewCell).(closure #1)"
+                  moduleName = "closer-connect"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///CT%20Apps/DemoCodes/test/cc/CloserConnect2/closer-connect/Meetle/Classes/EventListViewController.swift"
+                  timestampString = "519819970.044768"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "448"
+                  endingLineNumber = "448"
+                  offsetFromSymbolStart = "6165">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

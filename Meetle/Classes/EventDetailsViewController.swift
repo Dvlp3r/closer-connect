@@ -17,6 +17,8 @@ class EventDetailsViewController: BaseViewController , UITableViewDelegate, UITa
     @IBOutlet var testLbl: UILabel!
     var ref: DatabaseReference!
     var eventId: String?
+    var myEvent: Int?
+    var profilesDict = NSMutableDictionary()
     
     let cellReuseIdentifier1 = "EventDetailCell1"
     let cellReuseIdentifier2 = "EventDetailCell2"
@@ -55,9 +57,7 @@ class EventDetailsViewController: BaseViewController , UITableViewDelegate, UITa
     }
     override func viewWillAppear(_ animated: Bool) {
         
-        
-        
-        self.ref.child("eventsLocation").child(eventId!).observeSingleEvent(of: .value, with: { (snapshot) in
+        self.ref.child("eventsLocation").child(eventId!).observe(.value, with: { (snapshot) in
             // Get user value
             print(snapshot)
             if let value = snapshot.value as? NSDictionary
@@ -70,6 +70,8 @@ class EventDetailsViewController: BaseViewController , UITableViewDelegate, UITa
         }) { (error) in
             print(error.localizedDescription)
         }
+        
+        
         
         self.ref.child("events").child(eventId!).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
@@ -86,6 +88,7 @@ class EventDetailsViewController: BaseViewController , UITableViewDelegate, UITa
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
+        self.ref.child("eventsLocation").child(eventId!).removeAllObservers()
     }
     
     //MARK: - Class Methods
@@ -115,12 +118,28 @@ class EventDetailsViewController: BaseViewController , UITableViewDelegate, UITa
         
         return label.frame.height
     }
-    
+    @IBAction func startMessanging(_ sender: UIBarButtonItem) {
+        
+    }
+    @IBAction func SegmentValueChanged(_ sender: UISegmentedControl) {
+        self.ref.child("eventsLocation").child(self.eventId!).child((Auth.auth().currentUser?.uid)!).setValue(["Invited": true, "IsGoing": sender.selectedSegmentIndex], withCompletionBlock: { (error, ref) -> Void in
+            if (!(error != nil))
+            {
+                
+            }
+        })
+    }
     //MARK: - UITableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 7
-        
+        if self.eventDetailsDict.object(forKey: "Title") != nil
+        {
+            return 9
+        }
+        else
+        {
+            return 0
+        }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
@@ -165,7 +184,7 @@ class EventDetailsViewController: BaseViewController , UITableViewDelegate, UITa
             }
             return 0.0;
         }
-        else
+        else if (indexPath.row==6)
         {
             if let urlData = self.eventDetailsDict.object(forKey: "notes") as? String
             {
@@ -185,6 +204,10 @@ class EventDetailsViewController: BaseViewController , UITableViewDelegate, UITa
                 }
             }
             return 0.0;
+        }
+        else
+        {
+            return 50.0
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -231,33 +254,48 @@ class EventDetailsViewController: BaseViewController , UITableViewDelegate, UITa
             let cell:EventDetailCell3 = self.pipelineTblView.dequeueReusableCell(withIdentifier: cellReuseIdentifier3)  as! EventDetailCell3
             //let key = keysArrayUpcoming[indexPath.row]
             cell.statusLbl?.text = ""
-            if let statusData = self.eventParticipientDict.object(forKey: (Auth.auth().currentUser?.uid)!) as? NSDictionary
+            if (self.myEvent == 1)
             {
-                if let goingval = statusData.object(forKey: "IsGoing") as? NSNumber
+                cell.statusSegmentedControl?.isHidden = true
+                cell.statusLbl?.isHidden = false
+                cell.statusLbl?.text = "Event Owner"
+            }
+            else
+            {
+                if let statusData = self.eventParticipientDict.object(forKey: (Auth.auth().currentUser?.uid)!) as? NSDictionary
                 {
-                    if (goingval.intValue == -1)
+                    if let goingval = statusData.object(forKey: "IsGoing") as? NSNumber
+                    {
+                        if (goingval.intValue == -1)
+                        {
+                            cell.statusSegmentedControl?.selectedSegmentIndex = -1
+                            cell.statusSegmentedControl?.isHidden = false
+                            cell.statusLbl?.isHidden = true
+                        }
+                        else
+                        {
+                            cell.statusSegmentedControl?.isHidden = true
+                            cell.statusLbl?.isHidden = false
+                            if (goingval.intValue == 0)
+                            {
+                                cell.statusLbl?.text = "Going"
+                            }
+                            else if (goingval.intValue == 1)
+                            {
+                                cell.statusLbl?.text = "May be going"
+                            }
+                            else
+                            {
+                                cell.statusLbl?.text = "Not going"
+                            }
+                            
+                        }
+                    }
+                    else
                     {
                         cell.statusSegmentedControl?.selectedSegmentIndex = -1
                         cell.statusSegmentedControl?.isHidden = false
                         cell.statusLbl?.isHidden = true
-                    }
-                    else
-                    {
-                        cell.statusSegmentedControl?.isHidden = true
-                        cell.statusLbl?.isHidden = false
-                        if (goingval.intValue == 0)
-                        {
-                            cell.statusLbl?.text = "Going"
-                        }
-                        else if (goingval.intValue == 1)
-                        {
-                            cell.statusLbl?.text = "May be going"
-                        }
-                        else
-                        {
-                            cell.statusLbl?.text = "Not going"
-                        }
-                        
                     }
                 }
                 else
@@ -267,12 +305,7 @@ class EventDetailsViewController: BaseViewController , UITableViewDelegate, UITa
                     cell.statusLbl?.isHidden = true
                 }
             }
-            else
-            {
-                cell.statusSegmentedControl?.selectedSegmentIndex = -1
-                cell.statusSegmentedControl?.isHidden = false
-                cell.statusLbl?.isHidden = true
-            }
+            
             //cell.placeLbl?.text = String(format: "Place: %@", (self.eventDetailsDict.object(forKey: "Place") as? String)
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
@@ -283,6 +316,7 @@ class EventDetailsViewController: BaseViewController , UITableViewDelegate, UITa
             //let key = keysArrayUpcoming[indexPath.row]
             //cell.eventLbl?.text = (self.eventDetailsDict.object(forKey: "Title") as? String
             print (self.eventParticipientDict)
+            
             if let latLongArr = self.eventParticipientDict.object(forKey: "l") as? [NSNumber]
             {
                 print(latLongArr)
@@ -332,7 +366,7 @@ class EventDetailsViewController: BaseViewController , UITableViewDelegate, UITa
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         }
-        else
+        else if (indexPath.row==6)
         {
             let cell:EventDetailCell6 = self.pipelineTblView.dequeueReusableCell(withIdentifier: cellReuseIdentifier6)  as! EventDetailCell6
             //let key = keysArrayUpcoming[indexPath.row]
@@ -344,11 +378,54 @@ class EventDetailsViewController: BaseViewController , UITableViewDelegate, UITa
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         }
-        
+        else if (indexPath.row==7)
+        {
+            let cell:EventDetailCell6 = self.pipelineTblView.dequeueReusableCell(withIdentifier: cellReuseIdentifier6)  as! EventDetailCell6
+            //let key = keysArrayUpcoming[indexPath.row]
+            cell.txtLbl?.text = "Event Participients"
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+            return cell
+        }
+        else
+        {
+            let cell:EventDetailCell6 = self.pipelineTblView.dequeueReusableCell(withIdentifier: cellReuseIdentifier6)  as! EventDetailCell6
+            //let key = keysArrayUpcoming[indexPath.row]
+            if let key = self.eventDetailsDict.object(forKey: "Owner") as? String
+            {
+                if let userData = self.profilesDict.object(forKey: key)
+                {
+                    cell.txtLbl?.text = String(format: "Created by: %@", ((userData as AnyObject).object(forKey: "Name") as! String?)!)
+                }
+                else
+                {
+                    self.ref.child("users").child(key).observeSingleEvent(of: .value, with: { (snapshot) in
+                        // Get user value
+                        if let value = snapshot.value as? NSDictionary
+                        {
+                            cell.txtLbl?.text = String(format: "Created by: %@", ((value as AnyObject).object(forKey: "Name") as! String?)!)
+                        }
+                        // ...
+                    }) { (error) in
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+            
+            cell.txtLbl?.text = "Event Participients"
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
-        
+        if (indexPath.row == 7)
+        {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let rootViewController = storyboard.instantiateViewController(withIdentifier: "ParticipientViewController") as! ParticipientViewController
+            rootViewController.pipelinesDict = self.eventParticipientDict
+            self.navigationController?.pushViewController(rootViewController, animated: true)
+        }
     }
 }
