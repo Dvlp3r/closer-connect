@@ -120,7 +120,38 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
                 print(value)
                 self.eventsDictUpcoming.setDictionary(value as! [AnyHashable : Any])
                 self.keysArrayUpcoming = self.eventsDictUpcoming.allKeys as! [String]
+                //self.pipelineTblView.reloadData()
+//                
+//                let myArrayOfTuples = dayTotalDicTest.sorted{
+//                    guard let d1 = $0.key.shortDateUS, let d2 = $1.key.shortDateUS else { return false }
+//                    return d1 < d2
+//                }
+//                
+//                print(myArrayOfTuples)  // [("12-10-2014", 12), ("03-28-2015", 10), ("04-07-2015", 8), ("04-09-2015", 4), ("04-10-2015", 6), ("12-10-2015", 12)]\n"
+//                
+//                for tuple in myArrayOfTuples {
+//                    print(tuple)
+//                }
+                
+                let sorted = self.eventsDictUpcoming.sorted {
+                    let l = $0.value as? NSDictionary
+                    let r = $1.value as? NSDictionary
+                    let sd1 = l?.object(forKey: "StartDate") as? String
+                    let sd2 = r?.object(forKey: "StartDate") as? String
+                    let d1 = sd1?.shortDateUS
+                    let d2 = sd2?.shortDateUS
+                    return d1! < d2!
+                }
+                
+                //print(sorted)  // [("12-10-2014", 12), ("03-28-2015", 10), ("04-07-2015", 8), ("04-09-2015", 4), ("04-10-2015", 6), ("12-10-2015", 12)]\n"
+                let arr = NSMutableArray()
+                for tuple in sorted {
+                    //print(tuple.key)
+                    arr.add(tuple.key)
+                }
+                self.keysArrayUpcoming = arr as! [String]
                 self.pipelineTblView.reloadData()
+                
             }
             // ...
         }) { (error) in
@@ -135,6 +166,24 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
                 print(value)
                 self.eventsDictMy.setDictionary(value as! [AnyHashable : Any])
                 self.keysArrayMy = self.eventsDictMy.allKeys as! [String]
+                self.pipelineTblView.reloadData()
+                let sorted = self.eventsDictMy.sorted {
+                    let l = $0.value as? NSDictionary
+                    let r = $1.value as? NSDictionary
+                    let sd1 = l?.object(forKey: "StartDate") as? String
+                    let sd2 = r?.object(forKey: "StartDate") as? String
+                    let d1 = sd1?.shortDateUS
+                    let d2 = sd2?.shortDateUS
+                    return d1! < d2!
+                }
+                
+                //print(sorted)  // [("12-10-2014", 12), ("03-28-2015", 10), ("04-07-2015", 8), ("04-09-2015", 4), ("04-10-2015", 6), ("12-10-2015", 12)]\n"
+                let arr = NSMutableArray()
+                for tuple in sorted {
+                    //print(tuple.key)
+                    arr.add(tuple.key)
+                }
+                self.keysArrayMy = arr as! [String]
                 self.pipelineTblView.reloadData()
             }
             // ...
@@ -577,5 +626,17 @@ class EventListViewController: BaseViewController , UITableViewDelegate, UITable
             rootViewController.myEvent = 1
             self.navigationController?.pushViewController(rootViewController, animated: true)
         }
+    }
+}
+extension String {
+    static let shortDateUS: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.timeZone = NSTimeZone(name: "UTC") as! TimeZone
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        return formatter
+    }()
+    var shortDateUS: Date? {
+        return String.shortDateUS.date(from: self)
     }
 }

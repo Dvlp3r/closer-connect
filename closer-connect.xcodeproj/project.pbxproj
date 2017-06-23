@@ -588,8 +588,8 @@
 		B0D2EC021B7227D7007DC099 /* Meetle */ = {
 			isa = PBXGroup;
 			children = (
-				3DCFFCB51EF27E6800C65CF3 /* Utilities */,
 				3D5809661ED7254500314BF3 /* GoogleService-Info.plist */,
+				3DCFFCB51EF27E6800C65CF3 /* Utilities */,
 				B0D2EDCD1B72BF52007DC099 /* 3rdParty */,
 				B0D2EC391B722A84007DC099 /* Configuration */,
 				B0D2EC381B722A7A007DC099 /* Common */,
